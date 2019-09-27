@@ -45,7 +45,12 @@
 
         var $this = $(this);
         var video = new String($this.attr('data-video'));
-        var videoSrc = video.slice(0, -5) + '.mp4';
+
+        if ($this.attr('data-network') == 'BRAMON') {
+            var videoSrc = video.slice(0, -5) + '.mp4';
+        } else {
+            var videoSrc = video;
+        }
 
         $("#videoModal").on('hide.bs.modal', function(){
           $("#video_source_0").attr('src', '');
