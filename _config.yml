@@ -10,7 +10,7 @@ timezone: America/Sao_Paulo
 permalink: pretty
 
 # Pagination
-paginate: 7
+paginate: 30
 pagination_path: "/:num"
 
 # Use your search engine ID
