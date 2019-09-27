@@ -6,30 +6,32 @@ layout: default
 	<div class="row">
         {% assign posts = paginator.posts %}
         {% for post in posts %}
-        <!-- start: Post -->
-        <article class="col-md-4">
-            <div class="post-content">
-                <div class="post-title">
-                    <h2><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></h2>
-                </div>
-                <div class="post-meta">
-                    <span><i class="fa fa-calendar"></i> {{ post.date | date: '%d/%m/%Y' }}</span>
-                </div>
-                <div class="post-description">
-                    {% assign filter = post.date | date: '%Y%m%d' %}
-                    {% assign capture_collections = site.captures | where: "label", filter %}
-                    {% assign capture_collection = capture_collections | first %}
-                    {% assign capture = capture_collection.capturas | first %}
+            {% assign filter = post.date | date: '%Y%m%d' %}
+            {% assign capture_collections = site.captures | where: "label", filter %}
+            {% assign capture_collection = capture_collections | first %}
+            {% assign capture = capture_collection.capturas | first %}
 
-                    <img src="{{ capture.imagem | prepend: 'https://meteoros.s3.amazonaws.com/' }}"
-                         class="img img-thumbnail img-responsive">
+            {% if (capture_collection.capturas | size) > 0 %}
+                <!-- start: Post -->
+                <article class="col-md-4">
+                    <div class="post-content">
+                        <div class="post-title">
+                            <h2><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></h2>
+                        </div>
+                        <div class="post-meta">
+                            <span><i class="fa fa-calendar"></i> {{ post.date | date: '%d/%m/%Y' }}</span>
+                        </div>
+                        <div class="post-description">
+                            <img src="{{ capture.imagem | prepend: 'https://meteoros.s3.amazonaws.com/' }}"
+                                 class="img img-thumbnail img-responsive">
 
-                    <br>
-                    Total de capturas: {{ capture_collection.capturas | size }}
-                </div>
-            </div>
-        </article>
-        <!-- end: Post -->
+                            <br>
+                            Total de capturas: {{ capture_collection.capturas | size }}
+                        </div>
+                    </div>
+                </article>
+                <!-- end: Post -->
+            {% endif %}
         {% endfor %}
 	</div>
 	<!--end: Row -->
