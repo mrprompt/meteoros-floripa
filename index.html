@@ -11,12 +11,12 @@ layout: default
             {% assign capture_collection = capture_collections | first %}
             {% assign capture = capture_collection.capturas | first %}
 
-            {% if (capture_collection.capturas | size) > 0 %}
+            {% if capture_collection.capturas.size > 0 %}
                 <!-- start: Post -->
                 <article class="col-md-4" style="height: 400px !important">
                     <div class="post-content">
                         <div class="post-title">
-                            <h2><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></h2>
+                            <h2><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }} - {{ post.network }}</a></h2>
                         </div>
                         <div class="post-meta">
                             <span><i class="fa fa-calendar"></i> {{ post.date | date: '%d/%m/%Y' }}</span>
@@ -26,7 +26,7 @@ layout: default
                                  class="img img-thumbnail img-responsive">
 
                             <br>
-                            Total de capturas: {{ capture_collection.capturas | size }}
+                            Total de capturas: {{ capture_collection.capturas.size }}
                         </div>
                     </div>
                 </article>

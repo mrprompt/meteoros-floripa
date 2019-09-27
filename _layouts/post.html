@@ -7,7 +7,7 @@
 		<div class="post">
 			<div class="post-content">
 				<div class="post-title">
-					<h2><a href="{{ post.url | prepend: site.baseurl }}">{{ page.title }}</a></h2>
+					<h2><a href="{{ post.url | prepend: site.baseurl }}">{{ page.title }} - {{ page.network }}</a></h2>
 				</div>
 				<div class="post-meta">
 					<span><i class="mini-ico-calendar"></i>{{ page.date | date: '%d/%m/%Y' }}</span>
@@ -18,8 +18,13 @@
 				{% assign capture_collection = capture_collections | first %}
 				{% for capture in capture_collection.capturas %}
 					<span class="col-md-3">
-						<a href="{{ capture.imagem | prepend: 'https://meteoros.s3.amazonaws.com/' }}"
-						   target="_blank">
+						<a
+						{% comment %}
+							href="{{ capture.imagem | prepend: 'https://meteoros.s3.amazonaws.com/' }}"
+						   target="_blank"
+						{% endcomment %}
+							href="#videoModal" data-toggle="modal" data-video="capture.imagem | prepend: 'https://meteoros.s3.amazonaws.com/'"
+						>
 							<img src="{{ capture.imagem | prepend: 'https://meteoros.s3.amazonaws.com/' }}"
 								 class="img img-thumbnail img-responsive">
 						</a>
