@@ -1,3 +1,21 @@
+    <div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Fechar</span></button>
+            <h4 class="modal-title" id="myModalLabel">Captura</h4>
+          </div>
+          <div class="modal-body text-center">
+            <div class="embed-responsive embed-responsive-16by9">
+              <iframe id="video_source_0" class="embed-responsive-item" width="720" height="480" src="" frameborder="0" allowfullscreen>
+                <p>Your browser does not appear to support iframes</p>
+              </iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- start: Java Script -->
     <!-- Latest compiled and minified JavaScript -->
     <script src="//code.jquery.com/jquery-2.2.1.min.js" integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00=" crossorigin="anonymous"></script>
@@ -22,19 +40,22 @@
     </script>
     <!-- end analytics -->
 
-    {% if page.comments %}
-    <!-- start disqus -->
     <script>
-        var disqus_shortname = 'blogdomrprompt';
+      $(".set-bramon .col-lg-4 a").on("click", function(e) {
+        e.preventDefault();
 
-        (function() {
-            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
+        var $this = $(this);
+        var video = new String($this.attr('data-video'));
+        var videoSrc = video.slice(0, -1) + '.mp4';
+
+        $("#videoModal").on('hide.bs.modal', function(){
+          $("#video_source_0").attr('src', '');
+        });
+
+        $("#videoModal").on('show.bs.modal', function(){
+          $("#video_source_0").attr('src', videoSrc);
+        });
+      });
     </script>
-    <!-- end disqus -->
-    {% endif %}
-    <!-- end: Java Script -->
 </body>
 </html>
