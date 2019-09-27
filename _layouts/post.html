@@ -1,0 +1,37 @@
+{% include head.html %}
+
+<div class="container">
+	<!--start: Row -->
+	<div class="row">
+		<!-- start: Post -->
+		<div class="post">
+			<div class="post-content">
+				<div class="post-title">
+					<h2><a href="{{ post.url | prepend: site.baseurl }}">{{ page.title }}</a></h2>
+				</div>
+				<div class="post-meta">
+					<span><i class="mini-ico-calendar"></i>{{ page.date | date: '%d/%m/%Y' }}</span>
+				</div>
+				<div class="post-description">
+				{% assign filter = page.date | date: '%Y%m%d' %}
+				{% assign capture_collections = site.captures | where: "label", filter %}
+				{% assign capture_collection = capture_collections | first %}
+				{% for capture in capture_collection.capturas %}
+					<span class="col-md-3">
+						<a href="{{ capture.imagem | prepend: 'https://meteoros.s3.amazonaws.com/' }}"
+						   target="_blank">
+							<img src="{{ capture.imagem | prepend: 'https://meteoros.s3.amazonaws.com/' }}"
+								 class="img img-thumbnail img-responsive">
+						</a>
+					</span>
+				{% endfor %}
+				</div>
+			</div>
+		</div>
+		<!-- end: Post -->
+	</div>
+	<!--end: Row -->
+</div>
+<!--end: Container-->
+
+{% include footer.html %}

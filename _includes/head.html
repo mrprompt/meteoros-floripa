@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <!-- start: Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{% if page.title %}{{ page.title }} - {% endif %} Meteoros Floripa</title>
+
+    <meta name="description" content="Estações de capturas de meteoros em Florianópolis/SC">
+    <meta name="keywords" content="TLP,meteoro,estações,estação,BRAMON,GMN,RMS,raspberry">
+    <meta name="author" content="Thiago Paes - mrprompt (at) gmail.com">
+    <!-- end: Meta -->
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:url" content="https://meteoros.floripa.br{% if page.slug %}{{ page.url }}{% endif %}">
+    <meta property="og:title" content="{% if page.title %}{{ page.title }} - {% endif %}Meteoros Floripa">
+    <meta property="og:site_name" content="Meteoros Floripa">
+    <meta property="og:description" content="{% if post %}{{ post.excerpt | strip_html }} - {% endif %}">
+    <meta property="og:image" content="">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="200">
+    <meta property="og:image:height" content="200">
+    <meta property="og:type" content="website">
+    <!-- end: Open Graph Meta Tags -->
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="http://feeds.feedburner.com/MeteorosFloripa">
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+
+    <style>
+    body {
+       padding-top: 70px;
+    }
+    </style>
+</head>
+<body>
+<!-- Static navbar -->
+<nav class="navbar navbar-default navbar-static-top navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{{ site.baseurl }}">Meteoros Floripa</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right hidden-xs">
+                <li><a href="{{ site.baseurl }}" title="Home"><i class="fa fa-home"></i> <span class="visible-xs">Início</span></a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>

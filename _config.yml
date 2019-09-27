@@ -1,0 +1,29 @@
+# Site settings
+title: Meteoros Floripa
+description: Estações de capturas de meteoros em Florianópolis/SC
+url: ""
+baseurl: "/"
+
+# Build settings
+highlighter: rouge
+timezone: America/Sao_Paulo
+permalink: pretty
+
+# Pagination
+paginate: 7
+pagination_path: "/:num"
+
+# Use your search engine ID
+google_cse_id: ""
+
+# Plugins
+plugins:
+  - jekyll-sitemap
+  - jekyll-paginate
+
+sass:
+  style: compressed
+
+collections:
+  captures:
+    output: false

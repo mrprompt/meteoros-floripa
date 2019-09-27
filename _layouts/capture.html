@@ -1,0 +1,33 @@
+{% include head.html %}
+
+<div class="container">
+	<!--start: Row -->
+	<div class="row">
+		<!-- start: Post -->
+		<div class="post">
+			<div class="post-content">
+				<div class="post-title">
+					<h2><a href="{{ post.url | prepend: site.baseurl }}">{{ page.title }}</a></h2>
+				</div>
+				<div class="post-meta">
+					<span><i class="mini-ico-calendar"></i>{{ page.date | date: '%d/%m/%Y' }}</span>
+				</div>
+				<div class="post-description">
+					{{ page.content | markdownify }}
+				</div>
+				<div class="gallery">
+					{% for imagem in page.capturas %}
+					<div class="col-md-3">
+						<img src="https://meteoros.s3.amazonaws.com/{{ imagem.imagem | replace: 'upload/', 'upload/w_120,h_120,c_fill,g_auto/' }}" alt="" class="img-responsive img-thumbnail">
+					</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+		<!-- end: Post -->
+	</div>
+	<!--end: Row -->
+</div>
+<!--end: Container-->
+
+{% include footer.html %}
