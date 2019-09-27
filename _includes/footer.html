@@ -39,14 +39,13 @@
         ga('send', 'pageview');
     </script>
     <!-- end analytics -->
-
     <script>
-      $(".set-bramon .col-lg-4 a").on("click", function(e) {
+      $(".post-description .col-md-3 a").on("click", function(e) {
         e.preventDefault();
 
         var $this = $(this);
         var video = new String($this.attr('data-video'));
-        var videoSrc = video.slice(0, -1) + '.mp4';
+        var videoSrc = video.slice(0, -5) + '.mp4';
 
         $("#videoModal").on('hide.bs.modal', function(){
           $("#video_source_0").attr('src', '');

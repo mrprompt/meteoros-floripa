@@ -23,7 +23,7 @@
 							href="{{ capture.imagem | prepend: 'https://meteoros.s3.amazonaws.com/' }}"
 						   target="_blank"
 						{% endcomment %}
-							href="#videoModal" data-toggle="modal" data-video="capture.imagem | prepend: 'https://meteoros.s3.amazonaws.com/'"
+							href="#videoModal" data-toggle="modal" data-video="{{ capture.imagem | prepend: 'https://meteoros.s3.amazonaws.com/' }}"
 						>
 							<img src="{{ capture.imagem | prepend: 'https://meteoros.s3.amazonaws.com/' }}"
 								 class="img img-thumbnail img-responsive">

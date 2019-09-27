@@ -16,16 +16,19 @@ layout: default
                 <article class="col-md-4" style="height: 400px !important">
                     <div class="post-content">
                         <div class="post-title">
-                            <h2><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }} - {{ post.network }}</a></h2>
+                            <h2><a href="/{{ post.url }}">{{ post.title }} - {{ post.network }}</a></h2>
                         </div>
                         <div class="post-meta">
                             <span><i class="fa fa-calendar"></i> {{ post.date | date: '%d/%m/%Y' }}</span>
                         </div>
                         <div class="post-description">
-                            <img src="{{ capture.imagem | prepend: 'https://meteoros.s3.amazonaws.com/' }}"
-                                 class="img img-thumbnail img-responsive">
+                            <a href="/{{ post.url }}">
+                                <img src="{{ capture.imagem | prepend: 'https://meteoros.s3.amazonaws.com/' }}"
+                                     class="img img-thumbnail img-responsive">
+                            </a>
 
                             <br>
+                            Rede: {{ capture_collection.network }} <br>
                             Total de capturas: {{ capture_collection.capturas.size }}
                         </div>
                     </div>
