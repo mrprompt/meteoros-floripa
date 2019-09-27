@@ -14,7 +14,7 @@
 				</div>
 				<div class="post-description">
 				{% assign filter = page.date | date: '%Y%m%d' %}
-				{% assign capture_collections = site.captures | where: "label", filter %}
+				{% assign capture_collections = site.captures | where: "label", filter | where: "network", page.network %}
 				{% assign capture_collection = capture_collections | first %}
 				{% for capture in capture_collection.capturas %}
 					<span class="col-md-3">
