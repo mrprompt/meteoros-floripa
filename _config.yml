@@ -16,6 +16,9 @@ pagination_path: "/:num"
 # Use your search engine ID
 google_cse_id: ""
 
+# S3 bucket base address
+s3_bucket: "https://meteoros.s3.amazonaws.com/"
+
 # Plugins
 plugins:
   - jekyll-sitemap

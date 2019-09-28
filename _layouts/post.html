@@ -11,18 +11,18 @@
 			{% assign capture_collections = site.captures | where: "label", filter | where: "network", page.network %}
 			{% assign capture_collection = capture_collections | first %}
 			{% for capture in capture_collection.capturas %}
-			<a href="{{ capture.imagem | prepend: 'https://meteoros.s3.amazonaws.com/' }}">
+			<a href="{{ capture.imagem | prepend: site.s3_bucket }}">
 				{% if page.network == 'GMN' %}
-				<img src="{{ capture.imagem | prepend: 'https://meteoros.s3.amazonaws.com/' }}"
+				<img src="{{ capture.imagem | prepend: site.s3_bucket }}"
 					 class="img img-thumbnail img-responsive" 
 					 data-network="{{ page.network }}">
 				{% endif %}
 
 				{% if page.network == 'BRAMON' %}
-				<img src="{{ capture.imagem | prepend: 'https://meteoros.s3.amazonaws.com/' }}"
+				<img src="{{ capture.imagem | prepend: site.s3_bucket }}"
 					 class="img img-thumbnail img-responsive"
 					 data-network="{{ page.network }}"
-					 data-layer="<a target='_blank' class='btn btn-primary' href={{ capture.imagem | replace: 'P.jpg', '.mp4' | prepend: 'https://meteoros.s3.amazonaws.com/' }}><i class='fa fa-film' aria-hidden='true'></i> Vídeo</a>">
+					 data-layer="<a target='_blank' class='btn btn-primary' href={{ capture.imagem | replace: 'P.jpg', '.mp4' | prepend: site.s3_bucket }}><i class='fa fa-film' aria-hidden='true'></i> Vídeo</a>">
 				{% endif %}
 			</a>
 			{% endfor %}
