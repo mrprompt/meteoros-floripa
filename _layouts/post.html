@@ -18,15 +18,8 @@
 				{% assign capture_collection = capture_collections | first %}
 				{% for capture in capture_collection.capturas %}
 					<span class="col-md-3">
-						<a
-						{% comment %}
-							href="{{ capture.imagem | prepend: 'https://meteoros.s3.amazonaws.com/' }}"
-						   target="_blank"
-						{% endcomment %}
-							href="#videoModal" data-toggle="modal" data-video="capture.imagem | prepend: 'https://meteoros.s3.amazonaws.com/'"
-						>
-							<img src="{{ capture.imagem | prepend: 'https://meteoros.s3.amazonaws.com/' }}"
-								 class="img img-thumbnail img-responsive">
+						<a href="#videoModal" data-toggle="modal" data-video="{{ capture.imagem | prepend: 'https://meteoros.s3.amazonaws.com/' }}" data-network="{{ page.network }}">
+							<img src="{{ capture.imagem | prepend: 'https://meteoros.s3.amazonaws.com/' }}" class="img img-thumbnail img-responsive">
 						</a>
 					</span>
 				{% endfor %}
