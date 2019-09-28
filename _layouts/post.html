@@ -4,7 +4,7 @@
 	<!--start: Row -->
 	<div class="row">
 		<!-- start: Post -->
-		<h2><a href="{{ post.url | prepend: site.baseurl }}">{{ page.title }} - {{ page.network }}</a></h2>
+		<h2><a href="{{ page.url | prepend: site.url }}">{{ page.title }} - {{ page.network }}</a></h2>
 
 		<div class="galleria">
 			{% assign filter = page.date | date: '%Y%m%d' %}
@@ -20,7 +20,7 @@
 				{% if page.network == 'BRAMON' %}
 				<img src="{{ capture.imagem | prepend: 'https://meteoros.s3.amazonaws.com/' }}"
 					 class="img img-thumbnail img-responsive  {% if page.network == 'GMN' %}rotateimg180{% endif %}"
-					 data-layer="<a target=_blank href={{ capture.imagem | replace: 'P.jpg', '.mp4' | prepend: 'https://meteoros.s3.amazonaws.com/' }}>Assista o Vídeo</a>">
+					 data-layer="<p class='bg-primary'><a target='_blank' href={{ capture.imagem | replace: 'P.jpg', '.mp4' | prepend: 'https://meteoros.s3.amazonaws.com/' }}><i class='fa fa-film' aria-hidden='true'></i> Assista o Vídeo</a></p>">
 				{% endif %}
 			</a>
 			{% endfor %}
