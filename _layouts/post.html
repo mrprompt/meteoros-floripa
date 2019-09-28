@@ -4,61 +4,71 @@
 	<!--start: Row -->
 	<div class="row">
 		<!-- start: Post -->
-		<h2><a href="{{ page.url | prepend: site.url }}">{{ page.title }}</a></h2>
+		<div class="post-content">
+			<div class="post-title">
+				<h2><a href="{{ page.url | prepend: site.url }}">{{ page.title }}</a></h2>
+			</div>
+			<div class="post-description">
+				<!-- Social Button HTML -->
+				<div class="col-lg-12 share">
+					<!-- Twitter -->
+					<a href="https://twitter.com/share?url={{ page.url | prepend: site.url }}" target="_blank" class="share-btn twitter">
+						<i class="fa fa-twitter"></i>
+					</a>
 
-		<!-- Social Button HTML -->
-		<div class="col-lg-12 share">
-			<!-- Twitter -->
-			<a href="https://twitter.com/share?url={{ page.url | prepend: site.url }}" target="_blank" class="share-btn twitter">
-				<i class="fa fa-twitter"></i>
-			</a>
+					<!-- Google Plus -->
+					<a href="https://plus.google.com/share?url={{ page.url | prepend: site.url }}" target="_blank" class="share-btn google-plus">
+						<i class="fa fa-google-plus"></i>
+					</a>
 
-			<!-- Google Plus -->
-			<a href="https://plus.google.com/share?url={{ page.url | prepend: site.url }}" target="_blank" class="share-btn google-plus">
-				<i class="fa fa-google-plus"></i>
-			</a>
+					<!-- Facebook -->
+					<a href="https://www.facebook.com/sharer/sharer.php?u={{ page.url | prepend: site.url }}" target="_blank" class="share-btn facebook">
+						<i class="fa fa-facebook"></i>
+					</a>
 
-			<!-- Facebook -->
-			<a href="https://www.facebook.com/sharer/sharer.php?u={{ page.url | prepend: site.url }}" target="_blank" class="share-btn facebook">
-				<i class="fa fa-facebook"></i>
-			</a>
+					<!-- StumbleUpon (url, title) -->
+					<a href="https://www.stumbleupon.com/submit?url={{ page.url | prepend: site.url }}&title={{ page.title }}" target="_blank" class="share-btn stumbleupon">
+						<i class="fa fa-stumbleupon"></i>
+					</a>
 
-			<!-- StumbleUpon (url, title) -->
-			<a href="https://www.stumbleupon.com/submit?url={{ page.url | prepend: site.url }}&title={{ page.title }}" target="_blank" class="share-btn stumbleupon">
-				<i class="fa fa-stumbleupon"></i>
-			</a>
+					<!-- Reddit (url, title) -->
+					<a href="https://reddit.com/submit?url={{ page.url | prepend: site.url }}&title={{ page.title }}" target="_blank" class="share-btn reddit">
+						<i class="fa fa-reddit"></i>
+					</a>
 
-			<!-- Reddit (url, title) -->
-			<a href="https://reddit.com/submit?url={{ page.url | prepend: site.url }}&title={{ page.title }}" target="_blank" class="share-btn reddit">
-				<i class="fa fa-reddit"></i>
-			</a>
+					<!-- LinkedIn -->
+					<a href="https://www.linkedin.com/shareArticle?url={{ page.url | prepend: site.url }}&title={{ page.title }}&summary=<SUMMARY>&source=<SOURCE_URL>" target="_blank" class="share-btn linkedin">
+						<i class="fa fa-linkedin"></i>
+					</a>
+				</div>
 
-			<!-- LinkedIn -->
-			<a href="https://www.linkedin.com/shareArticle?url={{ page.url | prepend: site.url }}&title={{ page.title }}&summary=<SUMMARY>&source=<SOURCE_URL>" target="_blank" class="share-btn linkedin">
-				<i class="fa fa-linkedin"></i>
-			</a>
-		</div>
+				<div class="galleria">
+					{% assign filter = page.date | date: '%Y%m%d' %}
+					{% assign capture_collections = site.captures | where: "label", filter | where: "network", page.network %}
+					{% assign capture_collection = capture_collections | first %}
+					{% for capture in capture_collection.capturas %}
+					<a href="{{ capture.imagem | prepend: site.s3_bucket }}">
+						{% if page.network == 'GMN' %}
+						<img src="{{ capture.imagem | prepend: site.s3_bucket }}"
+							class="img img-thumbnail img-responsive" 
+							data-network="{{ page.network }}">
+						{% endif %}
 
-		<div class="galleria">
-			{% assign filter = page.date | date: '%Y%m%d' %}
-			{% assign capture_collections = site.captures | where: "label", filter | where: "network", page.network %}
-			{% assign capture_collection = capture_collections | first %}
-			{% for capture in capture_collection.capturas %}
-			<a href="{{ capture.imagem | prepend: site.s3_bucket }}">
-				{% if page.network == 'GMN' %}
-				<img src="{{ capture.imagem | prepend: site.s3_bucket }}"
-					 class="img img-thumbnail img-responsive" 
-					 data-network="{{ page.network }}">
-				{% endif %}
-
-				{% if page.network == 'BRAMON' %}
-				<img src="{{ capture.imagem | prepend: site.s3_bucket }}"
-					 class="img img-thumbnail img-responsive"
-					 data-network="{{ page.network }}"
-					 data-layer="<a target='_blank' class='btn btn-primary' href={{ capture.imagem | replace: 'P.jpg', '.mp4' | prepend: site.s3_bucket }}><i class='fa fa-film' aria-hidden='true'></i> Vídeo</a>">
-				{% endif %}
-			</a>
-			{% endfor %}
+						{% if page.network == 'BRAMON' %}
+						<img src="{{ capture.imagem | prepend: site.s3_bucket }}"
+							class="img img-thumbnail img-responsive"
+							data-network="{{ page.network }}"
+							data-layer="<a target='_blank' class='btn btn-primary' href={{ capture.imagem | replace: 'P.jpg', '.mp4' | prepend: site.s3_bucket }}><i class='fa fa-film' aria-hidden='true'></i> Vídeo</a>">
+						{% endif %}
+					</a>
+					{% endfor %}
+				</div>
+			</div>
+			<div class="post-meta">
+				<span><i class="fa fa-calendar"></i> {{ post.date | date: '%d/%m/%Y' }}</span><br>
+				<span><i class="fa fa-globe-americas"></i> Rede: {{ capture_collection.network }}</span><br>
+				<span><i class="fa fa-meteor"></i> Total de capturas: {{ capture_collection.capturas.size }}</span>
+			</div>
 		</div>
 		<!-- end: Post -->
 	</div>
