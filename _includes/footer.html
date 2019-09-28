@@ -3,7 +3,7 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <script src="//kit.fontawesome.com/1ed5defbcd.js" crossorigin="anonymous"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/galleria/1.5.7/galleria.min.js"></script>
-    <script async src="//www.googletagmanager.com/gtag/js?id=UA-148905542-1"></script>
+    <script async src="//www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}"></script>
     <script>
         (function() {
             if ($('.galleria').length) {
@@ -17,7 +17,7 @@
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
 
-      gtag('config', 'UA-148905542-1');
+      gtag('config', '{{ site.google_analytics }}');
     </script>
 </body>
 </html>
