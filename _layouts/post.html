@@ -14,12 +14,13 @@
 			<a href="{{ capture.imagem | prepend: 'https://meteoros.s3.amazonaws.com/' }}">
 				{% if page.network == 'GMN' %}
 				<img src="{{ capture.imagem | prepend: 'https://meteoros.s3.amazonaws.com/' }}"
-					 class="img img-thumbnail img-responsive  {% if page.network == 'GMN' %}rotateimg180{% endif %}">
+					 class="img img-thumbnail img-responsive" data-network="{{ page.network }}">
 				{% endif %}
 
 				{% if page.network == 'BRAMON' %}
 				<img src="{{ capture.imagem | prepend: 'https://meteoros.s3.amazonaws.com/' }}"
 					 class="img img-thumbnail img-responsive  {% if page.network == 'GMN' %}rotateimg180{% endif %}"
+					 data-network="{{ page.network }}"
 					 data-layer="<a target='_blank' class='btn btn-primary' href={{ capture.imagem | replace: 'P.jpg', '.mp4' | prepend: 'https://meteoros.s3.amazonaws.com/' }}><i class='fa fa-film' aria-hidden='true'></i> Vídeo</a>">
 				{% endif %}
 			</a>
