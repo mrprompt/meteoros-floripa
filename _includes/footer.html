@@ -41,8 +41,12 @@
 
         if ($this.attr('data-network') == 'BRAMON') {
             var videoSrc = video.slice(0, -5) + '.mp4';
+
+            $("#video_source_0").removeClass('rotateimg180');
         } else {
             var videoSrc = video;
+
+            $("#video_source_0").addClass('rotateimg180');
         }
 
         $("#videoModal").on('hide.bs.modal', function(){
