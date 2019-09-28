@@ -20,7 +20,7 @@
 				{% if page.network == 'BRAMON' %}
 				<img src="{{ capture.imagem | prepend: 'https://meteoros.s3.amazonaws.com/' }}"
 					 class="img img-thumbnail img-responsive  {% if page.network == 'GMN' %}rotateimg180{% endif %}"
-					 data-layer="<p class='bg-primary'><a target='_blank' href={{ capture.imagem | replace: 'P.jpg', '.mp4' | prepend: 'https://meteoros.s3.amazonaws.com/' }}><i class='fa fa-film' aria-hidden='true'></i> Assista o Vídeo</a></p>">
+					 data-layer="<a target='_blank' class='btn btn-primary' href={{ capture.imagem | replace: 'P.jpg', '.mp4' | prepend: 'https://meteoros.s3.amazonaws.com/' }}><i class='fa fa-film' aria-hidden='true'></i> Vídeo</a>">
 				{% endif %}
 			</a>
 			{% endfor %}
