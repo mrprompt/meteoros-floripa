@@ -19,7 +19,7 @@
 				{% for capture in capture_collection.capturas %}
 					<span class="col-md-3">
 						<a href="#videoModal" data-toggle="modal" data-video="{{ capture.imagem | prepend: 'https://meteoros.s3.amazonaws.com/' }}" data-network="{{ page.network }}">
-							<img src="{{ capture.imagem | prepend: 'https://meteoros.s3.amazonaws.com/' }}" class="img img-thumbnail img-responsive">
+							<img src="{{ capture.imagem | prepend: 'https://meteoros.s3.amazonaws.com/' }}" class="img img-thumbnail img-responsive  {% if page.network == 'GMN' %}rotateimg180{% endif %}">
 						</a>
 					</span>
 				{% endfor %}
