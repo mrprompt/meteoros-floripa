@@ -6,6 +6,39 @@
 		<!-- start: Post -->
 		<h2><a href="{{ page.url | prepend: site.url }}">{{ page.title }}</a></h2>
 
+		<!-- Social Button HTML -->
+		<div class="col-lg-12 share">
+			<!-- Twitter -->
+			<a href="https://twitter.com/share?url={{ page.url | prepend: site.url }}" target="_blank" class="share-btn twitter">
+				<i class="fa fa-twitter"></i>
+			</a>
+
+			<!-- Google Plus -->
+			<a href="https://plus.google.com/share?url={{ page.url | prepend: site.url }}" target="_blank" class="share-btn google-plus">
+				<i class="fa fa-google-plus"></i>
+			</a>
+
+			<!-- Facebook -->
+			<a href="https://www.facebook.com/sharer/sharer.php?u={{ page.url | prepend: site.url }}" target="_blank" class="share-btn facebook">
+				<i class="fa fa-facebook"></i>
+			</a>
+
+			<!-- StumbleUpon (url, title) -->
+			<a href="https://www.stumbleupon.com/submit?url={{ page.url | prepend: site.url }}&title={{ page.title }}" target="_blank" class="share-btn stumbleupon">
+				<i class="fa fa-stumbleupon"></i>
+			</a>
+
+			<!-- Reddit (url, title) -->
+			<a href="https://reddit.com/submit?url={{ page.url | prepend: site.url }}&title={{ page.title }}" target="_blank" class="share-btn reddit">
+				<i class="fa fa-reddit"></i>
+			</a>
+
+			<!-- LinkedIn -->
+			<a href="https://www.linkedin.com/shareArticle?url={{ page.url | prepend: site.url }}&title={{ page.title }}&summary=<SUMMARY>&source=<SOURCE_URL>" target="_blank" class="share-btn linkedin">
+				<i class="fa fa-linkedin"></i>
+			</a>
+		</div>
+
 		<div class="galleria">
 			{% assign filter = page.date | date: '%Y%m%d' %}
 			{% assign capture_collections = site.captures | where: "label", filter | where: "network", page.network %}
