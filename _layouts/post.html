@@ -4,27 +4,26 @@
 	<!--start: Row -->
 	<div class="row">
 		<!-- start: Post -->
-		<div class="post">
-			<div class="post-content">
-				<div class="post-title">
-					<h2><a href="{{ post.url | prepend: site.baseurl }}">{{ page.title }} - {{ page.network }}</a></h2>
-				</div>
-				<div class="post-meta">
-					<span><i class="mini-ico-calendar"></i>{{ page.date | date: '%d/%m/%Y' }}</span>
-				</div>
-				<div class="post-description">
-				{% assign filter = page.date | date: '%Y%m%d' %}
-				{% assign capture_collections = site.captures | where: "label", filter | where: "network", page.network %}
-				{% assign capture_collection = capture_collections | first %}
-				{% for capture in capture_collection.capturas %}
-					<span class="col-md-3">
-						<a href="#videoModal" data-toggle="modal" data-video="{{ capture.imagem | prepend: 'https://meteoros.s3.amazonaws.com/' }}" data-network="{{ page.network }}">
-							<img src="{{ capture.imagem | prepend: 'https://meteoros.s3.amazonaws.com/' }}" class="img img-thumbnail img-responsive  {% if page.network == 'GMN' %}rotateimg180{% endif %}">
-						</a>
-					</span>
-				{% endfor %}
-				</div>
-			</div>
+		<h2><a href="{{ post.url | prepend: site.baseurl }}">{{ page.title }} - {{ page.network }}</a></h2>
+
+		<div class="galleria">
+			{% assign filter = page.date | date: '%Y%m%d' %}
+			{% assign capture_collections = site.captures | where: "label", filter | where: "network", page.network %}
+			{% assign capture_collection = capture_collections | first %}
+			{% for capture in capture_collection.capturas %}
+			<a href="{{ capture.imagem | prepend: 'https://meteoros.s3.amazonaws.com/' }}">
+				{% if page.network == 'GMN' %}
+				<img src="{{ capture.imagem | prepend: 'https://meteoros.s3.amazonaws.com/' }}"
+					 class="img img-thumbnail img-responsive  {% if page.network == 'GMN' %}rotateimg180{% endif %}">
+				{% endif %}
+
+				{% if page.network == 'BRAMON' %}
+				<img src="{{ capture.imagem | prepend: 'https://meteoros.s3.amazonaws.com/' }}"
+					 class="img img-thumbnail img-responsive  {% if page.network == 'GMN' %}rotateimg180{% endif %}"
+					 data-layer="<a target=_blank href={{ capture.imagem | replace: 'P.jpg', '.mp4' | prepend: 'https://meteoros.s3.amazonaws.com/' }}>Assista o Vídeo</a>">
+				{% endif %}
+			</a>
+			{% endfor %}
 		</div>
 		<!-- end: Post -->
 	</div>

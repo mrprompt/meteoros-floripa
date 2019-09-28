@@ -1,62 +1,20 @@
-    <div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Fechar</span></button>
-            <h4 class="modal-title" id="myModalLabel">Captura</h4>
-          </div>
-          <div class="modal-body text-center">
-            <div class="embed-responsive embed-responsive-16by9">
-              <iframe id="video_source_0" class="embed-responsive-item" width="720" height="480" src="" frameborder="0" allowfullscreen>
-                <p>Your browser does not appear to support iframes</p>
-              </iframe>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <!-- start: Java Script -->
-    <!-- Latest compiled and minified JavaScript -->
     <script src="//code.jquery.com/jquery-2.2.1.min.js" integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00=" crossorigin="anonymous"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-    
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-148905542-1"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/galleria/1.5.7/galleria.min.js"></script>
+    <script async src="//www.googletagmanager.com/gtag/js?id=UA-148905542-1"></script>
+    <script>
+        (function() {
+            Galleria.loadTheme('/assets/galleria/dist/themes/classic/galleria.classic.min.js');
+            Galleria.run('.galleria');
+        }());
+    </script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
 
       gtag('config', 'UA-148905542-1');
-    </script>
-
-    <!-- modal -->
-    <script>
-      $(".post-description .col-md-3 a").on("click", function(e) {
-        e.preventDefault();
-
-        var $this = $(this);
-        var video = new String($this.attr('data-video'));
-
-        if ($this.attr('data-network') == 'BRAMON') {
-            var videoSrc = video.slice(0, -5) + '.mp4';
-
-            $("#video_source_0").removeClass('rotateimg180');
-        } else {
-            var videoSrc = video;
-
-            $("#video_source_0").addClass('rotateimg180');
-        }
-
-        $("#videoModal").on('hide.bs.modal', function(){
-          $("#video_source_0").attr('src', '');
-        });
-
-        $("#videoModal").on('show.bs.modal', function(){
-          $("#video_source_0").attr('src', videoSrc);
-        });
-      });
     </script>
 </body>
 </html>
