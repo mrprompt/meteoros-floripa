@@ -1,7 +1,7 @@
 # Site settings
 title: Meteoros Floripa
 description: Estações de capturas de meteoros em Florianópolis/SC
-url: ""
+url: "https://meteoros.floripa.br"
 baseurl: "/"
 
 # Build settings
