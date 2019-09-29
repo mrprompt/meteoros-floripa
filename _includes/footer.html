@@ -10,6 +10,19 @@
                 Galleria.loadTheme('/assets/galleria/dist/themes/classic/galleria.classic.min.js');
                 Galleria.run('.galleria');
             }
+
+            $('#form_busca').on('submit', function(e) {
+                e.preventDefault();
+
+                var data_captura = $('#data_captura').val();
+                var rede_captura = $('input[name=rede_captura]:checked', '#form_busca').val();
+                var data_exploded = data_captura.split('-');
+                
+                var url = data_exploded[0] + '/' + data_exploded[1] + '/' + data_exploded[2]
+                    + '/' + rede_captura + '-' + data_captura;
+                
+                window.location.href = '{{ site.url }}/' +  url + '/';
+            })
         }());
     </script>
     <script>
