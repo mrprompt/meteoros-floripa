@@ -14,7 +14,6 @@ paginate: 30
 pagination_path: "/:num"
 
 # Use your search engine ID
-google_cse_id: ""
 google_analytics: "UA-148905542-1"
 
 # S3 bucket base address

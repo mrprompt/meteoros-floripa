@@ -1,6 +1,7 @@
 ---
 layout: default
 ---
+<!--start: Container-->
 <div class="container">
 	<!--start: Row -->
 	<div class="row">
@@ -55,7 +56,7 @@ layout: default
                     {% if page == paginator.page %}
                     <a href="#">{{ page }}</a>
                     {% elsif page == 1 %}
-                    <a href="{{ '/index.html' | prepend: site.baseurl | replace: '//', '/' }}">{{ page }}</a>
+                    <a href="{{ '/' | prepend: site.baseurl | replace: '//', '/' }}">{{ page }}</a>
                     {% else %}
                     <a href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}">{{
                         page }}</a>
