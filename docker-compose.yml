@@ -6,6 +6,4 @@ services:
       - "8080:4000"
     volumes:
       - .:/usr/src/app
-    environment:
-      - POSTGRES_DB=gateway_development
     tty: true
