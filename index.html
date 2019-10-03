@@ -9,7 +9,7 @@ layout: default
         
         {% for post in posts %}
             {% assign filter = post.date | date: '%Y%m%d' %}
-            {% assign capture_collections = site.captures | where: "label", filter | where: "network", post.network %}
+            {% assign capture_collections = site.captures | where: "label", filter | where: "network", post.network | where: "station", post.station %}
             {% assign capture_collection = capture_collections | first %}
             {% assign capture = capture_collection.capturas | first %}
 
