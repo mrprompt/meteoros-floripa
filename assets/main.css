@@ -47,3 +47,9 @@
 .sidebar {
     margin-top: 1.8em;
 }
+
+.nobreak {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
