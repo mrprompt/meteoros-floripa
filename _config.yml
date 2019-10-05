@@ -30,3 +30,5 @@ sass:
 collections:
   captures:
     output: false
+  stations:
+    output: true

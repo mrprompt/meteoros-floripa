@@ -1,0 +1,41 @@
+{% include head.html %}
+
+<!--start: Container-->
+<div class="container">
+	<!--start: Row -->
+	<div class="row">
+        <div class="col-sm-12 col-md-10">
+            {% assign posts = site.captures | where: "network", page.network | where: "station", page.station | reverse %}
+            
+            {% for post in posts %}
+                {% assign capture = post.capturas | first %}
+				{% assign year = post.label | slice: 0,4 %}
+				{% assign month = post.label | slice: 4, 2 %}
+				{% assign day = post.label | slice: 6, 2 %}
+
+                <article class="col-md-4 mb-1">
+                    <div class="post-content">
+                        <div class="post-description">
+                            <a href="/{{ year }}/{{ month }}/{{ day }}/{{ post.network }}-{{ post.station }}">
+                                <img src="{{ capture.imagem | prepend: site.s3_bucket }}"
+                                        class="img img-thumbnail img-responsive">
+                            </a>
+                        </div>
+                        <div class="post-meta">
+                            <span><i class="fa fa-calendar"></i> Data: {{ day }}/{{ month }}/{{ year }}</span><br>
+                            <span><i class="fa fa-globe-americas"></i> Rede: {{ post.network }}</span><br>
+                            <span><i class="fa fa-meteor"></i> Capturas: {{ post.capturas.size }}</span>
+                        </div>
+                    </div>
+                </article>
+            {% endfor %}
+        </div>
+        <div class="col-sm-12 col-md-2 sidebar">
+            {% include sidebar.html %}
+        </div>
+	</div>
+	<!--end: Row -->
+</div>
+<!--end: Container-->
+
+{% include footer.html %}

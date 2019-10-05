@@ -5,74 +5,46 @@ layout: default
 <div class="container">
 	<!--start: Row -->
 	<div class="row">
-        {% assign posts = paginator.posts %}
-        
-        {% for post in posts %}
-            {% assign filter = post.date | date: '%Y%m%d' %}
-            {% assign capture_collections = site.captures | where: "label", filter | where: "network", post.network | where: "station", post.station %}
-            {% assign capture_collection = capture_collections | first %}
-            {% assign capture = capture_collection.capturas | first %}
+        <div class="col-sm-12 col-md-10">
+            {% assign posts = paginator.posts %}
+            
+            {% for post in posts %}
+                {% assign filter = post.date | date: '%Y%m%d' %}
+                {% assign capture_collections = site.captures | where: "label", filter | where: "network", post.network | where: "station", post.station %}
+                {% assign capture_collection = capture_collections | first %}
+                {% assign capture = capture_collection.capturas | first %}
 
-            <!-- start: Post -->
-            <article class="col-md-4 mb-1">
-                <div class="post-content">
-                    <div class="post-title">
-                        <h2><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></h2>
+                <!-- start: Post -->
+                <article class="col-md-4 mb-1">
+                    <div class="post-content">
+                        <div class="post-title">
+                            <h2><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></h2>
+                        </div>
+                        <div class="post-description">
+                            <a href="{{ post.url | prepend: site.baseurl }}">
+                                <img src="{{ capture.imagem | prepend: site.s3_bucket }}"
+                                        class="img img-thumbnail img-responsive">
+                            </a>
+                        </div>
+                        <div class="post-meta">
+                            <span><i class="fa fa-calendar"></i> Data: {{ post.date | date: '%d/%m/%Y' }}</span><br>
+                            <span><i class="fa fa-globe-americas"></i> Rede: {{ capture_collection.network }}</span><br>
+                            <span><i class="fa fa-meteor"></i> Capturas: {{ capture_collection.capturas.size }}</span>
+                        </div>
                     </div>
-                    <div class="post-description">
-                        <a href="{{ post.url | prepend: site.baseurl }}">
-                            <img src="{{ capture.imagem | prepend: site.s3_bucket }}"
-                                    class="img img-thumbnail img-responsive">
-                        </a>
-                    </div>
-                    <div class="post-meta">
-                        <span><i class="fa fa-calendar"></i> Data: {{ post.date | date: '%d/%m/%Y' }}</span><br>
-                        <span><i class="fa fa-globe-americas"></i> Rede: {{ capture_collection.network }}</span><br>
-                        <span><i class="fa fa-meteor"></i> Capturas: {{ capture_collection.capturas.size }}</span>
-                    </div>
-                </div>
-            </article>
-            <!-- end: Post -->
-        {% endfor %}
+                </article>
+                <!-- end: Post -->
+            {% endfor %}
+        </div>
+        <div class="col-sm-12 col-md-2 sidebar">
+            {% include sidebar.html %}
+        </div>
 	</div>
 	<!--end: Row -->
 
 	<!--start: Row -->
 	<div class="row">
-        <!-- start: pagination -->
-        <nav class="col-md-12 text-center">
-            <ul class="pagination">
-                <li>
-                    {% if paginator.previous_page %}
-                    <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&laquo;</a>
-                    {% else %}
-                    <span>&laquo;</span>
-                    {% endif %}
-                </li>
-
-                {% for page in (1..paginator.total_pages) %}
-                <li>
-                    {% if page == paginator.page %}
-                    <a href="#">{{ page }}</a>
-                    {% elsif page == 1 %}
-                    <a href="{{ '/' | prepend: site.baseurl | replace: '//', '/' }}">{{ page }}</a>
-                    {% else %}
-                    <a href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}">{{
-                        page }}</a>
-                    {% endif %}
-                </li>
-                {% endfor %}
-
-                <li>
-                    {% if paginator.next_page %}
-                    <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">&raquo;</a>
-                    {% else %}
-                    <span>&raquo;</span>
-                    {% endif %}
-                </li>
-            </ul>
-        </nav>
-        <!-- end: pagination -->
+        {% include pagination.html %}
 	</div>
 	<!--end: Row -->
 </div>

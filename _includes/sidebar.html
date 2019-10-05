@@ -1,0 +1,9 @@
+<img src="{{ 'assets/logo.png' | prepend: site.baseurl }}" class="img-thumbnail img-responsive">
+<br>
+<ul class="list-unstyled">
+    {% for station in site.stations %}
+    <li>
+        <a href="/{{ 'stations/' | append: station.station }}">{{ station.station }} - {{ station.network }} </a>
+    </li>
+    {% endfor %}
+</ul>

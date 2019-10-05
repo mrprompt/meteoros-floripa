@@ -1,6 +1,3 @@
-body {
-    padding-top: 70px;
- }
  .galleria {
      width: 800px;
      height: 600px;
@@ -45,4 +42,8 @@ body {
 
  .mb-1 {
      margin-bottom: 1em; 
+}
+
+.sidebar {
+    margin-top: 1.8em;
 }
