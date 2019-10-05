@@ -1,6 +1,6 @@
 ---
 layout: station
-station: TLP1
+station: TLP7
 network: BRAMON
 camera: SAMSUNG SCB-2000
 lens: MegaPixel 4mm F1.0
