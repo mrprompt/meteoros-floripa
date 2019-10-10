@@ -7,7 +7,7 @@ layout: default
 	<div class="row">
         <div class="col-sm-12 col-md-10">
             {% assign posts = paginator.posts %}
-            
+
             {% for post in posts %}
                 {% assign filter = post.date | date: '%Y%m%d' %}
                 {% assign capture_collections = site.captures | where: "label", filter | where: "network", post.network | where: "station", post.station %}
