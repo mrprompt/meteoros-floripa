@@ -5,7 +5,7 @@
 	<!--start: Row -->
 	<div class="row">
         <div class="col-sm-12 col-md-10">
-            {% assign posts = site.captures | where: "network", page.network | where: "station", page.station | reverse %}
+            {% assign posts = site.captures | where: "station", page.station | reverse %}
             
             {% for post in posts %}
                 {% assign capture = post.capturas | first %}
@@ -23,7 +23,6 @@
                         </div>
                         <div class="post-meta">
                             <span><i class="fa fa-calendar"></i> Data: {{ day }}/{{ month }}/{{ year }}</span><br>
-                            <span><i class="fa fa-globe-americas"></i> Rede: {{ post.network }}</span><br>
                             <span><i class="fa fa-meteor"></i> Capturas: {{ post.capturas.size }}</span>
                         </div>
                     </div>
