@@ -4,7 +4,7 @@
     {% assign stations = site.stations | sort: station %}
     {% for station in stations %}
     <li>
-        <a href="/{{ 'stations/' | append: station.station }}">{{ station.station }} - {{ station.network }} </a>
+        <a href="/{{ 'stations/' | append: station.station }}">{{ station.station }}</a>
     </li>
     {% endfor %}
 </ul>

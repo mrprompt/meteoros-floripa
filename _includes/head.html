@@ -24,7 +24,7 @@
     
     {% if page.title %}
         {% assign filter = page.date | date: '%Y%m%d' %}
-        {% assign capture_collections = site.captures | where: "label", filter | where: "network", page.network | where: "station", page.station %}
+        {% assign capture_collections = site.captures | where: "label", filter | where: "station", page.station %}
         {% assign capture_collection = capture_collections | first %}
         {% assign capture_image = capture_collection.capturas | first %}
 
