@@ -8,18 +8,23 @@
 		<link>{{ site.url }}</link>
 		<atom:link href="{{ site.url }}/feed.xml" rel="self" type="application/rss+xml" />
 		{% for post in site.posts limit:100 %}
+			{% assign filter = post.date | date: '%Y%m%d' %}
+			{% assign capture_collections = site.captures | where: "label", filter | where: "station", post.station %}
+			{% assign capture_collection = capture_collections | first %}
+			{% assign capture = capture_collection.capturas | first %}
+
 			<item>
 				<title>{{ post.title | xml_escape }}</title>
-				{% if post.author.name %}
-					<dc:creator>{{ post.author.name | xml_escape }}</dc:creator>
-				{% endif %}        
-				{% if post.excerpt %}
-					<description>{{ post.excerpt | xml_escape }}</description>
-				{% else %}
-					<description>{{ post.content | xml_escape }}</description>
-				{% endif %}
+				<description>Capturas: {{ capture_collection.capturas.size }}</description>
 				<pubDate>{{ post.date | date_to_rfc822 }}</pubDate>
 				<link>{{ site.url }}{{ post.url }}</link>
+				<media:content 
+					xmlns:media="http://search.yahoo.com/mrss/" 
+					url="{{ capture.imagem | prepend: site.s3_bucket }}" 
+					medium="image" 
+					type="image/jpeg" 
+					width="720" 
+					height="480" />
 				<guid isPermaLink="true">{{ site.url }}{{ post.url }}</guid>
 			</item>
 		{% endfor %}
