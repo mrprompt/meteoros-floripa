@@ -24,6 +24,10 @@ jobs:
         pip install -r requirements.txt
 
     - name: Run script
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.aws_access_key_id }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.aws_secret_access_key }}
+        AWS_DEFAULT_REGION: ${{ secrets.aws_default_region }}
       run: |
         python make-collection.py
 
