@@ -4,6 +4,6 @@ station: TLP2
 network: BRAMON
 camera: SAMSUNG SCB-2000
 lens: MegaPixel 4mm F1.0
-azimute: 82 E
-elevation: 55
+azimute: 102
+elevation: 65
 ---

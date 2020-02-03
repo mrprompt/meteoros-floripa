@@ -4,6 +4,6 @@ station: TLP7
 network: BRAMON
 camera: SAMSUNG SCB-2000
 lens: MegaPixel 4mm F1.0
-azimute: 35 NE
-elevation: 70
+azimute: 145
+elevation: 51
 ---

@@ -8,7 +8,12 @@ baseurl: "/"
 highlighter: rouge
 timezone: America/Sao_Paulo
 permalink: pretty
-exclude: "make-collection.py, requirements.txt, docker-compose.yml"
+exclude:
+  - make-collection.py
+  - requirements.txt
+  - docker-compose.yml
+  - .idea
+  - .github
 
 # Pagination
 paginate: 30
