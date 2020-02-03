@@ -6,4 +6,5 @@ camera: SAMSUNG SCB-2000
 lens: MegaPixel 4mm F1.0
 azimute: 313
 elevation: 20
+navigation_weight: 10
 ---
