@@ -4,7 +4,7 @@
 <div class="container">
 	<!--start: Row -->
 	<div class="row">
-        <div class="col-sm-12 col-md-10">
+        <div class="col-sm-12 col-md-11">
             {% assign posts = site.captures | where: "station", page.station | reverse %}
             
             {% for post in posts %}
@@ -29,7 +29,7 @@
                 </article>
             {% endfor %}
         </div>
-        <div class="col-sm-12 col-md-2 sidebar">
+        <div class="col-sm-12 col-md-1 sidebar">
             {% include sidebar.html %}
         </div>
 	</div>
