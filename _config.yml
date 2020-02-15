@@ -25,6 +25,9 @@ google_analytics: "UA-148905542-1"
 # S3 bucket base address
 s3_bucket: "https://meteoros.s3.amazonaws.com/"
 
+# Facebook App ID
+facebook_app_id: "2497397260472875"
+
 # Plugins
 plugins:
   - jekyll-sitemap
