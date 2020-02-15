@@ -72,5 +72,8 @@
 }
 
 .logo {
-    margin-top: -10px !important;
+    margin-top: -15px !important;
+}
+.logo > img {
+    max-height: 50px !important
 }
