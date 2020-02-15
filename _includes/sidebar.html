@@ -1,8 +1,0 @@
-<ul class="list-unstyled">
-    {% assign stations = site.stations | sort: 'navigation_weight' %}
-    {% for station in stations %}
-    <li>
-        <a href="/{{ 'stations/' | append: station.station }}">{{ station.station }}</a>
-    </li>
-    {% endfor %}
-</ul>

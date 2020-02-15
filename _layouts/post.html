@@ -4,38 +4,33 @@
 <div class="container">
 	<!--start: Row -->
 	<div class="row">
-		<div class="col-sm-12 col-md-11">
-			<div class="post-content">
-				<div class="post-title">
-					<h2><a href="{{ page.url | prepend: site.url }}">{{ page.title }}</a></h2>
-				</div>
-				<div class="post-description">
-					{% include social.html %}
+		<div class="post-content">
+			<div class="post-title">
+				<h2><a href="{{ page.url | prepend: site.url }}">{{ page.title }}</a></h2>
+			</div>
+			<div class="post-description">
+				{% include social.html %}
 
-					<div class="galleria">
-						{% assign filter = page.date | date: '%Y%m%d' %}
-						{% assign capture_collections = site.captures | where: "label", filter | where: "station", page.station %}
-						{% assign capture_collection = capture_collections | first %}
-						
-						{% for capture in capture_collection.capturas %}
-						<a href="{{ capture.imagem | prepend: site.s3_bucket }}">
-							<img src="{{ capture.imagem | prepend: site.s3_bucket }}"
-								class="img img-thumbnail img-responsive"
-								data-network="{{ page.network }}"
-								data-layer="<a target='_blank' class='btn btn-primary' href={{ capture.imagem | replace: 'P.jpg', '.mp4' | prepend: site.s3_bucket }}><i class='fa fa-film' aria-hidden='true'></i> Vídeo</a>">
-						</a>
-						{% endfor %}
-					</div>
-				</div>
-				<div class="post-meta" style="margin-top: 5em;">
-					<span><i class="fa fa-calendar"></i> Data: {{ page.date | date: '%d/%m/%Y' }}</span><br>
-					<span><i class="fa fa-meteor"></i> Capturas: {{ capture_collection.capturas.size }}</span>
+				<div class="galleria">
+					{% assign filter = page.date | date: '%Y%m%d' %}
+					{% assign capture_collections = site.captures | where: "label", filter | where: "station", page.station %}
+					{% assign capture_collection = capture_collections | first %}
+
+					{% for capture in capture_collection.capturas %}
+					<a href="{{ capture.imagem | prepend: site.s3_bucket }}">
+						<img src="{{ capture.imagem | prepend: site.s3_bucket }}"
+							class="img img-thumbnail img-responsive"
+							data-network="{{ page.network }}"
+							data-layer="<a target='_blank' class='btn btn-primary' href={{ capture.imagem | replace: 'P.jpg', '.mp4' | prepend: site.s3_bucket }}><i class='fa fa-film' aria-hidden='true'></i> Vídeo</a>">
+					</a>
+					{% endfor %}
 				</div>
 			</div>
+			<div class="post-meta" style="margin-top: 5em;">
+				<span><i class="fa fa-calendar"></i> Data: {{ page.date | date: '%d/%m/%Y' }}</span><br>
+				<span><i class="fa fa-meteor"></i> Capturas: {{ capture_collection.capturas.size }}</span>
+			</div>
 		</div>
-        <div class="col-sm-12 col-md-1 sidebar">
-            {% include sidebar.html %}
-        </div>
 	</div>
 	<!--end: Row -->
 </div>
