@@ -21,10 +21,10 @@
     <meta property="og:site_name" content="{{ site.title }}">
 
     {% if page.title %}
-    {% assign filter = page.date | date: '%Y%m%d' %}
-    {% assign capture_collections = site.captures | where: "label", filter | where: "station", page.station %}
-    {% assign capture_collection = capture_collections | first %}
-    {% assign capture_image = capture_collection.capturas | first %}
+        {% assign filter = page.date | date: '%Y%m%d' %}
+        {% assign capture_collections = site.captures | where: "label", filter | where: "station", page.station %}
+        {% assign capture_collection = capture_collections | first %}
+        {% assign capture_image = capture_collection.capturas | first %}
 
     <meta property="og:type" content="article">
     <meta property="og:description" content="{{ page.title }}">
@@ -35,7 +35,7 @@
     {% else %}
     <meta property="og:type" content="website">
     <meta property="og:description" content="{{ site.description }}">
-    <meta property="og:image" content="/assets/logo.png">
+    <meta property="og:image" content="{{ '/assets/logo.png' | prepend: site.url }}">
     {% endif %}
     <!-- end: Meta -->
 
@@ -43,9 +43,9 @@
           integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
           integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-    <link rel="stylesheet" href="/assets/main.css">
-    <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml">
-    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+    <link rel="stylesheet" href="{{ '/assets/main.css' | prepend: site.url }}">
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ '/feed.xml' | prepend: site.url }}">
+    <link rel="icon" type="image/x-icon" href="{{ '/assets/favicon.ico' | prepend: site.url }}">
 </head>
 <body>
 <!-- Static navbar -->
@@ -74,7 +74,7 @@
                         {% assign stations = site.stations | sort: 'navigation_weight' %}
                         {% for station in stations %}
                         <li>
-                            <a href="/{{ 'stations/' | append: station.station }}">{{ station.station }}</a>
+                            <a href="{{ '/stations/' | prepend: site.url | append: station.station }}">{{ station.station | upcase }}</a>
                         </li>
                         {% endfor %}
                         <li role="separator" class="divider"></li>
@@ -82,7 +82,7 @@
                     </ul>
                 </li>
             </ul>
-            <ul class="nav navbar-nav navbar-right list-inline">
+            <ul class="nav navbar-nav navbar-right list-inline sm-hidden">
                 <li><a href="https://facebook.com/MeteorosFloripa" title="Facebook"><i class="fab fa-facebook"></i></i>
                     <span class="hidden">Facebook</span></a></li>
                 <li><a href="https://twitter.com/MeteorosFloripa" title="Twitter"><i class="fab fa-twitter"></i></i>

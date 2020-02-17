@@ -33,7 +33,7 @@
   "dependencies": {
     "jquery": ">=1.9.0"
   },
-  "main": "./dist/galleria.js",
+  "main": "dist/galleria.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/worseisbetter/galleria.git"
