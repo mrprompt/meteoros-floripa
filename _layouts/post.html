@@ -23,6 +23,7 @@
 
 		{% for capture in capture_collection.capturas %}
 			{% assign base_file = capture.imagem | split: "/" %}
+			{% assign file_meta = base_file | split: "_" %}
 		<article class="col-md-4 mb-1">
 			<div class="post-content">
 				<div class="post-description">
@@ -33,7 +34,7 @@
 				</div>
 				<div class="post-meta">
 					<span><i class="fa fa-calendar"></i> Data: {{ page.date | date: '%d/%m/%Y' }}</span><br>
-<!--					<span><i class="fa fa-clock"></i> Hora: {{ page.date | hour: '%H:%M:%S' }}</span><br>-->
+					<span><i class="fa fa-clock"></i> Hora: {{ file_meta[1] | slice: 0,2 }}:{{ file_meta[1] | slice: 2,2 }}:{{ file_meta[1] | slice: 4,2 }}</span><br>
 					<span><i class="fa fa-film"></i> Vídeo: <a target='_blank' href="{{ capture.imagem | replace: 'P.jpg', '.mp4' | prepend: site.s3_bucket }}">{{ base_file | last | replace: 'P.jpg', '.mp4' }}</a></span>
 				</div>
 			</div>
