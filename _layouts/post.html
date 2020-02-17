@@ -2,35 +2,43 @@
 
 <!--start: Container-->
 <div class="container">
+	<!-- Main component for a primary marketing message or call to action -->
+	<div class="jumbotron">
+		<h1>{{ page.station | upcase }}</h1>
+		<p>Listando capturas da estação {{ page.station | upcase }}</p>
+
+		<p>
+			<span><i class="fa fa-calendar"></i> Data: {{ page.date | date: '%d/%m/%Y' }}</span><br>
+			<span><i class="fa fa-meteor"></i> Capturas: {{ capture_collection.capturas.size }}</span>
+		</p>
+	</div>
+
 	<!--start: Row -->
 	<div class="row">
-		<div class="post-content">
-			<div class="post-title">
-				<h2><a href="{{ page.url | prepend: site.url }}">{{ page.title }}</a></h2>
-			</div>
-			<div class="post-description">
-				{% include social.html %}
+		{% include social.html %}
 
-				<div class="galleria">
-					{% assign filter = page.date | date: '%Y%m%d' %}
-					{% assign capture_collections = site.captures | where: "label", filter | where: "station", page.station %}
-					{% assign capture_collection = capture_collections | first %}
+		{% assign filter = page.date | date: '%Y%m%d' %}
+		{% assign capture_collections = site.captures | where: "label", filter | where: "station", page.station %}
+		{% assign capture_collection = capture_collections | first %}
 
-					{% for capture in capture_collection.capturas %}
-					<a href="{{ capture.imagem | prepend: site.s3_bucket }}">
+		{% for capture in capture_collection.capturas %}
+			{% assign base_file = capture.imagem | split: "/" %}
+		<article class="col-md-4 mb-1">
+			<div class="post-content">
+				<div class="post-description">
+					<a href="{{ capture.imagem | prepend: site.s3_bucket }}" target="_blank">
 						<img src="{{ capture.imagem | prepend: site.s3_bucket }}"
-							class="img img-thumbnail img-responsive"
-							data-network="{{ page.network }}"
-							data-layer="<a target='_blank' class='btn btn-primary' href={{ capture.imagem | replace: 'P.jpg', '.mp4' | prepend: site.s3_bucket }}><i class='fa fa-film' aria-hidden='true'></i> Vídeo</a>">
+							 class="img img-thumbnail img-responsive">
 					</a>
-					{% endfor %}
+				</div>
+				<div class="post-meta">
+					<span><i class="fa fa-calendar"></i> Data: {{ page.date | date: '%d/%m/%Y' }}</span><br>
+<!--					<span><i class="fa fa-clock"></i> Hora: {{ page.date | hour: '%H:%M:%S' }}</span><br>-->
+					<span><i class="fa fa-film"></i> Vídeo: <a target='_blank' href="{{ capture.imagem | replace: 'P.jpg', '.mp4' | prepend: site.s3_bucket }}">{{ base_file | last | replace: 'P.jpg', '.mp4' }}</a></span>
 				</div>
 			</div>
-			<div class="post-meta" style="margin-top: 5em;">
-				<span><i class="fa fa-calendar"></i> Data: {{ page.date | date: '%d/%m/%Y' }}</span><br>
-				<span><i class="fa fa-meteor"></i> Capturas: {{ capture_collection.capturas.size }}</span>
-			</div>
-		</div>
+		</article>
+		{% endfor %}
 	</div>
 	<!--end: Row -->
 </div>
