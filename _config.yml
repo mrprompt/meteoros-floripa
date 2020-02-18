@@ -33,11 +33,14 @@ plugins:
   - jekyll-sitemap
   - jekyll-paginate
 
+# Sass
 sass:
   style: compressed
 
+# Collections used
 collections:
   captures:
     output: false
+
   stations:
     output: true

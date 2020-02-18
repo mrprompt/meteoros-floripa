@@ -1,0 +1,62 @@
+---
+layout: default
+permalink: videos
+title: Vídeos
+---
+<!--start: Container-->
+<div class="container">
+	<!-- Main component for a primary marketing message or call to action -->
+	<div class="jumbotron">
+		<h1>{{ page.title | upcase }}</h1>
+		<p>Vídeos da BRAMON</p>
+	</div>
+
+	{% for videos in site.data.videos.videos %}
+	<!--start: Row -->
+	<div class="row">
+		<div class="col-md-12">
+			<h2>{{ videos.grupo }}</h2>
+		</div>
+
+		{% for video in videos.videos %}
+			{% assign video_meta = video.url | split: "=" %}
+		<article class="col-md-4 mb-1">
+			<div class="post-content">
+				<div class="post-description">
+					<a href="{{ video.url }}" data-toggle="modal" data-target="#modal-{{ video_meta | last }}">
+						<img src="https://img.youtube.com/vi/{{ video_meta | last }}/mqdefault.jpg"
+							 class="img img-thumbnail img-responsive">
+					</a>
+				</div>
+				<div class="post-meta">
+					<span><i class="fa fa-clip"></i> {{ video.titulo }}</span><br>
+				</div>
+			</div>
+		</article>
+		{% endfor %}
+	</div>
+	<!--end: Row -->
+	{% endfor %}
+
+	<!-- start modals -->
+	{% for videos in site.data.videos.videos %}
+		{% for video in videos.videos %}
+			{% assign video_meta = video.url | split: "=" %}
+	<div class="modal fade" id="modal-{{ video_meta | last }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">{{ video.titulo }}</h4>
+				</div>
+				<div class="modal-body text-center">
+					<iframe width="560" height="315" src="{{ video.url }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+				</div>
+			</div>
+		</div>
+	</div>
+		{% endfor %}
+	{% endfor %}
+	<!-- end modals -->
+</div>
+<!--end: Container-->
