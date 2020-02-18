@@ -23,7 +23,7 @@ title: Vídeos
 		<article class="col-md-4 mb-1">
 			<div class="post-content">
 				<div class="post-description">
-					<a href="{{ video.url }}" data-toggle="modal" data-target="#modal-{{ video_meta | last }}">
+					<a href="{{ video.url }}" target="_blank">
 						<img src="https://img.youtube.com/vi/{{ video_meta | last }}/mqdefault.jpg"
 							 class="img img-thumbnail img-responsive">
 					</a>
@@ -37,26 +37,5 @@ title: Vídeos
 	</div>
 	<!--end: Row -->
 	{% endfor %}
-
-	<!-- start modals -->
-	{% for videos in site.data.videos.videos %}
-		{% for video in videos.videos %}
-			{% assign video_meta = video.url | split: "=" %}
-	<div class="modal fade" id="modal-{{ video_meta | last }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-		<div class="modal-dialog modal-lg" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="myModalLabel">{{ video.titulo }}</h4>
-				</div>
-				<div class="modal-body text-center">
-					<iframe width="560" height="315" src="{{ video.url }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-				</div>
-			</div>
-		</div>
-	</div>
-		{% endfor %}
-	{% endfor %}
-	<!-- end modals -->
 </div>
 <!--end: Container-->
