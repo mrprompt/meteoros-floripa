@@ -9,9 +9,9 @@ highlighter: rouge
 timezone: America/Sao_Paulo
 permalink: pretty
 exclude:
-  - make-collection.py
   - requirements.txt
   - docker-compose.yml
+  - .bin
   - .idea
   - .github
 

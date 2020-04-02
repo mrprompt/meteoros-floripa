@@ -1,17 +1,12 @@
 #!/usr/bin/env python3
 # -*- coding: utf8 -*-
-import os
 import sqlite3
-from datetime import date
+import boto3
 from typing import List
 
-import boto3
 
 S3_BUCKET = 'meteoros'
-PATH_OF_SITE_CAPTURES = "_captures/"
-PATH_OF_SITE_POSTS = "_posts/"
-WORK_BRANCH_NAME = date.today()
-PUBLISH_BRANCH_NAME = "master"
+CAPTURES_STATS_FILENAME = '../../estatisticas.md'
 
 
 def get_matching_s3_objects(bucket, prefix="", suffix=""):
@@ -67,23 +62,6 @@ def get_matching_s3_keys(bucket, prefix="", suffix=""):
         yield obj["Key"]
 
 
-def cleanup_dir(directory: str) -> bool:
-    """
-    Remove posts and captures before recreate then.
-
-    :param directory: Name of directory to cleanup md files.
-    :returns: bool
-    """
-    file_list = [f for f in os.listdir(directory) if f.endswith(".md")]
-
-    for f in file_list:
-        file_to_delete = os.path.join(directory, f)
-
-        os.remove(file_to_delete)
-
-    return True
-
-
 def organize_captures(stations_captures: List) -> List:
     """
     Organize captures to be inserted into database with
@@ -97,7 +75,7 @@ def organize_captures(stations_captures: List) -> List:
     for capture in stations_captures:
         capture_spliced = capture.split('/')
         station = capture_spliced[0]
-        capture_date = capture_spliced[3]
+        capture_date = capture_spliced[2]
         post = (capture_date, station, capture)
 
         captures_organized.append(post)
@@ -118,23 +96,20 @@ def populate_tables(connection: object, captures_list: List) -> bool:
     connection_cursor.execute("""
     CREATE TABLE IF NOT EXISTS captures (
         id INTEGER  NOT NULL PRIMARY KEY AUTOINCREMENT,
-        night_start DATE NOT NULL,
+        capture_month VARCHAR(6) NOT NULL,
         station VARCHAR(20) NOT NULL,
         files TEXT
     );
     """)
 
-    connection_cursor.executemany("""
-    INSERT INTO captures (night_start, station, files)
-    VALUES (?, ?, ?)
-    """, captures_list)
+    connection_cursor.executemany("INSERT INTO captures (capture_month, station, files) VALUES (?, ?, ?)", captures_list)
 
     connection.commit()
 
     return True
 
 
-def generate_pages(connection: object) -> bool:
+def generate_stats(connection: object) -> bool:
     """
     Generate captures collections and pages from every station captures.
 
@@ -142,65 +117,40 @@ def generate_pages(connection: object) -> bool:
     :return: bool
     """
     connection_cursor = connection.cursor()
-
     connection_cursor.execute("""
-    SELECT night_start, station
-    FROM captures
-    GROUP BY night_start, station
+    SELECT COUNT(files) AS captures, capture_month, station 
+    FROM captures 
+    GROUP BY capture_month, station
+    ORDER BY station, capture_month
     """)
 
+    filehandle = open(CAPTURES_STATS_FILENAME, "w+")
+    filehandle.write("---\n")
+    filehandle.write("layout: default\n")
+    filehandle.write("permalink: estatisticas\n")
+    filehandle.write("title: Estatísticas\n")
+    filehandle.write("---\n")
+    filehandle.write("| Estação | Mês | Ano | Capturas |\n")
+
     for data in connection_cursor.fetchall():
-        night_start = str(data[0])
-        station = str(data[1])
-        day = str(night_start[6:8])
-        month = str(night_start[4:6])
-        year = str(night_start[0:4])
-        capture_filename = PATH_OF_SITE_CAPTURES + "{}_{}.md".format(station, night_start)
-        post_filename = PATH_OF_SITE_POSTS + "{}-{}-{}-{}.md".format(year, month, day, station)
+        captures = str(data[0])
+        month_and_year = str(data[1])
+        capture_year = str(month_and_year[0:4])
+        capture_month = str(month_and_year[4:6])
+        station = str(data[2])
 
-        connection_cursor.execute("""
-            SELECT id, night_start, station, files
-            FROM captures
-            WHERE night_start = ?
-            AND station = ?
-            ORDER BY station
-            """, (night_start, station))
+        table_row = "| {} | {} | {} | {} |\n".format(station, capture_month, capture_year, captures)
 
-        for capture in connection_cursor.fetchall():
-            if not os.path.exists(capture_filename):
-                filehandle = open(capture_filename, "w+")
-                filehandle.write("---\n")
-                filehandle.write("label: {}\n".format(night_start))
-                filehandle.write("station: {}\n".format(station))
-                filehandle.write("capturas:\n")
-            else:
-                filehandle = open(capture_filename, "a")
+        filehandle.write(table_row)
 
-            file = capture[3]
-
-            if file.endswith('P.jpg'):
-                filehandle.write("  - imagem: {}\n".format(file))
-
-        filehandle.close()
-        filehandle = open(capture_filename, "a")
-        filehandle.write("---\n")
-        filehandle.close()
-
-        filehandle = open(post_filename, "w+")
-        filehandle.write("---\n")
-        filehandle.write("layout: post\n")
-        filehandle.write("title: {} - {}/{}/{}\n".format(station, day, month, year))
-        filehandle.write("station: {}\n".format(station))
-        filehandle.write("date: {}-{}-{} 12:00:00+00:00\n".format(year, month, day))
-        filehandle.write("---\n")
-        filehandle.close()
+    filehandle.close()
 
     return True
 
 
 if __name__ == '__main__':
     print('- Reading captures from S3 bucket')
-    captures = get_matching_s3_keys(S3_BUCKET, suffix=('.jpg', '.JPG'), prefix='TLP')
+    captures = get_matching_s3_keys(S3_BUCKET, suffix='.mp4', prefix='TLP')
 
     print("- Organizing captures")
     posts = organize_captures(captures)
@@ -211,14 +161,8 @@ if __name__ == '__main__':
     print("- Creating temporary table and populating...")
     populate_tables(conn, posts)
 
-    print("- Cleaning {}".format(PATH_OF_SITE_CAPTURES))
-    cleanup_dir(PATH_OF_SITE_CAPTURES)
-
-    print("- Cleaning {}".format(PATH_OF_SITE_POSTS))
-    cleanup_dir(PATH_OF_SITE_POSTS)
-
-    print("- Creating pages")
-    generate_pages(conn)
+    print("- Creating stats")
+    generate_stats(conn)
 
     print("- Closing database connection")
     conn.close()

@@ -2,7 +2,7 @@ name: Build
 
 on:
   schedule:
-    - cron:  '*/60 * * * *'
+    - cron:  '* 0 * * *'
 
 jobs:
   build:
@@ -28,14 +28,14 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.aws_secret_access_key }}
         AWS_DEFAULT_REGION: ${{ secrets.aws_default_region }}
       run: |
-        python ./bin/make-collection.py
+        python ./bin/make-stats.py
 
     - name: Commit files
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git add .
-        git commit -m "Add captures" -a --allow-empty
+        git commit -m "Creating statistics" -a --allow-empty
 
     - name: Push changes
       uses: ad-m/github-push-action@master
