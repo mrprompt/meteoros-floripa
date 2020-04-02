@@ -130,7 +130,7 @@ def generate_stats(connection: object) -> bool:
         capture_year = str(month_and_year[0:4])
         capture_month = str(month_and_year[4:6])
         station = str(data[2])
-        captures_stats_filename = "../../estatisticas_{}.md".format(station)
+        captures_stats_filename = "../estatisticas_{}.md".format(station)
 
         if not os.path.exists(captures_stats_filename):
             filehandle = open(captures_stats_filename, "w+")

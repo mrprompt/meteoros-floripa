@@ -7,8 +7,8 @@ from typing import List
 
 
 S3_BUCKET = 'meteoros'
-PATH_OF_SITE_CAPTURES = "../../_captures/"
-PATH_OF_SITE_POSTS = "../../_posts/"
+PATH_OF_SITE_CAPTURES = "../_captures/"
+PATH_OF_SITE_POSTS = "../_posts/"
 
 
 def get_matching_s3_objects(bucket, prefix="", suffix=""):
