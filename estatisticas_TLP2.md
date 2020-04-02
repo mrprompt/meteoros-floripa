@@ -6,7 +6,7 @@ title: Estatísticas de TLP2
 | Estação | Mês | Ano | Capturas |
 | TLP2 | 12 | 2018 | 2 |
 | TLP2 | 01 | 2019 | 6 |
-| TLP2 | 02 | 2019 | 363 |
+| TLP2 | 02 | 2019 | 27 |
 | TLP2 | 03 | 2019 | 6 |
 | TLP2 | 04 | 2019 | 75 |
 | TLP2 | 05 | 2019 | 32 |

@@ -5,7 +5,7 @@ title: Estatísticas de TLP3
 ---
 | Estação | Mês | Ano | Capturas |
 | TLP3 | 01 | 2019 | 52 |
-| TLP3 | 02 | 2019 | 371 |
+| TLP3 | 02 | 2019 | 23 |
 | TLP3 | 03 | 2019 | 5 |
 | TLP3 | 04 | 2019 | 105 |
 | TLP3 | 05 | 2019 | 108 |
