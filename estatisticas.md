@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: stats
 permalink: estatisticas
 title: Estatísticas
 ---

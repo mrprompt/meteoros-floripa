@@ -1,0 +1,21 @@
+{% include header.html %}
+
+<!--start: Container-->
+<div class="container">
+    <!-- Main component for a primary marketing message or call to action -->
+    <div class="jumbotron">
+        <h1>Estatísticas</h1>
+        <p>Estatísticas de capturas por estação.</p>
+    </div>
+
+	<!--start: Row -->
+	<div class="row">
+        {% include social.html %}
+
+        {{ content }}
+	</div>
+	<!--end: Row -->
+</div>
+<!--end: Container-->
+
+{% include footer.html %}

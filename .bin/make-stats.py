@@ -126,7 +126,7 @@ def generate_stats(connection: object) -> bool:
 
     filehandle = open(CAPTURES_STATS_FILENAME, "w+")
     filehandle.write("---\n")
-    filehandle.write("layout: default\n")
+    filehandle.write("layout: stats\n")
     filehandle.write("permalink: estatisticas\n")
     filehandle.write("title: Estatísticas\n")
     filehandle.write("---\n")
