@@ -5,7 +5,7 @@ title: Estatísticas de TLP5
 ---
 | Estação | Mês | Ano | Capturas |
 | TLP5 | 04 | 2019 | 33 |
-| TLP5 | 05 | 2019 | 355 |
+| TLP5 | 05 | 2019 | 80 |
 | TLP5 | 06 | 2019 | 149 |
 | TLP5 | 07 | 2019 | 40 |
 | TLP5 | 08 | 2019 | 8 |
