@@ -153,7 +153,26 @@ def generate_stats(connection: object) -> bool:
     return True
 
 
+def cleanup_dir(directory: str) -> bool:
+    """
+    Remove posts and captures before recreate then.
+
+    :param directory: Name of directory to cleanup md files.
+    :returns: bool
+    """
+    file_list = [f for f in os.listdir(directory) if f.startswith("estatisticas_")]
+
+    for f in file_list:
+        file_to_delete = os.path.join(directory, f)
+
+        os.remove(file_to_delete)
+
+    return True
+
 if __name__ == '__main__':
+    print("- Cleaning {}".format(PATH_OF_STATS))
+    cleanup_dir(PATH_OF_STATS)
+
     print('- Reading captures from S3 bucket')
     captures = get_matching_s3_keys(S3_BUCKET, suffix='.mp4', prefix='TLP')
 
