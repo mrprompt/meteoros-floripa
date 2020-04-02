@@ -6,9 +6,10 @@ import boto3
 from typing import List
 
 
+PATH = os.path.dirname(__file__)
 S3_BUCKET = 'meteoros'
-PATH_OF_SITE_CAPTURES = "../_captures/"
-PATH_OF_SITE_POSTS = "../_posts/"
+PATH_OF_SITE_CAPTURES = "{}/../_captures/".format(PATH)
+PATH_OF_SITE_POSTS = "{}/../_posts/".format(PATH)
 
 
 def get_matching_s3_objects(bucket, prefix="", suffix=""):

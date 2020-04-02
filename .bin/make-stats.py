@@ -6,8 +6,9 @@ import boto3
 from typing import List
 
 
+PATH = os.path.dirname(__file__)
 S3_BUCKET = 'meteoros'
-
+PATH_OF_STATS = "{}/../".format(PATH)
 
 def get_matching_s3_objects(bucket, prefix="", suffix=""):
     """
@@ -130,7 +131,7 @@ def generate_stats(connection: object) -> bool:
         capture_year = str(month_and_year[0:4])
         capture_month = str(month_and_year[4:6])
         station = str(data[2])
-        captures_stats_filename = "../estatisticas_{}.md".format(station)
+        captures_stats_filename = "{}/estatisticas_{}.md".format(PATH_OF_STATS, station)
 
         if not os.path.exists(captures_stats_filename):
             filehandle = open(captures_stats_filename, "w+")
