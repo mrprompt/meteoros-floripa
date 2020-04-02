@@ -28,7 +28,7 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.aws_secret_access_key }}
         AWS_DEFAULT_REGION: ${{ secrets.aws_default_region }}
       run: |
-        python ./bin/make-collection.py
+        python ./.bin/make-collection.py
 
     - name: Commit files
       run: |

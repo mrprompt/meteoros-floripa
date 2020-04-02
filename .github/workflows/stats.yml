@@ -1,4 +1,4 @@
-name: Build
+name: Stats
 
 on:
   schedule:
@@ -28,7 +28,7 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.aws_secret_access_key }}
         AWS_DEFAULT_REGION: ${{ secrets.aws_default_region }}
       run: |
-        python ./bin/make-stats.py
+        python ./.bin/make-stats.py
 
     - name: Commit files
       run: |
