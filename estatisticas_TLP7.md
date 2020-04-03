@@ -16,3 +16,4 @@ title: Estatísticas de TLP7
 | TLP7 | 01 | 2020 | 19 |
 | TLP7 | 02 | 2020 | 29 |
 | TLP7 | 03 | 2020 | 58 |
+| TLP7 | 04 | 2020 | 3 |
