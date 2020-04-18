@@ -1,11 +1,16 @@
 {% include header.html %}
 
+{% assign station = site.stations | where: "station", page.station %}
+
 <!--start: Container-->
 <div class="container">
     <!-- Main component for a primary marketing message or call to action -->
     <div class="jumbotron">
         <h1>{{ page.station | upcase }}</h1>
         <p>Listando capturas da estação {{ page.station | upcase }}</p>
+        <p class="text-center">
+            <img src="/assets/{{ page.station }}.png" alt="station_fov" class="img img-responsive">
+        </p>
     </div>
 
 	<!--start: Row -->

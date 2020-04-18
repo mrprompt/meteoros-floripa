@@ -8,7 +8,8 @@ from typing import List
 
 PATH = os.path.dirname(__file__)
 S3_BUCKET = 'meteoros'
-PATH_OF_STATS = "{}/../".format(PATH)
+PATH_OF_STATS = "{}/..".format(PATH)
+
 
 def get_matching_s3_objects(bucket, prefix="", suffix=""):
     """
@@ -125,54 +126,33 @@ def generate_stats(connection: object) -> bool:
     ORDER BY station, capture_month
     """)
 
+    captures_stats_filename = "{}/estatisticas.md".format(PATH_OF_STATS)
+    filehandle = open(captures_stats_filename, "w+")
+    filehandle.write("---\n")
+    filehandle.write("layout: stats\n")
+    filehandle.write("title: Estatísticas de Capturas\n")
+    filehandle.write("permalink: estatisticas\n")
+    filehandle.write("capturas: \n")
+
     for data in connection_cursor.fetchall():
         captures = str(data[0])
         month_and_year = str(data[1])
         capture_year = str(month_and_year[0:4])
         capture_month = str(month_and_year[4:6])
         station = str(data[2])
-        captures_stats_filename = "{}/estatisticas_{}.md".format(PATH_OF_STATS, station)
 
-        if not os.path.exists(captures_stats_filename):
-            filehandle = open(captures_stats_filename, "w+")
-            filehandle.write("---\n")
-            filehandle.write("layout: stats\n")
-            filehandle.write("permalink: estatisticas-{}\n".format(station))
-            filehandle.write("title: Estatísticas de {}\n".format(station))
-            filehandle.write("---\n")
-            filehandle.write("| Estação | Mês | Ano | Capturas |\n")
-        else:
-            filehandle = open(captures_stats_filename, "a")
+        filehandle.write("  - station: {}\n"
+                         "    month: {}\n"
+                         "    year: {}\n"
+                         "    captures: {}\n".format(station, capture_month, capture_year, captures))
 
-        table_row = "| {} | {} | {} | {} |\n".format(station, capture_month, capture_year, captures)
-
-        filehandle.write(table_row)
-
+    filehandle.write("---\n")
     filehandle.close()
 
     return True
 
 
-def cleanup_dir(directory: str) -> bool:
-    """
-    Remove posts and captures before recreate then.
-
-    :param directory: Name of directory to cleanup md files.
-    :returns: bool
-    """
-    file_list = [f for f in os.listdir(directory) if f.startswith("estatisticas_")]
-
-    for f in file_list:
-        file_to_delete = os.path.join(directory, f)
-
-        os.remove(file_to_delete)
-
-    return True
-
 if __name__ == '__main__':
-    print("- Cleaning {}".format(PATH_OF_STATS))
-    cleanup_dir(PATH_OF_STATS)
-
     print('- Reading captures from S3 bucket')
     captures = get_matching_s3_keys(S3_BUCKET, suffix='.mp4', prefix='TLP')
 

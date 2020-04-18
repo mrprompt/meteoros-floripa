@@ -9,12 +9,36 @@
     </div>
 
 	<!--start: Row -->
-	<div class="row">
+	<div class="row stats">
         {% include social.html %}
 
-        <div class="stats">
-            {{ content }}
-        </div>
+        {% assign stations = site.stations %}
+
+        {% for station in stations %}
+            {% assign stats = page.capturas | where: "station", station.station | reverse %}
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th colspan="3">{{ station.station }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Ano</td>
+                        <td>Mês</td>
+                        <td>Capturas</td>
+                    </tr>
+                    {% for post in stats %}
+                    <tr>
+                        <td>{{ post.year }}</td>
+                        <td>{{ post.month }}</td>
+                        <td>{{ post.captures }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endfor %}
 	</div>
 	<!--end: Row -->
 </div>
