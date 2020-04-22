@@ -22,7 +22,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Run script
+    - name: Create captures collections
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.aws_access_key_id }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.aws_secret_access_key }}
@@ -30,12 +30,20 @@ jobs:
       run: |
         python ./.bin/make-collection.py
 
+    - name: Generate stats
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.aws_access_key_id }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.aws_secret_access_key }}
+        AWS_DEFAULT_REGION: ${{ secrets.aws_default_region }}
+      run: |
+        python ./.bin/make-stats.py
+
     - name: Commit files
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git add .
-        git commit -m "Add captures" -a --allow-empty
+        git commit -m "Add captures and update stats" -a --allow-empty
 
     - name: Push changes
       uses: ad-m/github-push-action@master
