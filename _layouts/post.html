@@ -54,7 +54,7 @@
 					<h4 class="modal-title" id="myModalLabel">{{ base_file | last | replace: 'P.jpg', '.mp4' }}</h4>
 				</div>
 				<div class="modal-body text-center">
-					<video width="720" height="480" controls>
+					<video controls>
 						<source src="{{ capture.imagem | replace: 'P.jpg', '.mp4' | prepend: site.s3_bucket }}" type="video/mp4">
 						Seu navegador não suporta a tag de vídeo.
 					</video>
