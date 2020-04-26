@@ -126,7 +126,7 @@ capturas:
   - station: TLP10
     month: 04
     year: 2020
-    captures: 139
+    captures: 145
   - station: TLP2
     month: 12
     year: 2018
