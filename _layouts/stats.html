@@ -9,35 +9,38 @@
     </div>
 
 	<!--start: Row -->
-	<div class="row stats">
+	<div class="row">
         {% include social.html %}
 
-        {% assign stations = site.stations %}
+        <div class="stats">
+            {% assign stations = site.stations | sort: 'navigation_weight' %}
+            {% for station in stations %}
+                {% assign stats = page.capturas | where: "station", station.station | reverse %}
 
-        {% for station in stations %}
-            {% assign stats = page.capturas | where: "station", station.station | reverse %}
+                <div class="col-lg-3 col-md-6 col-xs-12">
+                    <h2>{{ station.station }}</h2>
 
-            <h2>{{ station.station }}</h2>
-
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Ano</th>
-                        <th>Mês</th>
-                        <th>Capturas</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for post in stats %}
-                    <tr>
-                        <td>{{ post.year }}</td>
-                        <td>{{ post.month }}</td>
-                        <td>{{ post.captures }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        {% endfor %}
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Ano</th>
+                                <th>Mês</th>
+                                <th>Capturas</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for post in stats %}
+                            <tr>
+                                <td>{{ post.year }}</td>
+                                <td>{{ post.month }}</td>
+                                <td>{{ post.captures }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% endfor %}
+        </div>
 	</div>
 	<!--end: Row -->
 </div>
