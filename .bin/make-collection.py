@@ -169,7 +169,7 @@ def generate_collections(connection: object) -> bool:
                 filehandle.write("layout: capture\n")
                 filehandle.write("label: {}\n".format(night_start))
                 filehandle.write("station: {}\n".format(station))
-                filehandle.write("date: {}-{}-{} 00:00:00+00:00\n".format(year, month, day))
+                filehandle.write("date: {}-{}-{} 21:00:00+00:00\n".format(year, month, day))
                 filehandle.write("capturas:\n")
             else:
                 filehandle = open(capture_filename, "a")

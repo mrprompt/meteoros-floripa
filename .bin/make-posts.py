@@ -141,14 +141,13 @@ def generate_pages(connection: object) -> bool:
     connection_cursor = connection.cursor()
 
     connection_cursor.execute("""
-    SELECT COUNT(files) AS captures, night_start
+    SELECT night_start
     FROM captures
     GROUP BY night_start
     """)
 
     for data in connection_cursor.fetchall():
-        captures = int(data[0])
-        night_start = str(data[1])
+        night_start = str(data[0])
         day = str(night_start[6:8])
         month = str(night_start[4:6])
         year = str(night_start[0:4])
@@ -158,8 +157,7 @@ def generate_pages(connection: object) -> bool:
         filehandle.write("---\n")
         filehandle.write("layout: post\n")
         filehandle.write("title: {}/{}/{}\n".format(day, month, year))
-        filehandle.write("date: {}-{}-{} 00:00:00+00:00\n".format(year, month, day))
-        filehandle.write("captures: {}\n".format(captures))
+        filehandle.write("date: {}-{}-{} 21:00:00+00:00\n".format(year, month, day))
         filehandle.write("---\n")
         filehandle.close()
 
@@ -171,7 +169,7 @@ if __name__ == '__main__':
     cleanup_dir(PATH_OF_SITE_POSTS)
 
     print('- Reading captures from S3 bucket')
-    captures = get_matching_s3_keys(S3_BUCKET, suffix=('.mp4', '.MP4'), prefix='TLP')
+    captures = get_matching_s3_keys(S3_BUCKET, suffix=('.jpg', '.JPG'), prefix='TLP')
 
     print("- Organizing captures")
     posts = organize_captures(captures)
