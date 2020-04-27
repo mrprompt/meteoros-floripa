@@ -16,7 +16,7 @@ exclude:
   - .github
 
 # Pagination
-paginate: 30
+paginate: 15
 pagination_path: "/:num"
 
 # Use your search engine ID
