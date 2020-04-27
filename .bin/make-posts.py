@@ -171,7 +171,7 @@ if __name__ == '__main__':
     cleanup_dir(PATH_OF_SITE_POSTS)
 
     print('- Reading captures from S3 bucket')
-    captures = get_matching_s3_keys(S3_BUCKET, suffix=('.jpg', '.JPG'), prefix='TLP')
+    captures = get_matching_s3_keys(S3_BUCKET, suffix=('.mp4', '.MP4'), prefix='TLP')
 
     print("- Organizing captures")
     posts = organize_captures(captures)
