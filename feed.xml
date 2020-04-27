@@ -9,8 +9,8 @@
 		<atom:link href="{{ site.url }}/feed.xml" rel="self" type="application/rss+xml" />
 		{% for post in site.posts limit:100 %}
 			{% assign filter = post.date | date: '%Y%m%d' %}
-			{% assign capture_collections = site.captures | where: "label", filter %}
-			{% assign capture_collection = capture_collections | first %}
+			{% assign capture_collections = site.captures | where: "label", filter | sort: "date" %}
+			{% assign capture_collection = capture_collections | sample: 3 | first %}
 			{% assign capture = capture_collection.capturas | first %}
 
 			<item>
@@ -18,9 +18,7 @@
 				<content><![CDATA[
                 <article>
 					<h2 class="nobreak"><a href="{{ post.url | prepend: site.url }}">{{ post.title }}</a></h2>
-					<a href="{{ post.url | prepend: site.url }}"><img src="{{ capture.imagem | prepend: site.s3_bucket }}"></a><br>
-					Data: {{ post.date | date: '%d/%m/%Y' }}<br>
-					Capturas: {{ capture_collection.capturas.size }}
+					<a href="{{ post.url | prepend: site.url }}"><img src="{{ capture.imagem | prepend: site.s3_bucket }}"></a>
                 </article>]]></content>
 				<pubDate>{{ post.date | date_to_rfc822 }}</pubDate>
 				<link>{{ site.url }}{{ post.url }}</link>
