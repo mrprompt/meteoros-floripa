@@ -5,29 +5,28 @@ layout: default
 <div class="container">
 	<!--start: Row -->
 	<div class="row">
-        {% assign posts = paginator.posts %}
-
-        {% for post in posts %}
+        {% for post in paginator.posts %}
             {% assign filter = post.date | date: '%Y%m%d' %}
-            {% assign capture_collections = site.captures | where: "label", filter | where: "station", post.station %}
-            {% assign capture_collection = capture_collections | first %}
+            {% assign capture_collections = site.captures | where: "label", filter | sort: "date" %}
+            {% assign capture_collection = capture_collections | sample: 3 | first %}
             {% assign capture = capture_collection.capturas | first %}
 
             <!-- start: Post -->
             <article class="col-md-4 mb-1">
                 <div class="post-content">
                     <div class="post-title">
-                        <h2 class="nobreak"><a href="{{ post.url }}">{{ post.title }}</a></h2>
+                        <h2 class="nobreak"><a href="{{ post.url | prepend: site.url }}">{{ post.title }}</a></h2>
                     </div>
                     <div class="post-description">
                         <a href="{{ post.url }}">
                             <img src="{{ capture.imagem | prepend: site.s3_bucket }}"
-                                    class="img img-thumbnail img-responsive">
+                                 class="img img-thumbnail img-responsive"
+                                 alt="capture shot">
                         </a>
                     </div>
                     <div class="post-meta">
                         <span><i class="fa fa-calendar"></i> Data: {{ post.date | date: '%d/%m/%Y' }}</span><br>
-                        <span><i class="fa fa-meteor"></i> Capturas: {{ capture_collection.capturas.size }}</span>
+                        <span><i class="fa fa-meteor"></i> Capturas: {{ post.captures }}</span>
                     </div>
                 </div>
             </article>

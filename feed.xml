@@ -9,7 +9,7 @@
 		<atom:link href="{{ site.url }}/feed.xml" rel="self" type="application/rss+xml" />
 		{% for post in site.posts limit:100 %}
 			{% assign filter = post.date | date: '%Y%m%d' %}
-			{% assign capture_collections = site.captures | where: "label", filter | where: "station", post.station %}
+			{% assign capture_collections = site.captures | where: "label", filter %}
 			{% assign capture_collection = capture_collections | first %}
 			{% assign capture = capture_collection.capturas | first %}
 
@@ -31,7 +31,7 @@
 					type="image/jpeg" 
 					width="720" 
 					height="480" />
-				<guid isPermaLink="true">{{ site.url }}{{ post.url }}</guid>
+				<guid isPermaLink="true">{{ post.url | prepend: site.url }}</guid>
 			</item>
 		{% endfor %}
 	</channel>

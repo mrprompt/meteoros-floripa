@@ -28,7 +28,7 @@
             <article class="col-md-4 mb-1">
                 <div class="post-content">
                     <div class="post-description">
-                        <a href="/{{ year }}/{{ month }}/{{ day }}/{{ post.station }}">
+                        <a href="/captures/{{ page.station }}_{{ year }}{{ month }}{{ day }}">
                             <img src="{{ capture.imagem | prepend: site.s3_bucket }}"
                                     class="img img-thumbnail img-responsive">
                         </a>

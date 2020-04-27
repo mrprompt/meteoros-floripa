@@ -40,7 +40,7 @@ sass:
 # Collections used
 collections:
   captures:
-    output: false
+    output: true
 
   stations:
     output: true

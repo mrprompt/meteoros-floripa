@@ -6,8 +6,8 @@ import boto3
 from typing import List
 
 
-PATH = os.path.dirname(__file__)
 S3_BUCKET = 'meteoros'
+PATH = os.path.dirname(__file__)
 PATH_OF_STATS = "{}/..".format(PATH)
 
 
