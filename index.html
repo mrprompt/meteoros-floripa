@@ -24,10 +24,12 @@ layout: default
                                  alt="capture shot">
                         </a>
                     </div>
+                    {% comment %}
                     <div class="post-meta">
                         <span><i class="fa fa-calendar"></i> Data: {{ post.date | date: '%d/%m/%Y' }}</span><br>
                         <span><i class="fa fa-meteor"></i> Capturas: {{ post.captures }}</span>
                     </div>
+                    {% endcomment %}
                 </div>
             </article>
             <!-- end: Post -->
