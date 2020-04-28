@@ -157,7 +157,7 @@ def generate_pages(connection: object) -> bool:
         filehandle.write("---\n")
         filehandle.write("layout: post\n")
         filehandle.write("title: {}/{}/{}\n".format(day, month, year))
-        filehandle.write("date: {}-{}-{} 21:00:00+00:00\n".format(year, month, day))
+        filehandle.write("date: {}-{}-{} 10:00:00+00:00\n".format(year, month, day))
         filehandle.write("---\n")
         filehandle.close()
 

@@ -149,9 +149,6 @@ def generate_collections(connection: object) -> bool:
     for data in connection_cursor.fetchall():
         night_start = str(data[0])
         station = str(data[1])
-        day = str(night_start[6:8])
-        month = str(night_start[4:6])
-        year = str(night_start[0:4])
         capture_filename = PATH_OF_SITE_CAPTURES + "{}_{}.md".format(station, night_start)
 
         connection_cursor.execute("""
@@ -163,18 +160,32 @@ def generate_collections(connection: object) -> bool:
             """, (night_start, station))
 
         for capture in connection_cursor.fetchall():
+            file = capture[3]
+
+            capture_spliced = file.split('/')
+            capture_base_filename = capture_spliced[-1]
+            capture_data_spliced = capture_base_filename.split('_')
+
+            capture_date = capture_data_spliced[0]
+            capture_day = capture_date[7:9]
+            capture_month = capture_date[5:7]
+            capture_year = capture_date[1:5]
+
+            capture_time = capture_data_spliced[1]
+            capture_hour = capture_time[0:2]
+            capture_minute = capture_time[2:4]
+            capture_second = capture_time[4:6]
+
             if not os.path.exists(capture_filename):
                 filehandle = open(capture_filename, "w+")
                 filehandle.write("---\n")
                 filehandle.write("layout: capture\n")
                 filehandle.write("label: {}\n".format(night_start))
                 filehandle.write("station: {}\n".format(station))
-                filehandle.write("date: {}-{}-{} 21:00:00+00:00\n".format(year, month, day))
+                filehandle.write("date: {}-{}-{} {}:{}:{}+00:00\n".format(capture_year, capture_month, capture_day, capture_hour, capture_minute, capture_second))
                 filehandle.write("capturas:\n")
             else:
                 filehandle = open(capture_filename, "a")
-
-            file = capture[3]
 
             if file.endswith('P.jpg'):
                 filehandle.write("  - imagem: {}\n".format(file))
