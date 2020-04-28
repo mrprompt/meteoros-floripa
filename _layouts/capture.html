@@ -24,7 +24,7 @@
 			<article class="col-md-4 mb-1">
 				<div class="post-content">
 					<div class="post-description">
-						<a href="{{ capture.imagem | replace: 'P.jpg', '.mp4' | prepend: site.s3_bucket }}" data-toggle="modal" data-target="#modal-{{ base_file | last | replace: 'P.jpg', '' }}">
+						<a href="{{ capture.imagem | replace: 'P.jpg', '.mp4' | prepend: site.s3_bucket }}" data-toggle="modal" data-target="#modal-{{ base_file | replace: 'P.jpg', '' }}">
 							<img src="{{ capture.imagem | prepend: site.s3_bucket }}"
 								 class="img img-thumbnail img-responsive">
 						</a>
@@ -41,9 +41,9 @@
 
 	<!-- start modals -->
 	{% for capture in capture_collection.capturas %}
-		{% assign base_file = capture.imagem | split: "/" %}
+		{% assign base_file = capture.imagem | split: "/" | last %}
 	<!-- Modal -->
-	<div class="modal fade" id="modal-{{ base_file | last | replace: 'P.jpg', '' }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal fade" id="modal-{{ base_file | replace: 'P.jpg', '' }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
