@@ -14,11 +14,7 @@
 			{% assign capture = capture_collection.capturas | first %}
 			<item>
 				<title>{{ post.title | xml_escape }}</title>
-				<content type="html">
-				<![CDATA[
-				<h2 class="nobreak"><a href="{{ post.url | prepend: site.url }}">{{ post.title }}</a></h2>
-				<a href="{{ post.url | prepend: site.url }}"><img src="{{ capture.imagem | prepend: site.s3_bucket }}"></a>
-				]]></content>
+				<description><![CDATA[<a href="{{ post.url | prepend: site.url }}"><img src="{{ capture.imagem | prepend: site.s3_bucket }}"></a>]]></description>
 				<pubDate>{{ post.date | date_to_rfc822 }}</pubDate>
 				<link>{{ post.url | prepend: site.url }}</link>
 				<media:content
