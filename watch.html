@@ -1,0 +1,30 @@
+---
+layout: default
+---
+
+<!--start: Container-->
+<div class="container">
+	<!--start: Row -->
+	<div class="row">
+		{% include social.html %}
+
+		<article class="mb-1">
+			<div class="post-content">
+				<div class="post-description">
+					<video height="480" width="720" controls id="videoPlayer">
+						<source src="" type="video/mp4" id="videoSource">
+						Seu navegador não suporta a tag de vídeo.
+					</video>
+				</div>
+				<div class="post-meta">
+					<span><i class="fa fa-calendar"></i> Data: <span id="capture-date"></span></span><br>
+					<span><i class="fa fa-clock"></i> Hora: <span id="capture-time"></span> UTC</span><br>
+				</div>
+			</div>
+		</article>
+	</div>
+	<!--end: Row -->
+</div>
+<!--end: Container-->
+
+{% include footer.html %}

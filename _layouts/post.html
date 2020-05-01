@@ -22,9 +22,8 @@
 				<article class="col-md-4 mb-1">
 					<div class="post-content">
 						<div class="post-description">
-							<a href="{{ capture.imagem | replace: 'P.jpg', '.mp4' | prepend: site.s3_bucket }}" data-toggle="modal" data-target="#modal-{{ base_file | replace: 'P.jpg', '' }}">
-								<img src="{{ capture.imagem | prepend: site.s3_bucket }}"
-									 class="img img-thumbnail img-responsive">
+							<a href="{{ '/watch' | prepend: site.url }}?v={{ capture.imagem | replace: 'P.jpg', '.mp4' }}">
+								<img src="{{ capture.imagem | prepend: site.s3_bucket }}" class="img img-thumbnail img-responsive" alt="{{ base_file }}">
 							</a>
 						</div>
 						<div class="post-meta">
@@ -38,31 +37,6 @@
 		{% endfor %}
 	</div>
 	<!--end: Row -->
-
-	<!-- start modals -->
-	{% for collection in capture_collections %}
-		{% for capture in collection.capturas %}
-			{% assign base_file = capture.imagem | split: "/" | last %}
-			<!-- Modal -->
-			<div class="modal fade" id="modal-{{ base_file | replace: 'P.jpg', '' }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-				<div class="modal-dialog modal-lg" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-							<h4 class="modal-title" id="myModalLabel">{{ base_file | last | replace: 'P.jpg', '.mp4' }}</h4>
-						</div>
-						<div class="modal-body text-center">
-							<video controls>
-								<source src="{{ capture.imagem | replace: 'P.jpg', '.mp4' | prepend: site.s3_bucket }}" type="video/mp4">
-								Seu navegador não suporta a tag de vídeo.
-							</video>
-						</div>
-					</div>
-				</div>
-			</div>
-		{% endfor %}
-	{% endfor %}
-	<!-- end modals -->
 </div>
 <!--end: Container-->
 
