@@ -12,8 +12,7 @@
 			{% assign capture_collections = site.captures | where: "label", filter | sort: "date" %}
 			{% assign capture_collection = capture_collections | sample: 3 | first %}
 			{% assign capture = capture_collection.capturas | first %}
-
-			<entry>
+			<item>
 				<title>{{ post.title | xml_escape }}</title>
 				<content type="html">
 				<![CDATA[
@@ -22,15 +21,15 @@
 				]]></content>
 				<pubDate>{{ post.date | date_to_rfc822 }}</pubDate>
 				<link>{{ post.url | prepend: site.url }}</link>
-				<media:content 
-					xmlns:media="http://search.yahoo.com/mrss/" 
-					url="{{ capture.imagem | prepend: site.s3_bucket }}" 
-					medium="image" 
-					type="image/jpeg" 
-					width="720" 
+				<media:content
+					xmlns:media="http://search.yahoo.com/mrss/"
+					url="{{ capture.imagem | prepend: site.s3_bucket }}"
+					medium="image"
+					type="image/jpeg"
+					width="720"
 					height="480" />
 				<guid isPermaLink="true">{{ post.url | prepend: site.url }}</guid>
-			</entry>
+			</item>
 		{% endfor %}
 	</channel>
 </rss>
