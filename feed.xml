@@ -13,7 +13,7 @@
 			{% assign capture_collection = capture_collections | sample: 3 | first %}
 			{% assign capture = capture_collection.capturas | first %}
 
-			<item>
+			<entry>
 				<title>{{ post.title | xml_escape }}</title>
 				<content type="html">
 				<![CDATA[
@@ -30,7 +30,7 @@
 					width="720" 
 					height="480" />
 				<guid isPermaLink="true">{{ post.url | prepend: site.url }}</guid>
-			</item>
+			</entry>
 		{% endfor %}
 	</channel>
 </rss>
