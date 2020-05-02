@@ -9,7 +9,7 @@ $.urlParam = function(name) {
 };
 
 $( document ).ready(function() {
-    var videoRepository = 'https://meteoros.s3.amazonaws.com/';
+    var videoRepository = $('video').attr('data-repository');
     var video = $.urlParam('v').replace('P.jpg', '.mp4');
     var data = video.split('/');
     var base_file = data.pop().split('_');
@@ -21,4 +21,17 @@ $( document ).ready(function() {
 
     $('#capture-date').text(date.substr(6, 2) + '/' + date.substr(4, 2) + '/' + date.substr(0, 4));
     $('#capture-time').text(time.substr(0, 2) + ':' + time.substr(2, 2) + ':' + time.substr(4, 2));
+
+    $('.share a').each(function(){
+        var origUrl = $(this).attr("href");
+        var explodedUrl = origUrl.split('=');
+
+        if (origUrl.match(/\?v=/)) {
+            return false;
+        }
+
+        var newUrl = explodedUrl[0] + '=' + explodedUrl[1] + '?v=' + video;
+
+        $(this).attr("href", newUrl);
+    });
 });
