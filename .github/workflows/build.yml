@@ -22,14 +22,6 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Create collections
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.aws_access_key_id }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.aws_secret_access_key }}
-        AWS_DEFAULT_REGION: ${{ secrets.aws_default_region }}
-      run: |
-        python ./.bin/make-collection.py
-
     - name: Create posts
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.aws_access_key_id }}

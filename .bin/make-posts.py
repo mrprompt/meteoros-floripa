@@ -9,6 +9,7 @@ from typing import List
 S3_BUCKET = 'meteoros'
 PATH = os.path.dirname(__file__)
 PATH_OF_SITE_POSTS = "{}/../_posts/".format(PATH)
+PATH_OF_SITE_CAPTURES = "{}/../_captures/".format(PATH)
 
 
 def get_matching_s3_objects(bucket, prefix="", suffix=""):
@@ -131,6 +132,74 @@ def populate_tables(connection: object, captures_list: List) -> bool:
     return True
 
 
+def generate_collections(connection: object) -> bool:
+    """
+    Generate captures collections from every station captures.
+
+    :param connection: The database connection
+    :return: bool
+    """
+    connection_cursor = connection.cursor()
+
+    connection_cursor.execute("""
+    SELECT night_start, station
+    FROM captures
+    GROUP BY night_start, station
+    """)
+
+    for data in connection_cursor.fetchall():
+        night_start = str(data[0])
+        station = str(data[1])
+        capture_filename = PATH_OF_SITE_CAPTURES + "{}_{}.md".format(station, night_start)
+
+        connection_cursor.execute("""
+            SELECT id, night_start, station, files
+            FROM captures
+            WHERE night_start = ?
+            AND station = ?
+            ORDER BY station
+            """, (night_start, station))
+
+        for capture in connection_cursor.fetchall():
+            file = capture[3]
+
+            capture_spliced = file.split('/')
+            capture_base_filename = capture_spliced[-1]
+            capture_data_spliced = capture_base_filename.split('_')
+
+            capture_date = capture_data_spliced[0]
+            capture_day = capture_date[7:9]
+            capture_month = capture_date[5:7]
+            capture_year = capture_date[1:5]
+
+            capture_time = capture_data_spliced[1]
+            capture_hour = capture_time[0:2]
+            capture_minute = capture_time[2:4]
+            capture_second = capture_time[4:6]
+
+            if not os.path.exists(capture_filename):
+                filehandle = open(capture_filename, "w+")
+                filehandle.write("---\n")
+                filehandle.write("layout: capture\n")
+                filehandle.write("label: {}\n".format(night_start))
+                filehandle.write("station: {}\n".format(station))
+                filehandle.write("date: {}-{}-{} {}:{}:{}\n".format(capture_year, capture_month, capture_day, capture_hour, capture_minute, capture_second))
+                filehandle.write("capturas:\n")
+            else:
+                filehandle = open(capture_filename, "a")
+
+            if file.endswith('P.jpg'):
+                filehandle.write("  - imagem: {}\n".format(file))
+
+            filehandle.close()
+
+        filehandle = open(capture_filename, "a")
+        filehandle.write("---\n")
+        filehandle.close()
+
+    return True
+
+
 def generate_pages(connection: object) -> bool:
     """
     Generate captures collections and pages from every station captures.
@@ -168,6 +237,9 @@ if __name__ == '__main__':
     print("- Cleaning {}".format(PATH_OF_SITE_POSTS))
     cleanup_dir(PATH_OF_SITE_POSTS)
 
+    print("- Cleaning {}".format(PATH_OF_SITE_CAPTURES))
+    cleanup_dir(PATH_OF_SITE_CAPTURES)
+
     print('- Reading captures from S3 bucket')
     captures = get_matching_s3_keys(S3_BUCKET, suffix=('.jpg', '.JPG'), prefix='TLP')
 
@@ -179,6 +251,9 @@ if __name__ == '__main__':
 
     print("- Creating temporary table and populating...")
     populate_tables(conn, posts)
+
+    print("- Creating collections")
+    generate_collections(conn)
 
     print("- Creating pages")
     generate_pages(conn)
