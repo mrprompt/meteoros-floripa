@@ -1,6 +1,6 @@
 ---
 layout: stats
-title: Estatísticas de Capturas
+title: Estat&iacute;sticas de Capturas
 permalink: estatisticas
 capturas: 
   - station: TLP1

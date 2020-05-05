@@ -5,6 +5,7 @@ url: "https://meteoros.floripa.br"
 baseurl: "/"
 
 # Build settings
+encoding: UTF-8
 highlighter: rouge
 timezone: 	UTC
 permalink: pretty
