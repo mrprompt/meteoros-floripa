@@ -3,11 +3,19 @@
 {% assign filter = page.date | date: '%Y%m%d' %}
 {% assign capture_collections = site.captures | where: "label", filter | sort: "date" %}
 
+{% assign counter = 0 %}
+
+{% for collection in capture_collections %}
+	{% assign counter = counter | plus: collection.capturas.size %}
+{% endfor %}
+
 <!--start: Container-->
 <div class="container">
 	<!-- Main component for a primary marketing message or call to action -->
 	<div class="jumbotron">
 		<h1>Listando capturas de {{ page.date | date: '%d/%m/%Y' }}</h1>
+
+		<p>Total de capturas: <b>{{ counter }}</b></p>
 	</div>
 
 	<!--start: Row -->

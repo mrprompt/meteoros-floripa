@@ -8,8 +8,15 @@ layout: default
         {% for post in paginator.posts %}
             {% assign filter = post.date | date: '%Y%m%d' %}
             {% assign capture_collections = site.captures | where: "label", filter | sort: "date" %}
-            {% assign capture_collection = capture_collections | sample: 3 | first %}
-            {% assign capture = capture_collection.capturas | first %}
+            {% assign counter = 0 %}
+            {% assign cover = " " | join: ", " %}
+
+            {% for collection in capture_collections %}
+                {% assign counter = counter | plus: collection.capturas.size %}
+                {% assign cover = cover | concat: collection.capturas %}
+            {% endfor %}
+
+            {% assign capture = cover | sample: 5 | first %}
 
             <!-- start: Post -->
             <article class="col-md-4 mb-1">
@@ -24,12 +31,10 @@ layout: default
                                  alt="capture shot">
                         </a>
                     </div>
-                    {% comment %}
                     <div class="post-meta">
                         <span><i class="fa fa-calendar"></i> Data: {{ post.date | date: '%d/%m/%Y' }}</span><br>
-                        <span><i class="fa fa-meteor"></i> Capturas: {{ post.captures }}</span>
+                        <span><i class="fa fa-meteor"></i> Capturas: {{ counter }}</span>
                     </div>
-                    {% endcomment %}
                 </div>
             </article>
             <!-- end: Post -->
