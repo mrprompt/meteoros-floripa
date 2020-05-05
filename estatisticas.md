@@ -1,6 +1,6 @@
 ---
 layout: stats
-title: EstatÃ­sticas de Capturas
+title: Estatísticas de Capturas
 permalink: estatisticas
 capturas: 
   - station: TLP1
@@ -90,7 +90,7 @@ capturas:
   - station: TLP1
     month: 05
     year: 2020
-    captures: 52
+    captures: 64
   - station: TLP10
     month: 07
     year: 2019
@@ -134,7 +134,7 @@ capturas:
   - station: TLP10
     month: 05
     year: 2020
-    captures: 17
+    captures: 24
   - station: TLP2
     month: 12
     year: 2018
@@ -206,7 +206,7 @@ capturas:
   - station: TLP2
     month: 05
     year: 2020
-    captures: 61
+    captures: 82
   - station: TLP3
     month: 01
     year: 2019
@@ -274,7 +274,7 @@ capturas:
   - station: TLP3
     month: 05
     year: 2020
-    captures: 79
+    captures: 98
   - station: TLP4
     month: 04
     year: 2019
@@ -330,7 +330,7 @@ capturas:
   - station: TLP4
     month: 05
     year: 2020
-    captures: 96
+    captures: 110
   - station: TLP5
     month: 04
     year: 2019
@@ -386,7 +386,7 @@ capturas:
   - station: TLP5
     month: 05
     year: 2020
-    captures: 71
+    captures: 87
   - station: TLP6
     month: 04
     year: 2019
@@ -546,7 +546,7 @@ capturas:
   - station: TLP8
     month: 05
     year: 2020
-    captures: 31
+    captures: 35
   - station: TLP9
     month: 06
     year: 2019
@@ -594,5 +594,5 @@ capturas:
   - station: TLP9
     month: 05
     year: 2020
-    captures: 32
+    captures: 38
 ---
