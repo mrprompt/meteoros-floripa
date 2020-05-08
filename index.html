@@ -9,16 +9,16 @@ layout: default
             {% assign filter = post.date | date: '%Y%m%d' %}
             {% assign capture_collections = site.captures | where: "label", filter | sort: "date" %}
             {% assign counter = 0 %}
+            {% assign cover = false %}
 
             {% for collection in capture_collections %}
                 {% assign counter = counter | plus: collection.capturas.size %}
 
-                {% if cover != nil %}
-                    {% assign cover = cover | concat: collection.capturas %}
-                {% else %}
+                {% if cover == false %}
                     {% assign cover = collection.capturas %}
+                {% else %}
+                    {% assign cover = cover | concat: collection.capturas %}
                 {% endif %}
-
             {% endfor %}
 
             {% assign capture = cover | sample %}
@@ -43,6 +43,9 @@ layout: default
                 </div>
             </article>
             <!-- end: Post -->
+
+            {% assign cover = false %}
+            {% assign counter = 0 %}
         {% endfor %}
 	</div>
 	<!--end: Row -->
