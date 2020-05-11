@@ -2,7 +2,7 @@
 
 setlocal
 
-for %%d in (D E) do (
+for %%d in (D E F) do (
     start sync.bat "%%d:\"
 )
 
