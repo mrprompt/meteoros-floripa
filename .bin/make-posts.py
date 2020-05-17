@@ -267,7 +267,7 @@ def generate_watches(connection: object) -> bool:
         minute = capture_base_filename_spliced[1][2:4]
         second = capture_base_filename_spliced[1][4:6]
 
-        post_filename = PATH_OF_WATCH_CAPTURES + "{}-{}-{}-watch-{}.md".format(year, month, day, capture_base_filename.replace('T.jpg', ''))
+        post_filename = PATH_OF_WATCH_CAPTURES + "{}.md".format(capture_base_filename.replace('T.jpg', ''))
 
         filehandle = open(post_filename, "w+")
         filehandle.write("---\n")
