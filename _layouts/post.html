@@ -27,33 +27,33 @@
 		{% assign year = collection.label | slice: 0,4 %}
 		{% assign month = collection.label | slice: 4, 2 %}
 		{% assign day = collection.label | slice: 6, 2 %}
+		<h2><a href="/captures/{{ collection.station }}_{{ year }}{{ month }}{{ day }}">{{ collection.station }}</a></h2>
+
 		<!--start: Row -->
 		<div class="row">
-			<h2><a href="/captures/{{ collection.station }}_{{ year }}{{ month }}{{ day }}">{{ collection.station }}</a></h2>
-
-			<div class="row">
-				{% for capture in collection.capturas %}
-					{% assign base_file = capture.imagem | split: "/" | last %}
-					{% assign file_meta = base_file | split: "_" %}
-					{% assign file_date = file_meta[0] | replace: 'M', '' %}
-					<article class="col-md-4 mb-1">
-						<div class="post-content">
-							<div class="post-description">
-								<a href="/{{ file_date | slice: 0,4 }}/{{ file_date | slice: 4,2 }}/{{ file_date | slice: 6,2 }}/watch/{{ base_file | replace: 'P.jpg', '' }}">
-									<img src="{{ capture.imagem | prepend: site.s3_bucket }}" class="img img-thumbnail img-responsive" alt="{{ base_file }}">
-								</a>
-							</div>
-							<div class="post-meta">
-								<span><i class="fa fa-meteor"></i> Estação: {{ collection.station }}</span><br>
-								<span><i class="fa fa-calendar"></i> Data: {{ file_date | slice: 6,2 }}/{{ file_date | slice: 4,2 }}/{{ file_date | slice: 0,4 }}</span><br>
-								<span><i class="fa fa-clock"></i> Hora: {{ file_meta[1] | slice: 0,2 }}:{{ file_meta[1] | slice: 2,2 }}:{{ file_meta[1] | slice: 4,2 }} UTC</span><br>
-							</div>
+			{% for capture in collection.capturas %}
+				{% assign base_file = capture.imagem | split: "/" | last %}
+				{% assign file_meta = base_file | split: "_" %}
+				{% assign file_date = file_meta[0] | replace: 'M', '' %}
+				<article class="col-md-4 mb-1">
+					<div class="post-content">
+						<div class="post-description">
+							<a href="/{{ file_date | slice: 0,4 }}/{{ file_date | slice: 4,2 }}/{{ file_date | slice: 6,2 }}/watch/{{ base_file | replace: 'P.jpg', '' }}">
+								<img src="{{ capture.imagem | prepend: site.s3_bucket }}" class="img img-thumbnail img-responsive" alt="{{ base_file }}">
+							</a>
 						</div>
-					</article>
-				{% endfor %}
-			</div>
+						<div class="post-meta">
+							<span><i class="fa fa-meteor"></i> Estação: {{ collection.station }}</span><br>
+							<span><i class="fa fa-calendar"></i> Data: {{ file_date | slice: 6,2 }}/{{ file_date | slice: 4,2 }}/{{ file_date | slice: 0,4 }}</span><br>
+							<span><i class="fa fa-clock"></i> Hora: {{ file_meta[1] | slice: 0,2 }}:{{ file_meta[1] | slice: 2,2 }}:{{ file_meta[1] | slice: 4,2 }} UTC</span><br>
+						</div>
+					</div>
+				</article>
+			{% endfor %}
 		</div>
 		<!--end: Row -->
+
+		<hr class="clear">
 	{% endfor %}
 </div>
 <!--end: Container-->
