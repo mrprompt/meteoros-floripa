@@ -246,13 +246,15 @@ def generate_watches(connection: object) -> bool:
     connection_cursor.execute("""
     SELECT night_start, station, files
     FROM captures
-    GROUP BY night_start
     """)
 
     for data in connection_cursor.fetchall():
         night_start = str(data[0])
         station = str(data[1])
         file = str(data[2])
+
+        if file.endswith('P.jpg'):
+            continue
 
         day = night_start[6:8]
         month = night_start[4:6]
