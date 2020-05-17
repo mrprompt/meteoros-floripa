@@ -10,6 +10,7 @@ S3_BUCKET = 'meteoros'
 PATH = os.path.dirname(__file__)
 PATH_OF_SITE_POSTS = "{}/../_posts/".format(PATH)
 PATH_OF_SITE_CAPTURES = "{}/../_captures/".format(PATH)
+PATH_OF_WATCH_CAPTURES = "{}/../watch/".format(PATH)
 
 
 def get_matching_s3_objects(bucket, prefix="", suffix=""):
@@ -233,12 +234,62 @@ def generate_pages(connection: object) -> bool:
     return True
 
 
+def generate_watches(connection: object) -> bool:
+    """
+    Generate watch page for each collection item.
+
+    :param connection: The database connection
+    :return: bool
+    """
+    connection_cursor = connection.cursor()
+
+    connection_cursor.execute("""
+    SELECT night_start, station, files
+    FROM captures
+    GROUP BY night_start
+    """)
+
+    for data in connection_cursor.fetchall():
+        night_start = str(data[0])
+        station = str(data[1])
+        file = str(data[2])
+
+        day = night_start[6:8]
+        month = night_start[4:6]
+        year = night_start[0:4]
+
+        capture_spliced = file.split('/')
+        capture_base_filename = capture_spliced[-1]
+        capture_base_filename_spliced = capture_base_filename.split('_')
+
+        hour = capture_base_filename_spliced[1][0:2]
+        minute = capture_base_filename_spliced[1][2:4]
+        second = capture_base_filename_spliced[1][4:6]
+
+        post_filename = PATH_OF_WATCH_CAPTURES + "{}-{}-{}-watch.md".format(year, month, day)
+
+        filehandle = open(post_filename, "w+")
+        filehandle.write("---\n")
+        filehandle.write("layout: watch\n")
+        filehandle.write("title: {} - {}/{}/{} - {}\n".format(station, day, month, year, capture_base_filename))
+        filehandle.write("date: {}-{}-{} {}:{}:{}\n".format(year, month, day, hour, minute, second))
+        filehandle.write("permalink: /{}/{}/{}/watch/{}\n".format(year, month, day, capture_base_filename.replace('T.jpg', '')))
+        filehandle.write("capture: {}\n".format(file))
+        filehandle.write("---\n")
+        filehandle.close()
+
+    return True
+
+
 if __name__ == '__main__':
     print("- Cleaning {}".format(PATH_OF_SITE_POSTS))
     cleanup_dir(PATH_OF_SITE_POSTS)
 
     print("- Cleaning {}".format(PATH_OF_SITE_CAPTURES))
     cleanup_dir(PATH_OF_SITE_CAPTURES)
+
+    print("- Cleaning {}".format(PATH_OF_WATCH_CAPTURES))
+    cleanup_dir(PATH_OF_WATCH_CAPTURES)
 
     print('- Reading captures from S3 bucket')
     captures = get_matching_s3_keys(S3_BUCKET, suffix=('.jpg', '.JPG'), prefix='TLP')
@@ -257,6 +308,9 @@ if __name__ == '__main__':
 
     print("- Creating pages")
     generate_pages(conn)
+
+    print("- Creating watches page")
+    generate_watches(conn)
 
     print("- Closing database connection")
     conn.close()

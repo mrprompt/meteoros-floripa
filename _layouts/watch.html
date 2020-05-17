@@ -1,6 +1,4 @@
----
-layout: default
----
+{% include header.html %}
 
 <!--start: Container-->
 <div class="container">
@@ -11,14 +9,14 @@ layout: default
 		<article class="mb-1">
 			<div class="post-content">
 				<div class="post-description embed-responsive embed-responsive-16by9">
-					<video height="480" width="720" controls id="videoPlayer" data-repository="{{ site.s3_bucket }}" class="embed-responsive-item">
-						<source src="" type="video/mp4" id="videoSource">
+					<video height="480" width="720" controls autoplay loop id="videoPlayer" class="embed-responsive-item">
+						<source src="{{ page.capture | replace: 'T.jpg', '.mp4' | prepend: site.s3_bucket }}" type="video/mp4" id="videoSource">
 						Seu navegador não suporta a tag de vídeo.
 					</video>
 				</div>
 				<div class="post-meta">
-					<span><i class="fa fa-calendar"></i> Data: <span id="capture-date"></span></span><br>
-					<span><i class="fa fa-clock"></i> Hora: <span id="capture-time"></span> UTC</span><br>
+					<span><i class="fa fa-calendar"></i> Data: {{ page.date | date: '%d/%m/%Y' }}</span><br>
+					<span><i class="fa fa-clock"></i> Hora: {{ page.date | date: '%H:%M:%S' }} UTC</span><br>
 				</div>
 			</div>
 		</article>
