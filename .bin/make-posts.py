@@ -256,14 +256,13 @@ def generate_watches(connection: object) -> bool:
         if file.endswith('P.jpg'):
             continue
 
-        day = night_start[6:8]
-        month = night_start[4:6]
-        year = night_start[0:4]
-
         capture_spliced = file.split('/')
         capture_base_filename = capture_spliced[-1]
         capture_base_filename_spliced = capture_base_filename.split('_')
 
+        day = capture_base_filename_spliced[0][7:9]
+        month = capture_base_filename_spliced[0][5:7]
+        year = capture_base_filename_spliced[0][1:5]
         hour = capture_base_filename_spliced[1][0:2]
         minute = capture_base_filename_spliced[1][2:4]
         second = capture_base_filename_spliced[1][4:6]
