@@ -28,7 +28,7 @@ Script actions:
 Make collection script is run by [Github Actions](https://help.github.com/en/actions/automating-your-workflow-with-github-actions) 
 and need an AWS credentials and a S3 bucket to work.
 
-## Your oun station
+## Your own station
 
 If you want to build your own meteor station, send me an [email](mailto:mrprompt+meteor@gmail.com) and I'll be happy 
 to help you.
