@@ -94,7 +94,7 @@ capturas:
   - station: TLP1
     month: 06
     year: 2020
-    captures: 8
+    captures: 17
   - station: TLP10
     month: 07
     year: 2019
@@ -142,7 +142,7 @@ capturas:
   - station: TLP10
     month: 06
     year: 2020
-    captures: 3
+    captures: 17
   - station: TLP2
     month: 12
     year: 2018
@@ -218,7 +218,7 @@ capturas:
   - station: TLP2
     month: 06
     year: 2020
-    captures: 16
+    captures: 33
   - station: TLP3
     month: 01
     year: 2019
@@ -290,7 +290,7 @@ capturas:
   - station: TLP3
     month: 06
     year: 2020
-    captures: 10
+    captures: 22
   - station: TLP4
     month: 04
     year: 2019
@@ -350,7 +350,7 @@ capturas:
   - station: TLP4
     month: 06
     year: 2020
-    captures: 10
+    captures: 23
   - station: TLP5
     month: 04
     year: 2019
@@ -410,7 +410,7 @@ capturas:
   - station: TLP5
     month: 06
     year: 2020
-    captures: 6
+    captures: 18
   - station: TLP6
     month: 04
     year: 2019
@@ -470,7 +470,7 @@ capturas:
   - station: TLP6
     month: 06
     year: 2020
-    captures: 3
+    captures: 6
   - station: TLP7
     month: 04
     year: 2019
@@ -530,7 +530,7 @@ capturas:
   - station: TLP7
     month: 06
     year: 2020
-    captures: 6
+    captures: 13
   - station: TLP8
     month: 06
     year: 2019
@@ -582,7 +582,7 @@ capturas:
   - station: TLP8
     month: 06
     year: 2020
-    captures: 11
+    captures: 22
   - station: TLP9
     month: 06
     year: 2019
@@ -634,5 +634,5 @@ capturas:
   - station: TLP9
     month: 06
     year: 2020
-    captures: 4
+    captures: 7
 ---
