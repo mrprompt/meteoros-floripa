@@ -5,6 +5,8 @@ setlocal
 
     cd /d "%sourcefolder%"
 
+    git pull origin master
+
     python ./.bin/make-posts.py
     python ./.bin/make-stats.py
 
