@@ -6,8 +6,7 @@
 	<div class="row">
 		{% include social.html %}
 
-		{% assign base_file = page.capture.imagem | split: "/" | last %}
-		{% assign image = page.capture.imagem | replace: 'T.jpg', 'P.jpg' %}
+		{% assign image = page.capture | replace: 'T.jpg', 'P.jpg' %}
 		{% assign analyze = site.data.analyzers[ image ] %}
 
 		<article class="mb-1">
