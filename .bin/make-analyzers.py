@@ -40,7 +40,7 @@ def organize_captures(stations_captures: List) -> List:
 
     for capture in stations_captures:
         base = re.findall("\w{3}\d{1,2}.+", capture)
-        capture_spliced = base[0].split('/')
+        capture_spliced = base[0].split(os.sep)
         station = capture_spliced[0]
         capture_date = capture_spliced[3]
         post = (capture_date, station, capture)
