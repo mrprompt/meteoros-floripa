@@ -125,7 +125,7 @@ def generate_collections(connection: object) -> bool:
             capture_base_filename = capture_spliced[-1]
 
             filehandle = open(capture_filename, "a")
-            filehandle.write("{}\n".format(base[0].replace('A.XML', 'P.jpg')))
+            filehandle.write("{}:\n".format(base[0].replace('A.XML', 'P.jpg')))
             filehandle.write("  station: {}\n".format(station))
             filehandle.write("  class: {}\n".format(classe))
             filehandle.close()
