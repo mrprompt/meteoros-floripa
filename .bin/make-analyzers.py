@@ -97,7 +97,7 @@ def generate_collections(connection: object) -> bool:
     for data in connection_cursor.fetchall():
         night_start = str(data[0])
         station = str(data[1])
-        capture_filename = PATH_OF_ANALYZERS + "analyzers.md"
+        capture_filename = PATH_OF_ANALYZERS + "analyzers.yaml"
 
         connection_cursor.execute("""
             SELECT id, night_start, station, files
@@ -153,7 +153,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     print("- Cleaning {}".format(PATH_OF_ANALYZERS))
-    cleanup_dir(PATH_OF_ANALYZERS, ".md")
+    cleanup_dir(PATH_OF_ANALYZERS, ".yaml")
 
     print("- Reading analyzer files from {}".format(args.captures_dir))
     analyzers = get_matching_analyzers(args.captures_dir)
