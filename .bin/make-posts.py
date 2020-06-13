@@ -185,6 +185,7 @@ def generate_collections(connection: object) -> bool:
                 filehandle.write("label: {}\n".format(night_start))
                 filehandle.write("station: {}\n".format(station))
                 filehandle.write("date: {}-{}-{} {}:{}:{}\n".format(capture_year, capture_month, capture_day, capture_hour, capture_minute, capture_second))
+                filehandle.write("preview: {}\n".format(file))
                 filehandle.write("capturas:\n")
             else:
                 filehandle = open(capture_filename, "a")
@@ -211,7 +212,7 @@ def generate_pages(connection: object) -> bool:
     connection_cursor = connection.cursor()
 
     connection_cursor.execute("""
-    SELECT night_start
+    SELECT night_start, files
     FROM captures
     GROUP BY night_start
     """)
@@ -221,6 +222,7 @@ def generate_pages(connection: object) -> bool:
         day = str(night_start[6:8])
         month = str(night_start[4:6])
         year = str(night_start[0:4])
+        file_preview = str(data[1])
         post_filename = PATH_OF_SITE_POSTS + "{}-{}-{}-captures.md".format(year, month, day)
 
         filehandle = open(post_filename, "w+")
@@ -228,6 +230,7 @@ def generate_pages(connection: object) -> bool:
         filehandle.write("layout: post\n")
         filehandle.write("title: {}/{}/{}\n".format(day, month, year))
         filehandle.write("date: {}-{}-{} 10:00:00\n".format(year, month, day))
+        filehandle.write("preview: {}\n".format(file_preview))
         filehandle.write("---\n")
         filehandle.close()
 

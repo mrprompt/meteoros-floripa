@@ -16,22 +16,10 @@
     <meta property="og:title" content="{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}">
     <meta property="og:site_name" content="{{ site.title }}">
 
-    {% if page.station %}
-    {% assign filter = page.date | date: '%Y%m%d' %}
-    {% assign capture_collections = site.captures | where: "label", filter | where: "station", page.station %}
-    {% assign capture_collection = capture_collections | first %}
-    {% assign capture_image = capture_collection.capturas | first %}
-
+    {% if page.preview %}
     <meta property="og:type" content="article">
     <meta property="og:description" content="{{ page.title }}">
-    <meta property="og:image" content="{{ capture_image.imagem | prepend: site.s3_bucket }}">
-    <meta property="og:image:type" content="image/jpeg">
-    <meta property="og:image:width" content="720">
-    <meta property="og:image:height" content="480">
-    {% elsif page.capture %}
-    <meta property="og:type" content="article">
-    <meta property="og:description" content="{{ page.title }}">
-    <meta property="og:image" content="{{ page.capture | replace: 'T.jpg', 'P.jpg' | prepend: site.s3_bucket }}">
+    <meta property="og:image" content="{{ page.capture | prepend: site.s3_bucket }}">
     <meta property="og:image:type" content="image/jpeg">
     <meta property="og:image:width" content="720">
     <meta property="og:image:height" content="480">
