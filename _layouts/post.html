@@ -47,7 +47,9 @@
 							<span><i class="fa fa-broadcast-tower"></i> Estação: {{ collection.station }}</span><br>
 							<span><i class="fa fa-calendar"></i> Data: {{ file_date | slice: 6,2 }}/{{ file_date | slice: 4,2 }}/{{ file_date | slice: 0,4 }}</span><br>
 							<span><i class="fa fa-clock"></i> Hora: {{ file_meta[1] | slice: 0,2 }}:{{ file_meta[1] | slice: 2,2 }}:{{ file_meta[1] | slice: 4,2 }} UTC</span><br>
-							<span><i class="fa fa-meteor"></i> Classe: {{ analyze.class }}</span>
+							<span><i class="fa fa-meteor"></i> Classe: {{ analyze.class }}</span><br>
+							<span><i class="fa fa-sun"></i> Magnitude: {{ analyze.magnitude }}</span><br>
+							<span><i class="fa fa-stopwatch-20"></i> Duração: {{ analyze.duration }}</span><br>
 						</div>
 					</div>
 				</article>

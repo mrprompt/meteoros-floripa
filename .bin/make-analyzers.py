@@ -114,24 +114,29 @@ def generate_collections(connection: object) -> bool:
         for capture in connection_cursor.fetchall():
             file = capture[3]
 
-
             try:
                 xmldoc = minidom.parse(file)
                 itemlist = xmldoc.getElementsByTagName('ua2_object')
                 classe = itemlist[0].attributes['class'].value
+                magnitude = itemlist[0].attributes['mag'].value
+                duration = itemlist[0].attributes['sec'].value
             except IndexError:
                 classe = "__none__"
+                magnitude = "__unknown__"
+                duration = "__unknown__"
             except Exception:
                 classe = "__none__"
+                magnitude = "__none__"
+                duration = "__none__"
 
             base = re.findall("\w{3}\d{1,2}.+", file)
-            capture_spliced = base[0].split('/')
-            capture_base_filename = capture_spliced[-1]
 
             filehandle = open(capture_filename, "a")
             filehandle.write("{}:\n".format(base[0].replace('A.XML', 'P.jpg')))
             filehandle.write("  station: {}\n".format(station))
             filehandle.write("  class: {}\n".format(classe))
+            filehandle.write("  magnitude: {}\n".format(magnitude))
+            filehandle.write("  duration: {}\n".format(duration))
             filehandle.close()
 
     return True
