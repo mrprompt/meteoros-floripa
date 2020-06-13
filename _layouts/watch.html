@@ -7,7 +7,8 @@
 		{% include social.html %}
 
 		{% assign base_file = page.capture.imagem | split: "/" | last %}
-		{% assign analyze = site.data.analyzers[ page.capture.imagem ] %}
+		{% assign image = page.capture.imagem | replace: 'T.jpg', 'P.jpg' %}
+		{% assign analyze = site.data.analyzers[ image ] %}
 
 		<article class="mb-1">
 			<div class="post-content">
