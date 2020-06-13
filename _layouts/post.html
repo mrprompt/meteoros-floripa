@@ -35,7 +35,7 @@
 				{% assign base_file = capture.imagem | split: "/" | last %}
 				{% assign file_meta = base_file | split: "_" %}
 				{% assign file_date = file_meta[0] | replace: 'M', '' %}
-				{% assign analyze = site.data.analyzers[ base_file ] %}
+				{% assign analyze = site.data.analyzers[ capture.imagem ] %}
 				<article class="col-md-4 mb-1">
 					<div class="post-content">
 						<div class="post-description">
