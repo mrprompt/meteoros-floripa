@@ -37,10 +37,14 @@ def organize_captures(stations_captures: List) -> List:
     :returns List
     """
     captures_organized = []
+    er_filter = "\w{3}\d{1,2}.+"
 
     for capture in stations_captures:
-        base = re.findall("\w{3}\d{1,2}.+", capture)
-        capture_spliced = base[0].split(os.sep)
+        if re.match(er_filter, capture) == False:
+            continue
+
+        base = re.findall(er_filter, capture)
+        capture_spliced = base[0].split('/')
         station = capture_spliced[0]
         capture_date = capture_spliced[3]
         post = (capture_date, station, capture)
@@ -133,16 +137,27 @@ def generate_collections(connection: object) -> bool:
     return True
 
 
-def get_matching_analyzers(captures_dir: list):
+def get_matching_analyzers(captures_dir: list, prefix: str):
     import glob
 
     result = []
 
     for directory in captures_dir:
-        files = glob.glob("{}/**/*A.XML".format(directory), recursive=True)
+        files = glob.glob("{}/**/*{}*A.XML".format(directory, prefix), recursive=True)
 
         result.extend(files)
 
+    return fix_path_delimiter(result)
+    
+
+def fix_path_delimiter(captures_list: list):
+    result = []
+    
+    for path in captures_list:
+        path_fixed = path.replace("\\", "/")
+        
+        result.append(path_fixed)
+    
     return result
 
 
@@ -156,7 +171,7 @@ if __name__ == '__main__':
     cleanup_dir(PATH_OF_ANALYZERS, ".yaml")
 
     print("- Reading analyzer files from {}".format(args.captures_dir))
-    analyzers = get_matching_analyzers(args.captures_dir)
+    analyzers = get_matching_analyzers(args.captures_dir, 'TLP')
 
     print("- Organizing captures")
     posts = organize_captures(analyzers)

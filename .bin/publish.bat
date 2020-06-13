@@ -7,7 +7,7 @@ setlocal
 
     git pull origin master
 
-    REM python ./.bin/make-analyzers.py "d:" "e:" "f:"
+    python ./.bin/make-analyzers.py "d:" "e:" "f:"
     python ./.bin/make-posts.py
     python ./.bin/make-stats.py
 
