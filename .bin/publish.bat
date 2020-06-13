@@ -7,6 +7,7 @@ setlocal
 
     git pull origin master
 
+    python ./.bin/make-analyzers.py "d:" "e:" "f:"
     python ./.bin/make-posts.py
     python ./.bin/make-stats.py
 
