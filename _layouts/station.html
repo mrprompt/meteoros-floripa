@@ -24,6 +24,7 @@
             {% assign year = post.label | slice: 0,4 %}
             {% assign month = post.label | slice: 4, 2 %}
             {% assign day = post.label | slice: 6, 2 %}
+            {% assign analyze = site.data.analyzers[ capture.imagem ] %}
 
             <article class="col-md-4 mb-1">
                 <div class="post-content">
@@ -34,7 +35,7 @@
                     </div>
                     <div class="post-meta">
                         <span><i class="fa fa-calendar"></i> Data: {{ day }}/{{ month }}/{{ year }}</span><br>
-                        <span><i class="fa fa-meteor"></i> Capturas: {{ post.capturas.size }}</span>
+                        <span><i class="fa fa-broadcast-tower"></i> Capturas: {{ post.capturas.size }}</span><br>
                     </div>
                 </div>
             </article>

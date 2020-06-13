@@ -6,6 +6,9 @@
 	<div class="row">
 		{% include social.html %}
 
+		{% assign base_file = page.capture.imagem | split: "/" | last %}
+		{% assign analyze = site.data.analyzers[ page.capture.imagem ] %}
+
 		<article class="mb-1">
 			<div class="post-content">
 				<div class="post-description embed-responsive embed-responsive-16by9">
@@ -17,6 +20,7 @@
 				<div class="post-meta">
 					<span><i class="fa fa-calendar"></i> Data: {{ page.date | date: '%d/%m/%Y' }}</span><br>
 					<span><i class="fa fa-clock"></i> Hora: {{ page.date | date: '%H:%M:%S' }} UTC</span><br>
+					<span><i class="fa fa-meteor"></i> Classe: {{ analyze.class }}</span>
 				</div>
 			</div>
 		</article>

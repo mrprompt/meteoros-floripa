@@ -35,6 +35,7 @@
 				{% assign base_file = capture.imagem | split: "/" | last %}
 				{% assign file_meta = base_file | split: "_" %}
 				{% assign file_date = file_meta[0] | replace: 'M', '' %}
+				{% assign analyze = site.data.analyzers[ base_file ] %}
 				<article class="col-md-4 mb-1">
 					<div class="post-content">
 						<div class="post-description">
@@ -43,9 +44,10 @@
 							</a>
 						</div>
 						<div class="post-meta">
-							<span><i class="fa fa-meteor"></i> Estação: {{ collection.station }}</span><br>
+							<span><i class="fa fa-broadcast-tower"></i> Estação: {{ collection.station }}</span><br>
 							<span><i class="fa fa-calendar"></i> Data: {{ file_date | slice: 6,2 }}/{{ file_date | slice: 4,2 }}/{{ file_date | slice: 0,4 }}</span><br>
 							<span><i class="fa fa-clock"></i> Hora: {{ file_meta[1] | slice: 0,2 }}:{{ file_meta[1] | slice: 2,2 }}:{{ file_meta[1] | slice: 4,2 }} UTC</span><br>
+							<span><i class="fa fa-meteor"></i> Classe: {{ analyze.class }}</span>
 						</div>
 					</div>
 				</article>
