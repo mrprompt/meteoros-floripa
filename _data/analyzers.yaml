@@ -32953,3 +32953,143 @@ TLP8/2020/202006/20200612/M20200613_054028_TLP_8P.jpg:
   class: J8_JEC
   magnitude: 0.004599
   duration: 0.266934
+TLP1/2020/202006/20200613/M20200614_065417_TLP_1P.jpg:
+  station: TLP1
+  class: spo
+  magnitude: -0.512093
+  duration: 0.700701
+TLP2/2020/202006/20200613/M20200614_051258_TLP_2P.jpg:
+  station: TLP2
+  class: spo
+  magnitude: 2.176337
+  duration: 0.066733
+TLP2/2020/202006/20200613/M20200614_052812_TLP_2P.jpg:
+  station: TLP2
+  class: J8_JCE
+  magnitude: 1.236864
+  duration: 0.266934
+TLP2/2020/202006/20200613/M20200614_060540_TLP_2P.jpg:
+  station: TLP2
+  class: spo
+  magnitude: 0.161449
+  duration: 0.400400
+TLP2/2020/202006/20200613/M20200614_061015_TLP_2P.jpg:
+  station: TLP2
+  class: J8_JPE
+  magnitude: 0.671142
+  duration: 0.100100
+TLP2/2020/202006/20200613/M20200614_062911_TLP_2P.jpg:
+  station: TLP2
+  class: J8_DGR*
+  magnitude: 0.302221
+  duration: 0.233567
+TLP2/2020/202006/20200613/M20200614_064051_TLP_2P.jpg:
+  station: TLP2
+  class: J8_PAQ
+  magnitude: 1.527837
+  duration: 0.066733
+TLP2/2020/202006/20200613/M20200614_070828_TLP_2P.jpg:
+  station: TLP2
+  class: J8_SGI*
+  magnitude: 0.247323
+  duration: 0.367034
+TLP2/2020/202006/20200613/M20200614_070835_TLP_2P.jpg:
+  station: TLP2
+  class: spo
+  magnitude: 1.017463
+  duration: 0.433767
+TLP2/2020/202006/20200613/M20200614_071357_TLP_2P.jpg:
+  station: TLP2
+  class: J8_LSA*
+  magnitude: 1.385335
+  duration: 0.333667
+TLP2/2020/202006/20200613/M20200614_074854_TLP_2P.jpg:
+  station: TLP2
+  class: spo
+  magnitude: 0.489837
+  duration: 0.166834
+TLP2/2020/202006/20200613/M20200614_074949_TLP_2P.jpg:
+  station: TLP2
+  class: J8_JLY
+  magnitude: -0.503526
+  duration: 0.100100
+TLP3/2020/202006/20200613/M20200614_055900_TLP_3P.jpg:
+  station: TLP3
+  class: J8_ZER
+  magnitude: 1.441767
+  duration: 0.400400
+TLP3/2020/202006/20200613/M20200614_074514_TLP_3P.jpg:
+  station: TLP3
+  class: spo
+  magnitude: 0.631067
+  duration: 0.100100
+TLP3/2020/202006/20200613/M20200614_074854_TLP_3P.jpg:
+  station: TLP3
+  class: J8_ASG
+  magnitude: 0.898333
+  duration: 0.100100
+TLP4/2020/202006/20200613/M20200614_061513_TLP_4P.jpg:
+  station: TLP4
+  class: J8_JOE
+  magnitude: 0.362002
+  duration: 0.166834
+TLP4/2020/202006/20200613/M20200614_072502_TLP_4P.jpg:
+  station: TLP4
+  class: J8_EGR*
+  magnitude: -0.543490
+  duration: 0.233567
+TLP4/2020/202006/20200613/M20200614_075654_TLP_4P.jpg:
+  station: TLP4
+  class: J8_JPE
+  magnitude: 0.657974
+  duration: 0.066733
+TLP4/2020/202006/20200613/M20200614_085050_TLP_4P.jpg:
+  station: TLP4
+  class: J8_DPI
+  magnitude: 0.925386
+  duration: 0.133467
+TLP5/2020/202006/20200613/M20200614_062911_TLP_5P.jpg:
+  station: TLP5
+  class: J8_DGR*
+  magnitude: 0.910938
+  duration: 0.166834
+TLP5/2020/202006/20200613/M20200614_070828_TLP_5P.jpg:
+  station: TLP5
+  class: J8_SGI*
+  magnitude: 0.430122
+  duration: 0.233567
+TLP7/2020/202006/20200613/M20200614_015706_TLP_7P.jpg:
+  station: TLP7
+  class: J8_ACI
+  magnitude: 0.519685
+  duration: 0.433767
+TLP7/2020/202006/20200613/M20200614_020524_TLP_7P.jpg:
+  station: TLP7
+  class: J8_SSS
+  magnitude: 1.857581
+  duration: 0.066733
+TLP7/2020/202006/20200613/M20200614_060049_TLP_7P.jpg:
+  station: TLP7
+  class: J8_MIC
+  magnitude: 0.162707
+  duration: 0.166834
+TLP7/2020/202006/20200613/M20200614_062303_TLP_7P.jpg:
+  station: TLP7
+  class: J8_SZC
+  magnitude: 1.156526
+  duration: 0.066733
+TLP7/2020/202006/20200613/M20200614_071949_TLP_7P.jpg:
+  station: TLP7
+  class: J8_PAQ
+  magnitude: 0.728260
+  duration: 0.066733
+TLP8/2020/202006/20200613/M20200614_074006_TLP_8P.jpg:
+  station: TLP8
+  class: J8_JRC
+  magnitude: -1.454612
+  duration: 0.867534
+TLP9/2020/202006/20200613/M20200614_065417_TLP_9P.jpg:
+  station: TLP9
+  class: spo
+  magnitude: -2.228615
+  duration: 0.400400
