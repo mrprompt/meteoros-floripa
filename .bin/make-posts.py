@@ -19,13 +19,6 @@ PATH_OF_ANALYZERS = "{}/../_data/".format(PATH)
 
 
 def populate_tables(connection: object, captures_list: List):
-    """
-    Insert posts into table
-
-    :param connection: The database connection
-    :param captures_list: Array of posts
-    :returns: bool
-    """
     connection_cursor = connection.cursor()
 
     connection_cursor.execute("""
@@ -47,13 +40,6 @@ def populate_tables(connection: object, captures_list: List):
 
 
 def organize_captures(stations_captures):
-    """
-    Organize captures to be inserted into database with
-    correct params organized into a tuple.
-
-    :param stations_captures: The array all captures
-    :returns List
-    """
     captures_organized = []
     er_filter = "\w{3}\d{1,2}.+P.jpg$"
 
@@ -70,12 +56,6 @@ def organize_captures(stations_captures):
 
 
 def generate_captures(connection: object) -> bool:
-    """
-    Generate captures collections from every station captures.
-
-    :param connection: The database connection
-    :return: bool
-    """
     connection_cursor = connection.cursor()
 
     connection_cursor.execute("""
@@ -137,12 +117,6 @@ def generate_captures(connection: object) -> bool:
 
 
 def generate_posts(connection: object) -> bool:
-    """
-    Generate captures collections and pages from every station captures.
-
-    :param connection: The database connection
-    :return: bool
-    """
     connection_cursor = connection.cursor()
 
     connection_cursor.execute("""
@@ -172,12 +146,6 @@ def generate_posts(connection: object) -> bool:
 
 
 def generate_watches(connection: object) -> bool:
-    """
-    Generate watch page for each collection item.
-
-    :param connection: The database connection
-    :return: bool
-    """
     connection_cursor = connection.cursor()
 
     connection_cursor.execute("""
@@ -241,8 +209,8 @@ def generate_videos(connection: object) -> bool:
             file_input = capture[4].replace('P.jpg', '.avi')
             file_output = capture[4].replace('P.jpg', '.mp4')
 
-            # if not os.path.exists(file_input) or os.path.exists(file_output):
-            #     continue
+            if not os.path.exists(file_input) or os.path.exists(file_output):
+                continue
 
             try:
                 convert_video(file_input, file_output)
@@ -253,12 +221,6 @@ def generate_videos(connection: object) -> bool:
 
 
 def generate_analyzers(connection: object) -> bool:
-    """
-    Generate captures collections from every station captures.
-
-    :param connection: The database connection
-    :return: bool
-    """
     connection_cursor = connection.cursor()
 
     connection_cursor.execute("""
