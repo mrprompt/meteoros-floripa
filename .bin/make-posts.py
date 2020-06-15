@@ -39,7 +39,7 @@ def populate_tables(connection: object, captures_list: List):
     connection.commit()
 
 
-def organize_captures(stations_captures):
+def organize_captures(db_connection, stations_captures):
     captures_organized = []
     er_filter = "\w{3}\d{1,2}.+P.jpg$"
 
@@ -52,7 +52,7 @@ def organize_captures(stations_captures):
 
         captures_organized.append(post)
 
-    populate_tables(connection, captures_organized)
+    populate_tables(db_connection, captures_organized)
 
 
 def generate_captures(connection: object) -> bool:
@@ -374,7 +374,7 @@ if __name__ == '__main__':
     captures = get_matching_captures(args.captures_dir, args.station_prefix, args.days_back)
 
     print("- Organizing captures")
-    organize_captures(captures)
+    organize_captures(connection, captures)
 
     print("- Converting videos")
     generate_videos(connection)
