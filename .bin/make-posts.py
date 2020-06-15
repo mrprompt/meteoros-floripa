@@ -6,6 +6,7 @@ import glob
 import os
 import re
 import sqlite3
+import subprocess
 from xml.dom import minidom
 from typing import List
 
@@ -215,6 +216,42 @@ def generate_watches(connection: object) -> bool:
     return True
 
 
+def generate_videos(connection: object) -> bool:
+    connection_cursor = connection.cursor()
+
+    connection_cursor.execute("""
+    SELECT night_start, station
+    FROM captures
+    GROUP BY night_start, station
+    """)
+
+    for data in connection_cursor.fetchall():
+        night_start = str(data[0])
+        station = str(data[1])
+
+        connection_cursor.execute("""
+            SELECT id, night_start, station, files, files_full_path
+            FROM captures
+            WHERE night_start = ?
+            AND station = ?
+            ORDER BY station
+            """, (night_start, station))
+
+        for capture in connection_cursor.fetchall():
+            file_input = capture[4].replace('P.jpg', '.avi')
+            file_output = capture[4].replace('P.jpg', '.mp4')
+
+            # if not os.path.exists(file_input) or os.path.exists(file_output):
+            #     continue
+
+            try:
+                convert_video(file_input, file_output)
+            except Exception:
+                pass
+
+    return True
+
+
 def generate_analyzers(connection: object) -> bool:
     """
     Generate captures collections from every station captures.
@@ -350,6 +387,11 @@ def cleanup_watches(days: int, station_prefix: str = 'TLP'):
         os.remove(file_to_delete)
 
 
+def convert_video(video_input: str, video_output: str):
+    cmds = ['ffmpeg', '-n -i', video_input, '-c:v libx264 -profile:v baseline -level 3.0 -pix_fmt yuv420p', video_output]
+    subprocess.Popen(cmds)
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Process captures files and create posts.')
     parser.add_argument('captures_dir', metavar='captures', type=str, nargs='+', help='captures directory input')
@@ -371,6 +413,9 @@ if __name__ == '__main__':
 
     print("- Organizing captures")
     organize_captures(captures)
+
+    print("- Converting videos")
+    generate_videos(connection)
 
     print("- Creating captures")
     generate_captures(connection)
