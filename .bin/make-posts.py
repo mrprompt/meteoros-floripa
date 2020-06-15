@@ -1,110 +1,23 @@
 #!/usr/bin/env python3
 # -*- coding: utf8 -*-
+import argparse
+import datetime
+import glob
 import os
+import re
 import sqlite3
-import boto3
+from xml.dom import minidom
 from typing import List
 
 
-S3_BUCKET = 'meteoros'
 PATH = os.path.dirname(__file__)
 PATH_OF_SITE_POSTS = "{}/../_posts/".format(PATH)
 PATH_OF_SITE_CAPTURES = "{}/../_captures/".format(PATH)
 PATH_OF_WATCH_CAPTURES = "{}/../watch/".format(PATH)
+PATH_OF_ANALYZERS = "{}/../_data/".format(PATH)
 
 
-def get_matching_s3_objects(bucket, prefix="", suffix=""):
-    """
-    Generate objects in an S3 bucket.
-
-    From: https://alexwlchan.net/2019/07/listing-s3-keys/
-
-    :param bucket: Name of the S3 bucket.
-    :param prefix: Only fetch objects whose key starts with
-        this prefix (optional).
-    :param suffix: Only fetch objects whose keys end with
-        this suffix (optional).
-    """
-    s3 = boto3.client("s3")
-    paginator = s3.get_paginator("list_objects_v2")
-
-    kwargs = {'Bucket': bucket}
-
-    # We can pass the prefix directly to the S3 API.  If the user has passed
-    # a tuple or list of prefixes, we go through them one by one.
-    if isinstance(prefix, str):
-        prefixes = (prefix,)
-    else:
-        prefixes = prefix
-
-    for key_prefix in prefixes:
-        kwargs["Prefix"] = key_prefix
-
-        for page in paginator.paginate(**kwargs):
-            try:
-                contents = page["Contents"]
-            except KeyError:
-                return
-
-            for obj in contents:
-                key = obj["Key"]
-                if key.endswith(suffix):
-                    yield obj
-
-
-def get_matching_s3_keys(bucket, prefix="", suffix=""):
-    """
-    Generate the keys in an S3 bucket.
-
-    From: https://alexwlchan.net/2019/07/listing-s3-keys/
-
-    :param bucket: Name of the S3 bucket.
-    :param prefix: Only fetch keys that start with this prefix (optional).
-    :param suffix: Only fetch keys that end with this suffix (optional).
-    """
-    for obj in get_matching_s3_objects(bucket, prefix, suffix):
-        yield obj["Key"]
-
-
-def cleanup_dir(directory: str) -> bool:
-    """
-    Remove posts and captures before recreate then.
-
-    :param directory: Name of directory to cleanup md files.
-    :returns: bool
-    """
-    file_list = [f for f in os.listdir(directory) if f.endswith(".md")]
-
-    for f in file_list:
-        file_to_delete = os.path.join(directory, f)
-
-        os.remove(file_to_delete)
-
-    return True
-
-
-def organize_captures(stations_captures: List) -> List:
-    """
-    Organize captures to be inserted into database with
-    correct params organized into a tuple.
-
-    :param stations_captures: The array all captures
-    :returns: List
-    """
-    captures_organized = []
-
-    for capture in stations_captures:
-        capture_spliced = capture.split('/')
-        station = capture_spliced[0]
-        capture_date = capture_spliced[3]
-        post = (capture_date, station, capture)
-
-        captures_organized.append(post)
-
-    return captures_organized
-
-
-def populate_tables(connection: object, captures_list: List) -> bool:
+def populate_tables(connection: object, captures_list: List):
     """
     Insert posts into table
 
@@ -119,21 +32,43 @@ def populate_tables(connection: object, captures_list: List) -> bool:
         id INTEGER  NOT NULL PRIMARY KEY AUTOINCREMENT,
         night_start DATE NOT NULL,
         station VARCHAR(20) NOT NULL,
-        files TEXT
+        files TEXT,
+        files_full_path TEXT
     );
     """)
 
     connection_cursor.executemany("""
-    INSERT INTO captures (night_start, station, files)
-    VALUES (?, ?, ?)
+    INSERT INTO captures (night_start, station, files, files_full_path)
+    VALUES (?, ?, ?, ?)
     """, captures_list)
 
     connection.commit()
 
-    return True
+
+def organize_captures(stations_captures):
+    """
+    Organize captures to be inserted into database with
+    correct params organized into a tuple.
+
+    :param stations_captures: The array all captures
+    :returns List
+    """
+    captures_organized = []
+    er_filter = "\w{3}\d{1,2}.+P.jpg$"
+
+    for capture in stations_captures:
+        base = re.findall(er_filter, capture)
+        capture_spliced = base[0].split('/')
+        station = capture_spliced[0]
+        capture_date = capture_spliced[3]
+        post = (capture_date, station, base[0], capture)
+
+        captures_organized.append(post)
+
+    populate_tables(connection, captures_organized)
 
 
-def generate_collections(connection: object) -> bool:
+def generate_captures(connection: object) -> bool:
     """
     Generate captures collections from every station captures.
 
@@ -190,9 +125,7 @@ def generate_collections(connection: object) -> bool:
             else:
                 filehandle = open(capture_filename, "a")
 
-            if file.endswith('P.jpg'):
-                filehandle.write("  - imagem: {}\n".format(file))
-
+            filehandle.write("  - imagem: {}\n".format(file))
             filehandle.close()
 
         filehandle = open(capture_filename, "a")
@@ -202,7 +135,7 @@ def generate_collections(connection: object) -> bool:
     return True
 
 
-def generate_pages(connection: object) -> bool:
+def generate_posts(connection: object) -> bool:
     """
     Generate captures collections and pages from every station captures.
 
@@ -256,9 +189,6 @@ def generate_watches(connection: object) -> bool:
         station = str(data[1])
         file = str(data[2])
 
-        if file.endswith('P.jpg'):
-            continue
-
         capture_spliced = file.split('/')
         capture_base_filename = capture_spliced[-1]
         capture_base_filename_spliced = capture_base_filename.split('_')
@@ -270,53 +200,191 @@ def generate_watches(connection: object) -> bool:
         minute = capture_base_filename_spliced[1][2:4]
         second = capture_base_filename_spliced[1][4:6]
 
-        post_filename = PATH_OF_WATCH_CAPTURES + "{}.md".format(capture_base_filename.replace('T.jpg', ''))
+        post_filename = PATH_OF_WATCH_CAPTURES + "{}.md".format(capture_base_filename.replace('P.jpg', ''))
 
         filehandle = open(post_filename, "w+")
         filehandle.write("---\n")
         filehandle.write("layout: watch\n")
-        filehandle.write("title: {} - {}/{}/{} - {}\n".format(station, day, month, year, capture_base_filename))
+        filehandle.write("title: {} - {}/{}/{} - {}\n".format(station, day, month, year, capture_base_filename.replace('P.jpg', 'T.jpg')))
         filehandle.write("date: {}-{}-{} {}:{}:{}\n".format(year, month, day, hour, minute, second))
-        filehandle.write("permalink: /{}/{}/{}/watch/{}\n".format(year, month, day, capture_base_filename.replace('T.jpg', '')))
-        filehandle.write("capture: {}\n".format(file))
+        filehandle.write("permalink: /{}/{}/{}/watch/{}\n".format(year, month, day, capture_base_filename.replace('P.jpg', '')))
+        filehandle.write("capture: {}\n".format(file.replace('P.jpg', 'T.jpg')))
         filehandle.write("---\n")
         filehandle.close()
 
     return True
 
 
+def generate_analyzers(connection: object) -> bool:
+    """
+    Generate captures collections from every station captures.
+
+    :param connection: The database connection
+    :return: bool
+    """
+    connection_cursor = connection.cursor()
+
+    connection_cursor.execute("""
+    SELECT night_start, station
+    FROM captures
+    GROUP BY night_start, station
+    """)
+
+    for data in connection_cursor.fetchall():
+        night_start = str(data[0])
+        station = str(data[1])
+        capture_filename = PATH_OF_ANALYZERS + "analyzers.yaml"
+
+        connection_cursor.execute("""
+            SELECT id, night_start, station, files, files_full_path
+            FROM captures
+            WHERE night_start = ?
+            AND station = ?
+            ORDER BY station
+            """, (night_start, station))
+
+        for capture in connection_cursor.fetchall():
+            file = capture[4].replace('P.jpg', 'A.XML')
+
+            if not os.path.exists(file):
+                continue
+
+            try:
+                xmldoc = minidom.parse(file)
+                itemlist = xmldoc.getElementsByTagName('ua2_object')
+                classe = itemlist[0].attributes['class'].value
+                magnitude = itemlist[0].attributes['mag'].value
+                duration = itemlist[0].attributes['sec'].value
+            except IndexError:
+                classe = "__none__"
+                magnitude = "__unknown__"
+                duration = "__unknown__"
+            except Exception:
+                classe = "__none__"
+                magnitude = "__none__"
+                duration = "__none__"
+
+            base = re.findall("\w{3}\d{1,2}.+", capture[3])
+
+            filehandle = open(capture_filename, "a")
+            filehandle.write("{}:\n".format(base[0]))
+            filehandle.write("  station: {}\n".format(station))
+            filehandle.write("  class: {}\n".format(classe))
+            filehandle.write("  magnitude: {}\n".format(magnitude))
+            filehandle.write("  duration: {}\n".format(duration))
+            filehandle.close()
+
+    return True
+
+
+def get_date_list(days: int, date_format: str = '%Y%m%d'):
+    return [(datetime.date.today() - datetime.timedelta(days=x)).strftime(date_format) for x in range(0, days)]
+
+
+def get_matching_captures(captures_dir: list, prefix: str, days: int):
+    result = []
+    date_list = get_date_list(days)
+
+    for directory in captures_dir:
+        for date in date_list:
+            files = glob.glob("{}/**/{}/*{}*P.jpg".format(directory, date, prefix), recursive=True)
+
+            result.extend(files)
+
+    return fix_path_delimiter(result)
+
+
+def fix_path_delimiter(captures_list: list):
+    result = []
+
+    for path in captures_list:
+        path_fixed = path.replace("\\", "/")
+
+        result.append(path_fixed)
+
+    return result
+
+
+def cleanup_posts(days: int):
+    result = []
+    date_list = get_date_list(days, '%Y-%m-%d')
+
+    for date in date_list:
+        files = glob.glob("{}/{}-captures.md".format(PATH_OF_SITE_POSTS, date))
+
+        result.extend(files)
+
+    files_to_delete = fix_path_delimiter(result)
+
+    for file_to_delete in files_to_delete:
+        os.remove(file_to_delete)
+
+
+def cleanup_captures(days: int, station_prefix: str = 'TLP'):
+    result = []
+    date_list = get_date_list(days, '%Y%m%d')
+
+    for date in date_list:
+        files = glob.glob("{}/{}*_{}.md".format(PATH_OF_SITE_CAPTURES, station_prefix, date))
+
+        result.extend(files)
+
+    files_to_delete = fix_path_delimiter(result)
+
+    for file_to_delete in files_to_delete:
+        os.remove(file_to_delete)
+
+
+def cleanup_watches(days: int, station_prefix: str = 'TLP'):
+    result = []
+    date_list = get_date_list(days, '%Y%m%d')
+
+    for date in date_list:
+        files = glob.glob("{}/M{}_*_{}_*.md".format(PATH_OF_WATCH_CAPTURES, date, station_prefix))
+
+        result.extend(files)
+
+    files_to_delete = fix_path_delimiter(result)
+
+    for file_to_delete in files_to_delete:
+        os.remove(file_to_delete)
+
+
 if __name__ == '__main__':
-    print("- Cleaning {}".format(PATH_OF_SITE_POSTS))
-    cleanup_dir(PATH_OF_SITE_POSTS)
+    parser = argparse.ArgumentParser(description='Process captures files and create posts.')
+    parser.add_argument('captures_dir', metavar='captures', type=str, nargs='+', help='captures directory input')
+    parser.add_argument('days_back', metavar='days', type=int, default=5, help='number of days in the past')
+    parser.add_argument('station_prefix', metavar='station', type=str, default='TLP', help='station prefix')
 
-    print("- Cleaning {}".format(PATH_OF_SITE_CAPTURES))
-    cleanup_dir(PATH_OF_SITE_CAPTURES)
-
-    print("- Cleaning {}".format(PATH_OF_WATCH_CAPTURES))
-    cleanup_dir(PATH_OF_WATCH_CAPTURES)
-
-    print('- Reading captures from S3 bucket')
-    captures = get_matching_s3_keys(S3_BUCKET, suffix=('.jpg', '.JPG'), prefix='TLP')
-
-    print("- Organizing captures")
-    posts = organize_captures(captures)
+    args = parser.parse_args()
 
     print("- Connecting to database")
-    conn = sqlite3.connect(':memory:')
+    connection = sqlite3.connect(':memory:')
 
-    print("- Creating temporary table and populating...")
-    populate_tables(conn, posts)
+    print("- Cleaning files")
+    cleanup_posts(args.days_back)
+    cleanup_captures(args.days_back, args.station_prefix)
+    cleanup_watches(args.days_back, args.station_prefix)
 
-    print("- Creating collections")
-    generate_collections(conn)
+    print('- Reading captures')
+    captures = get_matching_captures(args.captures_dir, args.station_prefix, args.days_back)
+
+    print("- Organizing captures")
+    organize_captures(captures)
+
+    print("- Creating captures")
+    generate_captures(connection)
 
     print("- Creating pages")
-    generate_pages(conn)
+    generate_posts(connection)
 
-    print("- Creating watches page")
-    generate_watches(conn)
+    print("- Creating watches")
+    generate_watches(connection)
+
+    print("- Creating analyzers")
+    generate_analyzers(connection)
 
     print("- Closing database connection")
-    conn.close()
+    connection.close()
 
     print("- Done :)")

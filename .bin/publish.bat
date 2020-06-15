@@ -7,12 +7,10 @@ setlocal
 
     git pull origin master
 
-    python ./.bin/make-analyzers.py "d:" "e:" "f:"
-    python ./.bin/make-posts.py
+    python ./.bin/make-posts.py "d:" "e:" "f:" 2 "TLP"
     python ./.bin/make-stats.py
 
     git add .
     git commit -am "captures!"
-    git pull origin master --rebase
     git push origin master
 endlocal
