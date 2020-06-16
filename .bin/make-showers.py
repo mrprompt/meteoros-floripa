@@ -86,7 +86,7 @@ def generate_shower():
         filehandle.write("  CG: \"{}\"\n".format(shower[21]))
         filehandle.write("  Parent: \"{} {}\"\n".format(shower[22], shower[23]))
         filehandle.write("  Remarks: \"{}\"\n".format(shower[24]))
-        filehandle.write("  Ote: \"{}\"\n".format(shower[25]))
+        filehandle.write("  Ote: {}\n".format(shower[25]))
         filehandle.write("  References: \"{}\"\n".format(shower[26]))
         filehandle.write("  Submission: \"{}\"\n".format(shower[27]))
         filehandle.write("  date: \"{}\"\n".format(shower[28]))
