@@ -4982,7 +4982,7 @@ J8_DAQ:
   Group: 00297
   CG: 01
   Parent:                                         
-  body: Group members: 26/NDA, 5/SDA                                                                                                                          
+  body:
   Remarks:     
   Ote: 1) <A href='http://adsabs.harvard.edu/abs/2006mspc.book.....J' target=_blank>Jenniskens, 2006</A> 
   References:  
@@ -7061,7 +7061,7 @@ J8_DSE:
   Parent: 1947 F2 (Becvar)?                       
   body:                                                                                                                                                       
   Remarks:     
-  Ote:    ? 
+  Ote:
   References:  
   Submission:  
   date:  
@@ -8236,7 +8236,7 @@ J8_EPV:
   N: 00077
   Group: 00000
   CG: 00
-  Parent: ? C/1846J1 (Brorsen)                    
+  Parent:
   body:                                                                                                                                                       
   Remarks: T   
   Ote: 1) <A href='http://adsabs.harvard.edu/abs/2013JIMO...41...70S' target=_blank> Segon et al., 2013 </A> 
@@ -11337,7 +11337,7 @@ J8_GVR:
   Group: 00291
   CG: 01
   Parent:                                         
-  body: Group members: 134/NGV, 135/SGV                                                                                                                       
+  body:
   Remarks:     
   Ote: 1) <A href='http://adsabs.harvard.edu/abs/2006mspc.book.....J' target=_blank>Jenniskens, 2006</A> 
   References:  
@@ -11554,7 +11554,7 @@ J8_IAQ:
   Group: 00298
   CG: 01
   Parent:                                         
-  body: Group members: 33/NUA, 3/SIA                                                                                                                          
+  body:
   Remarks:     
   Ote: 1) <A href='http://adsabs.harvard.edu/abs/2006mspc.book.....J' target=_blank>Jenniskens, 2006</A> 
   References:  
@@ -12143,7 +12143,7 @@ J8_JAQ:
   Group: 00295
   CG: 01
   Parent:                                         
-  body: Group members: 164/NZC, 165/SZC                                                                                                                       
+  body:
   Remarks:     
   Ote: 1) <A href='http://adsabs.harvard.edu/abs/2006mspc.book.....J' target=_blank>Jenniskens, 2006</A> 
   References:  
@@ -14436,7 +14436,7 @@ J8_KVI:
   N: 00058
   Group: 00000
   CG: 00
-  Parent: ? 2011 BT59                             
+  Parent:
   body:                                                                                                                                                       
   Remarks: T   
   Ote: 1) <A href='http://adsabs.harvard.edu/abs/2013JIMO...41...70S' target=_blank> Segon et al., 2013 </A> 
@@ -16638,7 +16638,7 @@ J8_MZC:
   Group: 00000
   CG: 00
   Parent:                                         
-  body: In Brown et al. 2010, shower has incorrect: name August zeta Cygnids and code ECY.                                                                    
+  body:
   Remarks: R   
   Ote: 1) <A href='http://adsabs.harvard.edu/abs/2010Icar..207...66B' target=_blank>Brown et al., 2010</A> 
   References:  
@@ -19025,7 +19025,7 @@ J8_OAR:
   Group: 00299
   CG: 01
   Parent:                                         
-  body: Group members: 25/NOA, 28/SOA                                                                                                                         
+  body:
   Remarks:     
   Ote: 1) <A href='http://adsabs.harvard.edu/abs/2006mspc.book.....J' target=_blank>Jenniskens, 2006</A> 
   References:  
@@ -20854,7 +20854,7 @@ J8_OSC:
   Group: 00160
   CG: 01
   Parent:                                         
-  body: Group members: 66/NSC, 161/SSC                                                                                                                        
+  body:
   Remarks:     
   Ote: 1)  <A href='http://adsabs.harvard.edu/abs/2006mspc.book.....J' target=_blank>Jenniskens, 2006</A> 
   References:  
@@ -22249,7 +22249,7 @@ J8_PSC:
   Group: 00030
   CG: 01
   Parent:                                         
-  body: Group members: 215/NPI, 216/SPI                                                                                                                       
+  body:
   Remarks:     
   Ote: 1)  <A href='http://adsabs.harvard.edu/abs/2006mspc.book.....J' target=_blank>Jenniskens, 2006</A> 
   References:  
@@ -23179,7 +23179,7 @@ J8_SAG:
   Group: 00163
   CG: 01
   Parent:                                         
-  body: Group members: 67/NSA, 69/SSG                                                                                                                         
+  body:
   Remarks:     
   Ote: 1) <A href='http://adsabs.harvard.edu/abs/2006mspc.book.....J' target=_blank>Jenniskens, 2006</A> 
   References:  
@@ -24264,7 +24264,7 @@ J8_SIS:
   Group: 00296
   CG: 01
   Parent:                                         
-  body: Group members: 167/NSS, 168/SSS                                                                                                                       
+  body:
   Remarks:     
   Ote: 1) <A href='http://adsabs.harvard.edu/abs/2006mspc.book.....J' target=_blank>Jenniskens, 2006</A> 
   References:  
@@ -26031,7 +26031,7 @@ J8_TAU:
   Group: 00247
   CG: 01
   Parent:                                         
-  body: Group members: 2/STA, 17/NTA                                                                                                                          
+  body:
   Remarks:     
   Ote: 1)  <A href='http://adsabs.harvard.edu/abs/2006mspc.book.....J' target=_blank>Jenniskens, 2006</A> 
   References:  
@@ -28542,7 +28542,7 @@ J8_VIR:
   Group: 00050
   CG: 01
   Parent:                                         
-  body: Group members: 123/NVI, 124/SVI                                                                                                                       
+  body:
   Remarks:     
   Ote: 1)  <A href='http://adsabs.harvard.edu/abs/2006mspc.book.....J' target=_blank>Jenniskens, 2006</A> 
   References:  
@@ -29069,7 +29069,7 @@ J8_XOR:
   Group: 00014
   CG: 01
   Parent:                                         
-  body: Group members: 256/ORN, 257/ORS                                                                                                                       
+  body:
   Remarks:     
   Ote: 1) <A href='http://adsabs.harvard.edu/abs/2006mspc.book.....J' target=_blank>Jenniskens, 2006</A> 
   References:  
