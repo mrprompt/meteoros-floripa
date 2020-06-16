@@ -42,8 +42,8 @@
 						A análise sugeriu também que este meteoro possivelmente pertence à chuva denominada {{ shower.shower_name }}
 						identificada pelo código {{ shower.IAUNo }} {{ shower.Code }} da IAU.<br>
 
-						{% if shower.Parent != "" and shower.body != "" %}
-						Esta chuva está relacionada ao corpo parental: {{ shower.Parent }} {{ shower.body }}.
+						{% if shower.Parent != "" %}
+						Esta chuva está relacionada ao corpo parental: {{ shower.Parent }}.
 						{% endif %}
 					</p>
 					<br>
