@@ -25,7 +25,6 @@
 					<span><i class="fa fa-stopwatch-20"></i> Duração: {{ analyze.duration }}</span><br>
 				</div>
 				<div class="post-body">
-					{% comment %}
 					<p>
 						Fenômeno registrado em {{ page.date | date: '%d/%m/%Y' }} por volta das {{ page.date | date: '%H:%M:%S' }} (UTC)
 						pela câmera {{ page.station }} da estação de monitoramento de Florianópolis-SC. <br>
@@ -38,6 +37,7 @@
 						O trajeto visível desapareceu no azimute {{ analyze.azimute_final }} com {{ analyze.elevation_final }}° de elevação e
 						altitude provável de {{ analyze.altitude_final }} km sobre as coordenadas {{ analyze.latitude_final }}, {{ analyze.longitude_final }}.
 					</p>
+					{% comment %}
 					<p>
 						A análise sugeriu também que este meteoro possivelmente pertence à chuva denominada June epsilon Cygnids
 						identificada pelo código 00458 {{ analyze.class }} da IAU. Esta chuva está relacionada ao corpo parental: .
