@@ -2967,7 +2967,7 @@ J8_BCB:
   Group: 00332
   CG: 01
   Parent:                                         
-  body: Group members: 321/TCB, 322/LBO, 323/XCB                                                                                                              
+  body:
   Remarks: R   
   Ote: 1) <A href='http://adsabs.harvard.edu/abs/2008Icar..195..317B' target=_blank>Brown et al., 2008</A> 
   References:  
