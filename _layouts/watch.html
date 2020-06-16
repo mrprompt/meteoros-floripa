@@ -29,7 +29,7 @@
 				<div class="post-body">
 					<p>
 						Fenômeno registrado em {{ page.date | date: '%d/%m/%Y' }} por volta das {{ page.date | date: '%H:%M:%S' }} (UTC)
-						pela câmera {{ station }} da estação de monitoramento de {{ site.location }}. <br>
+						pela câmera {{ station }} da estação de monitoramento de {{ site.city }}. <br>
 						A fase luminosa, que durou {{ analyze.duration }} segundos, teve um pico de magnitude de {{ analyze.magnitude }},
 						iniciou-se no azimute {{ analyze.azimute_start }} com uma elevação de {{ analyze.elevation_start }}° e altitude estimada
 						de {{ analyze.altitude_start }} km sobre as coordenadas {{ analyze.latitude_start }}, {{ analyze.longitude_start }}.
