@@ -7,9 +7,8 @@
 		{% include social.html %}
 
 		{% assign image = page.capture | replace: 'T.jpg', 'P.jpg' %}
-		{% assign analyze = site.data.analyzers[ image ] %}
-		{% assign shower = site.data.showers[ analyze.class | replace: '*', '' ] %}
 		{% assign station = image | split: "/" | first %}
+		{% assign analyze = site.data.analyzers[ image ] %}
 
 		<article class="mb-1">
 			<div class="post-content">
@@ -22,10 +21,14 @@
 				<div class="post-meta mb-1">
 					<span><i class="fa fa-calendar"></i> Data: {{ page.date | date: '%d/%m/%Y' }}</span><br>
 					<span><i class="fa fa-clock"></i> Hora: {{ page.date | date: '%H:%M:%S' }} UTC</span><br>
+					{% if analyze %}
 					<span><i class="fa fa-meteor"></i> Classe: {{ analyze.class }}</span><br>
 					<span><i class="fa fa-sun"></i> Magnitude: {{ analyze.magnitude }}</span><br>
 					<span><i class="fa fa-stopwatch-20"></i> Duração: {{ analyze.duration }}</span><br>
+					{% endif %}
 				</div>
+				{% if analyze %}
+					{% assign shower = site.data.showers[ analyze.class | replace: '*', '' ] %}
 				<div class="post-body">
 					<p>
 						Fenômeno registrado em {{ page.date | date: '%d/%m/%Y' }} por volta das {{ page.date | date: '%H:%M:%S' }} (UTC)
@@ -50,6 +53,7 @@
 					<br>
 					<cite>Referência: 1) Rudawska and Jenniskens, 2014</cite>
 				</div>
+				{% endif %}
 			</div>
 		</article>
 	</div>
