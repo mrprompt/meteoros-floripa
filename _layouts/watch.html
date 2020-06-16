@@ -8,7 +8,7 @@
 
 		{% assign image = page.capture | replace: 'T.jpg', 'P.jpg' %}
 		{% assign analyze = site.data.analyzers[ image ] %}
-		{% assign shower = site.data.showers[ analyze.class ] %}
+		{% assign shower = site.data.showers[ analyze.class | replace: '*', '' ] %}
 		{% assign station = image | split: "/" | first %}
 
 		<article class="mb-1">
