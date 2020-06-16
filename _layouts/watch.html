@@ -28,7 +28,7 @@
 					{% endif %}
 				</div>
 				{% if analyze %}
-					{% assign shower = site.data.showers[ analyze.class ] %}
+					{% assign shower = site.data.showers[ analyze.class | replace: '*', '' ] %}
 				<div class="post-body">
 					<p>
 						Fenômeno registrado em {{ page.date | date: '%d/%m/%Y' }} por volta das {{ page.date | date: '%H:%M:%S' }} (UTC)
