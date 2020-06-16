@@ -259,19 +259,19 @@ def generate_analyzers():
                 altitude_final = itemlist[0].attributes['h2'].value
             except IndexError:
                 classe = "__unknown__"
-                magnitude, velocity, duration = "__unknown__"
-                latitude_start, latitude_final = "__unknown__"
-                longitude_start, longitude_final = "__unknown__"
-                azimute_start, azimute_final = "__unknown__"
-                elevation_start, elevation_final = "__unknown__"
-                altitude_start, altitude_final = "__unknown__"
+                magnitude = velocity = duration = "__unknown__"
+                latitude_start = latitude_final = "__unknown__"
+                longitude_start = longitude_final = "__unknown__"
+                azimute_start = azimute_final = "__unknown__"
+                elevation_start = elevation_final = "__unknown__"
+                altitude_start = altitude_final = "__unknown__"
             except Exception:
-                classe, magnitude, duration, velocity = "__none__"
-                latitude_start, latitude_final = "__none__"
-                longitude_start, longitude_final = "__none__"
-                azimute_start, azimute_final = "__none__"
-                elevation_start, elevation_final = "__none__"
-                altitude_start, altitude_final = "__none__"
+                classe = magnitude = duration = velocity = "__none__"
+                latitude_start = latitude_final = "__none__"
+                longitude_start = longitude_final = "__none__"
+                azimute_start = azimute_final = "__none__"
+                elevation_start = elevation_final = "__none__"
+                altitude_start = altitude_final = "__none__"
 
             base = re.findall("\w{3}\d{1,2}.+", capture[3])
 
@@ -383,10 +383,10 @@ if __name__ == '__main__':
     print("- Connecting to database")
     connection = sqlite3.connect(':memory:')
 
-    print("- Cleaning files")
-    cleanup_posts(args.days_back)
-    cleanup_captures(args.days_back, args.station_prefix)
-    cleanup_watches(args.days_back, args.station_prefix)
+    # print("- Cleaning files")
+    # cleanup_posts(args.days_back)
+    # cleanup_captures(args.days_back, args.station_prefix)
+    # cleanup_watches(args.days_back, args.station_prefix)
 
     print('- Reading captures')
     captures = get_matching_captures(args.captures_dir, args.station_prefix, args.days_back)
@@ -394,17 +394,17 @@ if __name__ == '__main__':
     print("- Organizing captures")
     organize_captures(captures)
 
-    print("- Converting videos")
-    generate_videos()
-
-    print("- Creating captures")
-    generate_captures()
-
-    print("- Creating pages")
-    generate_posts()
-
-    print("- Creating watches")
-    generate_watches()
+    # print("- Converting videos")
+    # generate_videos()
+    #
+    # print("- Creating captures")
+    # generate_captures()
+    #
+    # print("- Creating pages")
+    # generate_posts()
+    #
+    # print("- Creating watches")
+    # generate_watches()
 
     print("- Creating analyzers")
     generate_analyzers()
