@@ -19,47 +19,6 @@ PATH_OF_WATCH_CAPTURES = "{}/../watch/".format(PATH)
 PATH_OF_ANALYZERS = "{}/../_data/".format(PATH)
 
 
-def import_showers():
-    connection_cursor = connection.cursor()
-
-    connection_cursor.execute("""
-        CREATE TABLE IF NOT EXISTS showers (
-            "LP" TEXT, "IAUNo" TEXT, "AdNo" TEXT, "Code" TEXT, "shower_name" TEXT, "activity" TEXT, "s" TEXT, 
-            "LaSun" TEXT, "Ra" TEXT, "De" TEXT, "dRa" TEXT, "dDe" TEXT, "Vg" TEXT, "a" TEXT, "q" TEXT, "e" TEXT, 
-            "peri" TEXT, "node" TEXT, "inc" TEXT, "N" TEXT, "Group" TEXT, "CG" TEXT, "Parent" TEXT, "body" TEXT, 
-            "Remarks" TEXT, "Ote" TEXT, "References" TEXT, "Submission" TEXT, "date" TEXT, "UTC" TEXT
-        );
-        """)
-
-    csv_file = "{}/showers.csv".format(PATH_OF_ANALYZERS)
-    showers = []
-
-    with open(csv_file, newline='') as csvfile:
-        csv_reader = csv.reader(csvfile, delimiter='|', quotechar='"')
-
-        for row in csv_reader:
-            try:
-                if row[-1].startswith(":") or len(row) < 2:
-                    continue
-
-                if len(row) == 26:
-                    row.append(" ")
-                    row.append(" ")
-                    row.append(" ")
-                    row.append(" ")
-
-                showers.append(row)
-            except IndexError:
-                pass
-
-    connection_cursor.executemany("""
-        INSERT INTO showers 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-        """, showers)
-
-    connection.commit()
-
-
 def populate_tables(captures_list: List):
     connection_cursor = connection.cursor()
 
@@ -425,34 +384,31 @@ if __name__ == '__main__':
     print("- Connecting to database")
     connection = sqlite3.connect(':memory:')
 
-    # print("- Cleaning files")
-    # cleanup_posts(args.days_back)
-    # cleanup_captures(args.days_back, args.station_prefix)
-    # cleanup_watches(args.days_back, args.station_prefix)
+    print("- Cleaning files")
+    cleanup_posts(args.days_back)
+    cleanup_captures(args.days_back, args.station_prefix)
+    cleanup_watches(args.days_back, args.station_prefix)
 
-    print("- Importing showers data")
-    import_showers()
+    print('- Reading captures')
+    captures = get_matching_captures(args.captures_dir, args.station_prefix, args.days_back)
 
-    # print('- Reading captures')
-    # captures = get_matching_captures(args.captures_dir, args.station_prefix, args.days_back)
-    #
-    # print("- Organizing captures")
-    # organize_captures(captures)
-    #
-    # print("- Converting videos")
-    # generate_videos()
-    #
-    # print("- Creating captures")
-    # generate_captures()
-    #
-    # print("- Creating pages")
-    # generate_posts()
-    #
-    # print("- Creating watches")
-    # generate_watches()
-    #
-    # print("- Creating analyzers")
-    # generate_analyzers()
+    print("- Organizing captures")
+    organize_captures(captures)
+
+    print("- Converting videos")
+    generate_videos()
+
+    print("- Creating captures")
+    generate_captures()
+
+    print("- Creating pages")
+    generate_posts()
+
+    print("- Creating watches")
+    generate_watches()
+
+    print("- Creating analyzers")
+    generate_analyzers()
 
     print("- Closing database connection")
     connection.close()
