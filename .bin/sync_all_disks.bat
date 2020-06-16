@@ -2,6 +2,6 @@
 
 setlocal
     for %%d in (D E F) do (
-        start sync.bat "%%d:\"
+        start sync_disk.bat "%%d:\"
     )
 endlocal

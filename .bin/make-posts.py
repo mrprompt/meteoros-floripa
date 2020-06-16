@@ -18,7 +18,7 @@ PATH_OF_WATCH_CAPTURES = "{}/../watch/".format(PATH)
 PATH_OF_ANALYZERS = "{}/../_data/".format(PATH)
 
 
-def populate_tables(connection: object, captures_list: List):
+def populate_tables(captures_list: List):
     connection_cursor = connection.cursor()
 
     connection_cursor.execute("""
@@ -39,7 +39,7 @@ def populate_tables(connection: object, captures_list: List):
     connection.commit()
 
 
-def organize_captures(db_connection, stations_captures):
+def organize_captures(stations_captures):
     captures_organized = []
     er_filter = "\w{3}\d{1,2}.+P.jpg$"
 
@@ -52,10 +52,10 @@ def organize_captures(db_connection, stations_captures):
 
         captures_organized.append(post)
 
-    populate_tables(db_connection, captures_organized)
+    populate_tables(captures_organized)
 
 
-def generate_captures(connection: object) -> bool:
+def generate_captures():
     connection_cursor = connection.cursor()
 
     connection_cursor.execute("""
@@ -113,10 +113,8 @@ def generate_captures(connection: object) -> bool:
         filehandle.write("---\n")
         filehandle.close()
 
-    return True
 
-
-def generate_posts(connection: object) -> bool:
+def generate_posts():
     connection_cursor = connection.cursor()
 
     connection_cursor.execute("""
@@ -142,10 +140,8 @@ def generate_posts(connection: object) -> bool:
         filehandle.write("---\n")
         filehandle.close()
 
-    return True
 
-
-def generate_watches(connection: object) -> bool:
+def generate_watches():
     connection_cursor = connection.cursor()
 
     connection_cursor.execute("""
@@ -181,10 +177,8 @@ def generate_watches(connection: object) -> bool:
         filehandle.write("---\n")
         filehandle.close()
 
-    return True
 
-
-def generate_videos(connection: object) -> bool:
+def generate_videos():
     connection_cursor = connection.cursor()
 
     connection_cursor.execute("""
@@ -217,10 +211,8 @@ def generate_videos(connection: object) -> bool:
             except Exception:
                 pass
 
-    return True
 
-
-def generate_analyzers(connection: object) -> bool:
+def generate_analyzers():
     connection_cursor = connection.cursor()
 
     connection_cursor.execute("""
@@ -254,14 +246,32 @@ def generate_analyzers(connection: object) -> bool:
                 classe = itemlist[0].attributes['class'].value
                 magnitude = itemlist[0].attributes['mag'].value
                 duration = itemlist[0].attributes['sec'].value
+                latitude_start = itemlist[0].attributes['lat1'].value
+                latitude_final = itemlist[0].attributes['lat2'].value
+                longitude_start = itemlist[0].attributes['lng1'].value
+                longitude_final = itemlist[0].attributes['lng2'].value
+                velocity = itemlist[0].attributes['Vo'].value
+                azimute_start = itemlist[0].attributes['az1'].value
+                azimute_final = itemlist[0].attributes['az2'].value
+                elevation_start = itemlist[0].attributes['ev1'].value
+                elevation_final = itemlist[0].attributes['ev2'].value
+                altitude_start = itemlist[0].attributes['h1'].value
+                altitude_final = itemlist[0].attributes['h2'].value
             except IndexError:
-                classe = "__none__"
-                magnitude = "__unknown__"
-                duration = "__unknown__"
+                classe = "__unknown__"
+                magnitude, velocity, duration = "__unknown__"
+                latitude_start, latitude_final = "__unknown__"
+                longitude_start, longitude_final = "__unknown__"
+                azimute_start, azimute_final = "__unknown__"
+                elevation_start, elevation_final = "__unknown__"
+                altitude_start, altitude_final = "__unknown__"
             except Exception:
-                classe = "__none__"
-                magnitude = "__none__"
-                duration = "__none__"
+                classe, magnitude, duration, velocity = "__none__"
+                latitude_start, latitude_final = "__none__"
+                longitude_start, longitude_final = "__none__"
+                azimute_start, azimute_final = "__none__"
+                elevation_start, elevation_final = "__none__"
+                altitude_start, altitude_final = "__none__"
 
             base = re.findall("\w{3}\d{1,2}.+", capture[3])
 
@@ -271,9 +281,18 @@ def generate_analyzers(connection: object) -> bool:
             filehandle.write("  class: {}\n".format(classe))
             filehandle.write("  magnitude: {}\n".format(magnitude))
             filehandle.write("  duration: {}\n".format(duration))
+            filehandle.write("  latitude_start: {}\n".format(latitude_start))
+            filehandle.write("  longitude_start: {}\n".format(longitude_start))
+            filehandle.write("  latitude_final: {}\n".format(latitude_final))
+            filehandle.write("  longitude_final: {}\n".format(longitude_final))
+            filehandle.write("  velocity: {}\n".format(velocity))
+            filehandle.write("  azimute_start: {}\n".format(azimute_start))
+            filehandle.write("  azimute_final: {}\n".format(azimute_final))
+            filehandle.write("  elevation_start: {}\n".format(elevation_start))
+            filehandle.write("  elevation_final: {}\n".format(elevation_final))
+            filehandle.write("  altitude_start: {}\n".format(altitude_start))
+            filehandle.write("  altitude_final: {}\n".format(altitude_final))
             filehandle.close()
-
-    return True
 
 
 def get_date_list(days: int, date_format: str = '%Y%m%d'):
@@ -304,6 +323,13 @@ def fix_path_delimiter(captures_list: list):
     return result
 
 
+def delete_files(files_to_delete):
+    fix_paths = fix_path_delimiter(files_to_delete)
+
+    for file_to_delete in fix_paths:
+        os.remove(file_to_delete)
+
+
 def cleanup_posts(days: int):
     result = []
     date_list = get_date_list(days, '%Y-%m-%d')
@@ -313,10 +339,7 @@ def cleanup_posts(days: int):
 
         result.extend(files)
 
-    files_to_delete = fix_path_delimiter(result)
-
-    for file_to_delete in files_to_delete:
-        os.remove(file_to_delete)
+    delete_files(result)
 
 
 def cleanup_captures(days: int, station_prefix: str = 'TLP'):
@@ -328,10 +351,7 @@ def cleanup_captures(days: int, station_prefix: str = 'TLP'):
 
         result.extend(files)
 
-    files_to_delete = fix_path_delimiter(result)
-
-    for file_to_delete in files_to_delete:
-        os.remove(file_to_delete)
+    delete_files(result)
 
 
 def cleanup_watches(days: int, station_prefix: str = 'TLP'):
@@ -343,15 +363,13 @@ def cleanup_watches(days: int, station_prefix: str = 'TLP'):
 
         result.extend(files)
 
-    files_to_delete = fix_path_delimiter(result)
-
-    for file_to_delete in files_to_delete:
-        os.remove(file_to_delete)
+    delete_files(result)
 
 
 def convert_video(video_input: str, video_output: str):
-    cmds = ['ffmpeg', '-n -i', video_input, '-c:v libx264 -profile:v baseline -level 3.0 -pix_fmt yuv420p', video_output]
-    subprocess.Popen(cmds)
+    ffmpeg_command = ['ffmpeg', '-n -i', video_input, '-c:v libx264 -profile:v baseline -level 3.0 -pix_fmt yuv420p', video_output]
+
+    subprocess.Popen(ffmpeg_command)
 
 
 if __name__ == '__main__':
@@ -374,22 +392,22 @@ if __name__ == '__main__':
     captures = get_matching_captures(args.captures_dir, args.station_prefix, args.days_back)
 
     print("- Organizing captures")
-    organize_captures(connection, captures)
+    organize_captures(captures)
 
     print("- Converting videos")
-    generate_videos(connection)
+    generate_videos()
 
     print("- Creating captures")
-    generate_captures(connection)
+    generate_captures()
 
     print("- Creating pages")
-    generate_posts(connection)
+    generate_posts()
 
     print("- Creating watches")
-    generate_watches(connection)
+    generate_watches()
 
     print("- Creating analyzers")
-    generate_analyzers(connection)
+    generate_analyzers()
 
     print("- Closing database connection")
     connection.close()

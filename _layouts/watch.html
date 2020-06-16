@@ -24,6 +24,28 @@
 					<span><i class="fa fa-sun"></i> Magnitude: {{ analyze.magnitude }}</span><br>
 					<span><i class="fa fa-stopwatch-20"></i> Duração: {{ analyze.duration }}</span><br>
 				</div>
+				<div class="post-body">
+					<p>
+						Fenômeno registrado em {{ page.date | date: '%d/%m/%Y' }} por volta das {{ page.date | date: '%H:%M:%S' }} (UTC)
+						pela câmera {{ page.station }} da estação de monitoramento de Florianópolis-SC. <br>
+						A fase luminosa, que durou {{ analyze.duration }} segundos, teve um pico de magnitude de {{ analyze.magnitude }},
+						iniciou-se no azimute {{ analyze.azimute_start }} com uma elevação de {{ analyze.elevation_start }}° e altitude estimada
+						de {{ analyze.altitude_start }} km sobre as coordenadas {{ analyze.latitude_start }}, {{ analyze.longitude_start }}.
+					</p>
+					<p>
+						O meteoro entrou na atmosfera com uma velocidade inicial estimada de {{ analyze.velocity }} km/s.
+						O trajeto visível desapareceu no azimute {{ analyze.azimute_final }} com {{ analyze.elevation_final }}° de elevação e
+						altitude provável de {{ analyze.altitude_final }} km sobre as coordenadas {{ analyze.latitude_final }}, {{ analyze.longitude_final }}.
+					</p>
+					{% comment %}
+					<p>
+						A análise sugeriu também que este meteoro possivelmente pertence à chuva denominada June epsilon Cygnids
+						identificada pelo código 00458 {{ analyze.class }} da IAU. Esta chuva está relacionada ao corpo parental: .
+					</p>
+					<br>
+					<cite>Referência: 1) Rudawska and Jenniskens, 2014</cite>
+					{% endcomment %}
+				</div>
 			</div>
 		</article>
 	</div>
