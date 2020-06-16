@@ -8,6 +8,7 @@
 
 		{% assign image = page.capture | replace: 'T.jpg', 'P.jpg' %}
 		{% assign analyze = site.data.analyzers[ image ] %}
+		{% assign shower = site.data.showers[ analyze.class ] %}
 
 		<article class="mb-1">
 			<div class="post-content">
@@ -17,7 +18,7 @@
 						Seu navegador não suporta a tag de vídeo.
 					</video>
 				</div>
-				<div class="post-meta">
+				<div class="post-meta mb-1">
 					<span><i class="fa fa-calendar"></i> Data: {{ page.date | date: '%d/%m/%Y' }}</span><br>
 					<span><i class="fa fa-clock"></i> Hora: {{ page.date | date: '%H:%M:%S' }} UTC</span><br>
 					<span><i class="fa fa-meteor"></i> Classe: {{ analyze.class }}</span><br>
@@ -33,18 +34,17 @@
 						de {{ analyze.altitude_start }} km sobre as coordenadas {{ analyze.latitude_start }}, {{ analyze.longitude_start }}.
 					</p>
 					<p>
-						O meteoro entrou na atmosfera com uma velocidade inicial estimada de {{ analyze.velocity }} km/s.
+						O meteoro entrou na atmosfera com uma velocidade inicial estimada de {{ analyze.velocity }} km/s.<br>
 						O trajeto visível desapareceu no azimute {{ analyze.azimute_final }} com {{ analyze.elevation_final }}° de elevação e
 						altitude provável de {{ analyze.altitude_final }} km sobre as coordenadas {{ analyze.latitude_final }}, {{ analyze.longitude_final }}.
 					</p>
-					{% comment %}
 					<p>
-						A análise sugeriu também que este meteoro possivelmente pertence à chuva denominada June epsilon Cygnids
-						identificada pelo código 00458 {{ analyze.class }} da IAU. Esta chuva está relacionada ao corpo parental: .
+						A análise sugeriu também que este meteoro possivelmente pertence à chuva denominada {{ shower.shower_name }}
+						identificada pelo código {{ shower.IAUNo }} {{ shower.Code }} da IAU. Esta chuva está relacionada ao
+						corpo parental: {{ shower.Parent }} {{ shower.body }}.
 					</p>
 					<br>
 					<cite>Referência: 1) Rudawska and Jenniskens, 2014</cite>
-					{% endcomment %}
 				</div>
 			</div>
 		</article>
