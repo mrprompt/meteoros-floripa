@@ -9,6 +9,7 @@ import sqlite3
 import subprocess
 import logging
 import boto3
+import yaml
 from botocore.exceptions import ClientError
 from xml.dom import minidom
 from typing import List
@@ -19,6 +20,8 @@ PATH_OF_SITE_POSTS = "{}/../_posts/".format(PATH)
 PATH_OF_SITE_CAPTURES = "{}/../_captures/".format(PATH)
 PATH_OF_WATCH_CAPTURES = "{}/../watch/".format(PATH)
 PATH_OF_ANALYZERS = "{}/../_data/".format(PATH)
+PATH_OF_STATIONS = "{}/../_stations/".format(PATH)
+CONFIG_FILE = "{}/../_config.yml".format(PATH)
 S3_BUCKET = 'meteoros'
 
 
@@ -419,6 +422,23 @@ def upload_captures(captures_dir: list, prefix: str, days: int):
         upload_file(capture, S3_BUCKET, base[0])
 
 
+def generate_stations():
+    with open(CONFIG_FILE, "r") as f:
+        config = yaml.load(f)
+        stations = config['stations']
+
+        for index, station in enumerate(stations, start=1):
+            station_filename = PATH_OF_STATIONS + "{}.md".format(station)
+            filehandle = open(station_filename, "w")
+            filehandle.write("---\n")
+            filehandle.write("layout: station\n")
+            filehandle.write("station: {}\n".format(station))
+            filehandle.write("navigation_weight: {}\n".format(index))
+            filehandle.write("---\n")
+
+            print(index, station)
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Process captures files and create posts.')
     parser.add_argument('captures_dir', metavar='captures', type=str, nargs='+', help='captures directory input')
@@ -443,6 +463,9 @@ if __name__ == '__main__':
 
     print("- Converting videos")
     generate_videos()
+
+    print("- Creating stations files")
+    generate_stations()
 
     print("- Creating captures")
     generate_captures()

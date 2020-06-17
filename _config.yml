@@ -12,6 +12,18 @@ pagination_path: "/:num"
 google_analytics: "UA-148905542-1"
 s3_bucket: "https://meteoros.s3.amazonaws.com/"
 
+stations:
+  - TLP1
+  - TLP2
+  - TLP3
+  - TLP4
+  - TLP5
+  - TLP6
+  - TLP7
+  - TLP8
+  - TLP9
+  - TLP10
+
 exclude:
   - bin
   - docker-compose.yml
