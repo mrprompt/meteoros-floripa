@@ -18,7 +18,7 @@ PATH = os.path.dirname(__file__)
 CONFIG_FILE = "{}/../_config.yml".format(PATH)
 PATH_OF_SITE_POSTS = "{}/../_posts/".format(PATH)
 PATH_OF_SITE_CAPTURES = "{}/../_captures/".format(PATH)
-PATH_OF_WATCH_CAPTURES = "{}/../watch/".format(PATH)
+PATH_OF_WATCH_CAPTURES = "{}/../_watches/".format(PATH)
 PATH_OF_ANALYZERS = "{}/../_data/".format(PATH)
 PATH_OF_STATIONS = "{}/../_stations/".format(PATH)
 

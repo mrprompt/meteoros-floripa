@@ -52,3 +52,6 @@ collections:
 
   stations:
     output: true
+
+  watches:
+    output: true
