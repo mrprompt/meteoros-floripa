@@ -42,16 +42,18 @@
 						O trajeto visível desapareceu no azimute {{ analyze.azimute_final }} com {{ analyze.elevation_final }}° de elevação e
 						altitude provável de {{ analyze.altitude_final }} km sobre as coordenadas {{ analyze.latitude_final }}, {{ analyze.longitude_final }}.
 					</p>
+					{% if analyze.class != "spo" %}
 					<p>
 						A análise sugeriu também que este meteoro possivelmente pertence à chuva denominada {{ shower.shower_name }}
 						identificada pelo código {{ shower.IAUNo }} {{ shower.Code }} da IAU.<br>
 
-						{% if shower.Parent != "" %}
+						{% if shower.Parent != "" and shower.Parent != " " %}
 						Esta chuva está relacionada ao corpo parental: {{ shower.Parent }}.
 						{% endif %}
 					</p>
 					<br>
 					<cite>Referência: 1) Rudawska and Jenniskens, 2014</cite>
+					{% endif %}
 				</div>
 				{% endif %}
 			</div>
