@@ -13,11 +13,8 @@ google_analytics: "UA-148905542-1"
 s3_bucket: "https://meteoros.s3.amazonaws.com/"
 
 exclude:
-  - requirements.txt
+  - bin
   - docker-compose.yml
-  - .bin
-  - .idea
-  - .github
 
 plugins:
   - jekyll-sitemap
