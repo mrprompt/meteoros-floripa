@@ -41,10 +41,8 @@
                     </table>
                 {% if column == 4 %}
                     </div>
-                    <div class="col-lg-3 col-md-6 col-xs-12">
                     {% assign column = 1 %}
                 {% else %}
-                    </div>
                     {% assign column = column | plus: 1 %}
                 {% endif %}
             {% endfor %}
