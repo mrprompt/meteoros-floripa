@@ -17,7 +17,8 @@ build:
   prefix: TLP
   days: 15
   captures:
-    - /Volumes/external/BRAMON/estacoes/!data
+    - "/Volumes/external/BRAMON/estacoes/!data"
+    - "C:\bramon\!data"
     - "D:"
     - "E:"
     - "F:"
