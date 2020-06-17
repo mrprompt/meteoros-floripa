@@ -4,7 +4,7 @@ cd /d %~1
 
 git pull origin master
 
-python ./bin/make-posts.py "d:" "e:" "f:" 2 "TLP"
+python ./bin/make-posts.py
 python ./bin/make-stats.py
 
 git add .

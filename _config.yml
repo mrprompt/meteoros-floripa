@@ -10,7 +10,17 @@ permalink: pretty
 paginate: 15
 pagination_path: "/:num"
 google_analytics: "UA-148905542-1"
-s3_bucket: "https://meteoros.s3.amazonaws.com/"
+s3_bucket: "meteoros"
+s3_bucket_url: "https://meteoros.s3.amazonaws.com/"
+
+build:
+  prefix: TLP
+  days: 15
+  captures:
+    - /Volumes/external/BRAMON/estacoes/!data
+    - "D:"
+    - "E:"
+    - "F:"
 
 stations:
   - TLP1

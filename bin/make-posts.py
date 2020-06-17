@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf8 -*-
-import argparse
 import datetime
 import glob
 import os
@@ -16,13 +15,12 @@ from typing import List
 
 
 PATH = os.path.dirname(__file__)
+CONFIG_FILE = "{}/../_config.yml".format(PATH)
 PATH_OF_SITE_POSTS = "{}/../_posts/".format(PATH)
 PATH_OF_SITE_CAPTURES = "{}/../_captures/".format(PATH)
 PATH_OF_WATCH_CAPTURES = "{}/../watch/".format(PATH)
 PATH_OF_ANALYZERS = "{}/../_data/".format(PATH)
 PATH_OF_STATIONS = "{}/../_stations/".format(PATH)
-CONFIG_FILE = "{}/../_config.yml".format(PATH)
-S3_BUCKET = 'meteoros'
 
 
 def populate_tables(captures_list: List):
@@ -419,44 +417,44 @@ def upload_captures(captures_dir: list, prefix: str, days: int):
     for capture in result:
         base = re.findall(er_filter, capture)
 
-        upload_file(capture, S3_BUCKET, base[0])
+        upload_file(capture, config['s3_bucket'], base[0])
+
+
+def load_config():
+    with open(CONFIG_FILE, "r") as f:
+        return yaml.load(f)
 
 
 def generate_stations():
-    with open(CONFIG_FILE, "r") as f:
-        config = yaml.load(f)
-        stations = config['stations']
+    stations = config['stations']
 
-        for index, station in enumerate(stations, start=1):
-            station_filename = PATH_OF_STATIONS + "{}.md".format(station)
-            filehandle = open(station_filename, "w")
-            filehandle.write("---\n")
-            filehandle.write("layout: station\n")
-            filehandle.write("station: {}\n".format(station))
-            filehandle.write("navigation_weight: {}\n".format(index))
-            filehandle.write("---\n")
-
-            print(index, station)
+    for index, station in enumerate(stations, start=1):
+        station_filename = PATH_OF_STATIONS + "{}.md".format(station)
+        filehandle = open(station_filename, "w")
+        filehandle.write("---\n")
+        filehandle.write("layout: station\n")
+        filehandle.write("station: {}\n".format(station))
+        filehandle.write("navigation_weight: {}\n".format(index))
+        filehandle.write("---\n")
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Process captures files and create posts.')
-    parser.add_argument('captures_dir', metavar='captures', type=str, nargs='+', help='captures directory input')
-    parser.add_argument('days_back', metavar='days', type=int, default=5, help='number of days in the past')
-    parser.add_argument('station_prefix', metavar='station', type=str, default='TLP', help='station prefix')
-
-    args = parser.parse_args()
-
     print("- Connecting to database")
     connection = sqlite3.connect(':memory:')
 
+    print("- Loading site configuration")
+    config = load_config()
+    days_back = config['build']['days']
+    station_prefix = config['build']['prefix']
+    captures_dir = config['build']['captures']
+
     print("- Cleaning files")
-    cleanup_posts(args.days_back)
-    cleanup_captures(args.days_back, args.station_prefix)
-    cleanup_watches(args.days_back, args.station_prefix)
+    cleanup_posts(days_back)
+    cleanup_captures(days_back, station_prefix)
+    cleanup_watches(days_back, station_prefix)
 
     print('- Reading captures')
-    captures = get_matching_captures(args.captures_dir, args.station_prefix, args.days_back)
+    captures = get_matching_captures(captures_dir, station_prefix, days_back)
 
     print("- Organizing captures")
     organize_captures(captures)
@@ -480,7 +478,7 @@ if __name__ == '__main__':
     generate_analyzers()
 
     print("- Upload captures")
-    upload_captures(args.captures_dir, args.station_prefix, args.days_back)
+    upload_captures(captures_dir, station_prefix, days_back)
 
     print("- Closing database connection")
     connection.close()
