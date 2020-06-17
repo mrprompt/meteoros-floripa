@@ -15,6 +15,7 @@ s3_bucket: "https://meteoros.s3.amazonaws.com/"
 exclude:
   - bin
   - docker-compose.yml
+  - .idea
 
 plugins:
   - jekyll-sitemap

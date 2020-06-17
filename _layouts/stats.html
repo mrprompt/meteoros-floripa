@@ -14,11 +14,11 @@
 
         <div class="stats">
             {% assign stations = site.stations | sort: 'navigation_weight' %}
-            {% assign column = 1 %}
+
             {% for station in stations %}
                 {% assign stats = page.capturas | where: "station", station.station | reverse %}
 
-                <div class="col-lg-3 col-md-6 col-xs-12">
+                <div class="col-lg-3 col-md-6 col-xs-12" style="min-height: 300px !important;">
                     <h2>{{ station.station }}</h2>
 
                     <table class="table">
@@ -39,12 +39,7 @@
                             {% endfor %}
                         </tbody>
                     </table>
-                {% if column == 4 %}
-                    </div>
-                    {% assign column = 1 %}
-                {% else %}
-                    {% assign column = column | plus: 1 %}
-                {% endif %}
+                </div>
             {% endfor %}
         </div>
 	</div>
