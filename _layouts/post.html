@@ -51,6 +51,10 @@
 							<span><i class="fa fa-meteor"></i> Classe: {{ analyze.class }}</span><br>
 							<span><i class="fa fa-sun"></i> Magnitude: {{ analyze.magnitude }}</span><br>
 							<span><i class="fa fa-stopwatch-20"></i> Duração: {{ analyze.duration }}</span><br>
+							{% else %}
+							<span><i class="fa fa-meteor"></i> Classe: não analisado</span><br>
+							<span><i class="fa fa-sun"></i> Magnitude: não analisado</span><br>
+							<span><i class="fa fa-stopwatch-20"></i> Duração: não analisado</span><br>
 							{% endif %}
 						</div>
 					</div>
