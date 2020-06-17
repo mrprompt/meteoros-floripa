@@ -3,12 +3,18 @@
 import os
 import sqlite3
 import boto3
+import yaml
 from typing import List
 
 
-S3_BUCKET = 'meteoros'
 PATH = os.path.dirname(__file__)
 PATH_OF_STATS = "{}/..".format(PATH)
+CONFIG_FILE = "{}/../_config.yml".format(PATH)
+
+
+def load_config():
+    with open(CONFIG_FILE, "r") as f:
+        return yaml.load(f)
 
 
 def get_matching_s3_objects(bucket, prefix="", suffix=""):
@@ -153,8 +159,11 @@ def generate_stats(connection: object) -> bool:
 
 
 if __name__ == '__main__':
+    print("- Loading site configuration")
+    config = load_config()
+
     print('- Reading captures from S3 bucket')
-    captures = get_matching_s3_keys(S3_BUCKET, suffix='.mp4', prefix='TLP')
+    captures = get_matching_s3_keys(config['s3_bucket'], suffix='.mp4', prefix=config['build']['prefix'])
 
     print("- Organizing captures")
     posts = organize_captures(captures)
