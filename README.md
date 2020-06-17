@@ -2,7 +2,7 @@
 
 ![Build](https://github.com/Meteoros-Floripa/site/workflows/Build/badge.svg)
 
-Capturas das estações associadas a [BRAMON](https://www.bramonmeteor.org) from [TLP](https://www.mrprompt.com.br) meteor stations.
+Capturas das estações [TLP](https://www.mrprompt.com.br) associadas da [BRAMON](https://www.bramonmeteor.org).
 
 ## Configurando o site
 
