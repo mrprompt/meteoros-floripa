@@ -74,8 +74,6 @@ stations:
   - TLP2
 ```
 
-Após atualizar o arquivo de configurações, rode o script `first-run.bat` encontrado dentro do diretório `bin`.
-
 ## Publicando
 
 Com as coleções criadas (`_captures`, `_data`, `_posts`, `_stations` e `_watches`) agora é hora de publicar seu site,
