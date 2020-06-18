@@ -38,6 +38,12 @@ Para isso, você pode seguir dois modos:
 Independente do modo escolhido, agora é hora de criar o `bucket` no S3 para armazenar as capturas, não esqueça de 
 deixar o bucket público para leitura.
 
+#### Simple Form
+
+Para receber emails do site, você precisa gerar um token no [Simple Form](https://getsimpleform.com/) e 
+atualizar o arquivo `_config.yml` com seu novo token.
+
+
 ## Configurando o site
 
 Edite o arquivo `_config.yml` nos seguintes campos:
@@ -51,7 +57,7 @@ city: <INSIRA AQUI SUA CIDADE>
 google_analytics: <INSIRA AQUI SEU CÓDIGO DO GOOGLE ANALYTICS - SE POSSUIR>
 s3_bucket: <INSIRA AQUI O BUCKET DO S3 A SER UTILIZADO PARA ARMAZENAR AS CAPTURAS>
 s3_bucket_url: <INSIRA AQUI O ENDEREÇO COMPLETO DO SEU BUCKET. EX: "https://meteoros.s3.amazonaws.com/">
-
+simple_form_token: <INSIRA AQUI SEU TOKEN DO SIMPLE FORM>
 build:
   prefix: <INSIRA AQUI O PREFIXO DE SUA ESTAÇÃO. EX: TLP>
   days: <DIAS A SER SINCRONIZADO - RECOMENDÁVEL 2 A 5>
