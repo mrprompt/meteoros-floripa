@@ -6,6 +6,15 @@ Capturas das estações [TLP](https://www.mrprompt.com.br) associadas da [BRAMON
 
 ## Iniciando
 
+#### GitHub
+
+Para iniciar, é necessário uma conta no [GitHub](https://github.com) para que possamos utilizar o 
+[Github Pages](https://help.github.com/pt/github/working-with-github-pages).
+
+Caso você não possua uma, crie agora para utilizar este recurso ou configure o Jekyll localmente. Efetuando um build
+local, você pode publicar diretamente o diretório `_site` em seu servidor.
+
+
 #### Python 
 
 Para iniciar, você precisa ter o [Python 3.7+](https://www.python.org/) instalado em sua máquina e com o `PATH` 
@@ -17,7 +26,11 @@ pip install -r requirements.txt
 
 #### AWS
 
-Com o Python devidamente configurado, é hora de configurar as credenciais da AWS. Para isso, você pode seguir dois modos:
+Com o Python devidamente configurado, é hora de configurar as credenciais da [AWS](https://aws.amazon.com/). 
+Caso você não tenha experiência com os serviços da [AWS](https://aws.amazon.com/), recomendo a 
+leitura [deste link](https://docs.aws.amazon.com/pt_br/AmazonS3/latest/dev/WebsiteHosting.html). 
+
+Para isso, você pode seguir dois modos:
 
 - configurar diretamente as variáveis de ambiente
 - criar o arquivo de credenciais em seu diretório home.
