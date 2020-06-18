@@ -27,16 +27,17 @@ pip install -r requirements.txt
 #### AWS
 
 Com o Python devidamente configurado, é hora de configurar as credenciais da [AWS](https://aws.amazon.com/). 
-Caso você não tenha experiência com os serviços da [AWS](https://aws.amazon.com/), recomendo a 
-leitura [deste link](https://docs.aws.amazon.com/pt_br/AmazonS3/latest/dev/WebsiteHosting.html). 
 
 Para isso, você pode seguir dois modos:
 
-- configurar diretamente as variáveis de ambiente
-- criar o arquivo de credenciais em seu diretório home.
+- [configurar diretamente as variáveis de ambiente](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html)
+- [criar o arquivo de credenciais](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html)
 
-Independente do modo escolhido, agora é hora de criar o `bucket` no S3 para armazenar as capturas, não esqueça de 
-deixar o bucket público para leitura.
+Independente do modo escolhido, agora é hora de criar o `bucket` no S3 para armazenar as capturas.
+
+A ferramenta de publicação envia os arquivos para o `bucket`, então é necessário que o mesmo tenha permissão para 
+leitura. Você pode obter mais informações sobre como configurar o `bucket` corretamente 
+[neste link](https://docs.aws.amazon.com/pt_br/AmazonS3/latest/dev/WebsiteHosting.html)
 
 #### Simple Form
 
@@ -58,16 +59,17 @@ google_analytics: <INSIRA AQUI SEU CÓDIGO DO GOOGLE ANALYTICS - SE POSSUIR>
 s3_bucket: <INSIRA AQUI O BUCKET DO S3 A SER UTILIZADO PARA ARMAZENAR AS CAPTURAS>
 s3_bucket_url: <INSIRA AQUI O ENDEREÇO COMPLETO DO SEU BUCKET. EX: "https://meteoros.s3.amazonaws.com/">
 simple_form_token: <INSIRA AQUI SEU TOKEN DO SIMPLE FORM>
+
 build:
   prefix: <INSIRA AQUI O PREFIXO DE SUA ESTAÇÃO. EX: TLP>
   days: <DIAS A SER SINCRONIZADO - RECOMENDÁVEL 2 A 5>
-  captures: <OS DIRETÓRIOS COM AS CAPTURAS DO UFO, SEGUINDO O PADRÃO [ESTACAO]/[ANO]/... - UM DIRETÓRIO POR LINHA> 
-    - "C:\bramon\!data"
+  # OS DIRETÓRIOS COM AS CAPTURAS DO UFO, SEGUINDO O PADRÃO [ESTACAO]/[ANO]/... - UM DIRETÓRIO POR LINHA
+  captures: 
+    - "C:/bramon/!data"
     - "D:"
-    - "E:"
-    - "F:"
 
-stations: <ESTACOES A SEREM EXIBIDAS NO SITE - UMA POR LINHA>
+# ESTACOES A SEREM EXIBIDAS NO SITE - UMA POR LINHA
+stations: 
   - TLP1
   - TLP2
 ```
