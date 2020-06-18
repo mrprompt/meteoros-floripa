@@ -4,6 +4,27 @@
 
 Capturas das estações [TLP](https://www.mrprompt.com.br) associadas da [BRAMON](https://www.bramonmeteor.org).
 
+## Iniciando
+
+#### Python 
+
+Para iniciar, você precisa ter o [Python 3.7+](https://www.python.org/) instalado em sua máquina e com o `PATH` 
+corretamente configurado. Após isso, entre no diretório `bin` do projeto e instale as dependências com:
+
+```console
+pip install -r requirements.txt 
+```
+
+#### AWS
+
+Com o Python devidamente configurado, é hora de configurar as credenciais da AWS. Para isso, você pode seguir dois modos:
+
+- configurar diretamente as variáveis de ambiente
+- criar o arquivo de credenciais em seu diretório home.
+
+Independente do modo escolhido, agora é hora de criar o `bucket` no S3 para armazenar as capturas, não esqueça de 
+deixar o bucket público para leitura.
+
 ## Configurando o site
 
 Edite o arquivo `_config.yml` nos seguintes campos:
@@ -33,6 +54,16 @@ stations: <ESTACOES A SEREM EXIBIDAS NO SITE - UMA POR LINHA>
 ```
 
 Após atualizar o arquivo de configurações, rode o script `first-run.bat` encontrado dentro do diretório `bin`.
+
+## Publicando
+
+Com as coleções criadas (`_captures`, `_data`, `_posts`, `_stations` e `_watches`) agora é hora de publicar seu site,
+para isso, habilite o Github-Pages em seu repositório e se necessário, configure um domínio para o mesmo - e não 
+esqueça de atualizar o domínio no arquivo `_config.yml`.
+
+Para efetuar a publicação do site, você precisa apenas rodar o script `publish.bat` localizado no diretório `bin` do 
+projeto, o mesmo irá atualizar os arquivos necessários, efetuar um commit e um push para o repositório, em alguns minutos
+seu site estará publicado - dependendo do número de capturas e etc, o tempo do build pode variar bastante.
 
 ## Rodando localmente
 
