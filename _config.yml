@@ -18,7 +18,7 @@ build:
   days: 15
   captures:
     - "/Volumes/external/BRAMON/estacoes/!data"
-    - "C:\bramon\!data"
+    - "C:/bramon/!data"
     - "D:"
     - "E:"
     - "F:"
