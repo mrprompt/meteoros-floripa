@@ -371,7 +371,7 @@ def cleanup_watches(days: int, station_prefix: str = 'TLP'):
 
 
 def convert_video(video_input: str, video_output: str):
-    ffmpeg_command = ['ffmpeg', '-n', '-i', video_input, '-c:v', 'libx264', '-profile:v', 'baseline', '-level 3.0', '-pix_fmt', 'yuv420p', video_output]
+    ffmpeg_command = ['ffmpeg', '-n', '-i', video_input, '-c:v', 'libx264', '-profile:v', 'baseline', '-level', '3.0', '-pix_fmt', 'yuv420p', video_output]
 
     subprocess.Popen(ffmpeg_command)
 
