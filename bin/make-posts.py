@@ -378,50 +378,22 @@ def convert_video(video_input: str, video_output: str):
 
 
 def upload_captures(captures_dir: list, prefix: str, days: int):
-    # Set the desired multipart threshold value (5GB)
-    GB = 1024 ** 3
-    s3_config = TransferConfig(multipart_threshold=5 * GB, max_concurrency=100)
-    s3_client = boto3.client('s3')
-
-    def upload_file(file_name, bucket, object_name=None):
-        """Upload a file to an S3 bucket
-
-        from: https://boto3.amazonaws.com/v1/documentation/api/latest/guide/s3-uploading-files.html
-        :param file_name: File to upload
-        :param bucket: Bucket to upload to
-        :param object_name: S3 object name. If not specified then file_name is used
-        :return: True if file was uploaded, else False
-        """
-
-        # If S3 object_name was not specified, use file_name
-        if object_name is None:
-            object_name = file_name
-
-        try:
-            response = s3_client.upload_file(file_name, bucket, object_name, Config=s3_config)
-        except ClientError as e:
-            logging.error(e)
-            return False
-
-        return True
-
-    result = []
-    date_list = get_date_list(days)
-
     for directory in captures_dir:
-        for date in date_list:
-            files = glob.glob("{}/**/**/**/{}/*{}*.*".format(directory, date, prefix), recursive=True)
+        os.chdir(directory)
 
-            result.extend(files)
+        sync_command = [
+            'aws',
+            's3',
+            'sync',
+            '.',
+            's3://' + config['s3_bucket'] + '/',
+            '--exclude', '"*$RECYCLE.BIN*"',
+            '--exclude', '"*Backups*"',
+            '--exclude', '"*WindowsImageBackup*"',
+            '--exclude', '"*Boot*"'
+        ]
 
-    result = fix_path_delimiter(result)
-    er_filter = "\w{3,5}\d{1,2}.+"
-
-    for capture in result:
-        base = re.findall(er_filter, capture)
-        upload = upload_file(capture, config['s3_bucket'], base[0])
-
-        print("  - upload: {} => {} = {}".format(capture, base[0], upload))
+        subprocess.Popen(sync_command)
 
 
 def load_config():
