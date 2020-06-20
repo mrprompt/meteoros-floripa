@@ -10,6 +10,7 @@ import logging
 import boto3
 import yaml
 from botocore.exceptions import ClientError
+from boto3.s3.transfer import TransferConfig
 from xml.dom import minidom
 from typing import List
 
@@ -377,6 +378,11 @@ def convert_video(video_input: str, video_output: str):
 
 
 def upload_captures(captures_dir: list, prefix: str, days: int):
+    # Set the desired multipart threshold value (5GB)
+    GB = 1024 ** 3
+    s3_config = TransferConfig(multipart_threshold=5 * GB, max_concurrency=100)
+    s3_client = boto3.client('s3')
+
     def upload_file(file_name, bucket, object_name=None):
         """Upload a file to an S3 bucket
 
@@ -391,11 +397,8 @@ def upload_captures(captures_dir: list, prefix: str, days: int):
         if object_name is None:
             object_name = file_name
 
-        # Upload the file
-        s3_client = boto3.client('s3')
-
         try:
-            response = s3_client.upload_file(file_name, bucket, object_name)
+            response = s3_client.upload_file(file_name, bucket, object_name, Config=s3_config)
         except ClientError as e:
             logging.error(e)
             return False
@@ -407,7 +410,7 @@ def upload_captures(captures_dir: list, prefix: str, days: int):
 
     for directory in captures_dir:
         for date in date_list:
-            files = glob.glob("{}/**/{}/*.*".format(directory, date, prefix), recursive=True)
+            files = glob.glob("{}/**/**/**/{}/*{}*.*".format(directory, date, prefix), recursive=True)
 
             result.extend(files)
 
@@ -418,7 +421,7 @@ def upload_captures(captures_dir: list, prefix: str, days: int):
         base = re.findall(er_filter, capture)
         upload = upload_file(capture, config['s3_bucket'], base[0])
 
-        print("  - upload: {} => {}/{} = {}".format(capture, config['s3_bucket'], base[0], upload))
+        print("  - upload: {} => {} = {}".format(capture, base[0], upload))
 
 
 def load_config():
@@ -453,7 +456,7 @@ if __name__ == '__main__':
     captures = get_matching_captures(captures_dir, station_prefix, days_back)
 
     if len(captures) == 0:
-        print("- Nada a fazer")
+        print("- Nothing to do")
         exit(0)
 
     print("- Cleaning files")
