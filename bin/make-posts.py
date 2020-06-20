@@ -393,6 +393,7 @@ def upload_captures(captures_dir: list, prefix: str, days: int):
 
         # Upload the file
         s3_client = boto3.client('s3')
+
         try:
             response = s3_client.upload_file(file_name, bucket, object_name)
         except ClientError as e:
@@ -411,12 +412,13 @@ def upload_captures(captures_dir: list, prefix: str, days: int):
             result.extend(files)
 
     result = fix_path_delimiter(result)
-    er_filter = "\w{3}\d{1,2}.+"
+    er_filter = "\w{3,5}\d{1,2}.+"
 
     for capture in result:
         base = re.findall(er_filter, capture)
+        upload = upload_file(capture, config['s3_bucket'], base[0])
 
-        upload_file(capture, config['s3_bucket'], base[0])
+        print("  - upload: {} => {}/{} = {}".format(capture, config['s3_bucket'], base[0], upload))
 
 
 def load_config():
@@ -447,13 +449,17 @@ if __name__ == '__main__':
     station_prefix = config['build']['prefix']
     captures_dir = config['build']['captures']
 
+    print('- Reading captures')
+    captures = get_matching_captures(captures_dir, station_prefix, days_back)
+
+    if len(captures) == 0:
+        print("- Nada a fazer")
+        exit(0)
+
     print("- Cleaning files")
     cleanup_posts(days_back)
     cleanup_captures(days_back, station_prefix)
     cleanup_watches(days_back, station_prefix)
-
-    print('- Reading captures')
-    captures = get_matching_captures(captures_dir, station_prefix, days_back)
 
     print("- Organizing captures")
     organize_captures(captures)
