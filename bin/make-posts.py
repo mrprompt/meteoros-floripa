@@ -476,8 +476,8 @@ if __name__ == '__main__':
     print("- Creating analyzers")
     generate_analyzers()
 
-    print("- Upload captures")
-    upload_captures(captures_dir, station_prefix, days_back)
+    # print("- Upload captures")
+    # upload_captures(captures_dir, station_prefix, days_back)
 
     print("- Closing database connection")
     connection.close()
