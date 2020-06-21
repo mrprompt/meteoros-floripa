@@ -405,7 +405,7 @@ def upload_captures(captures_dir: list):
             '--exclude', '"*Boot*"'
         ]
 
-        subprocess.Popen(sync_command)
+        subprocess.Popen(sync_command, shell=True, stdout=subprocess.PIPE)
 
     os.chdir(PATH)
 
@@ -484,8 +484,8 @@ if __name__ == '__main__':
     print("- Creating analyzers")
     generate_analyzers()
 
-    # print("- Upload captures")
-    # upload_captures(captures_dir)
+    print("- Upload captures")
+    upload_captures(captures_dir)
 
     print("- Push to git")
     git_push()
