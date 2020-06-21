@@ -484,8 +484,8 @@ if __name__ == '__main__':
     print("- Creating analyzers")
     generate_analyzers()
 
-    print("- Upload captures")
-    upload_captures(captures_dir)
+    # print("- Upload captures")
+    # upload_captures(captures_dir)
 
     print("- Push to git")
     git_push()

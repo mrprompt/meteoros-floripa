@@ -16,10 +16,8 @@ simple_form_token: 5da33a3875b2782c0143c966613ebc60
 
 build:
   prefix: TLP
-  days: 3
+  days: 2
   captures:
-    - "/Volumes/external/BRAMON/estacoes/!data"
-    - "C:/bramon/!data"
     - "D:"
     - "E:"
     - "F:"
