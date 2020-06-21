@@ -23,6 +23,11 @@ build:
     - "D:"
     - "E:"
     - "F:"
+  ignore:
+    - "*$RECYCLE.BIN*"
+    - "*Backups*"
+    - "*WindowsImageBackup*"
+    - "*Boot*"
 
 stations:
   - TLP1
