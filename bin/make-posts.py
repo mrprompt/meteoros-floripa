@@ -393,8 +393,8 @@ def upload_captures(captures_dir: list):
     for directory in captures_dir:
         os.chdir(directory)
 
-        sync_command = [
-            'aws',
+        params = [
+            'aws'
             's3',
             'sync',
             '.',
@@ -403,11 +403,10 @@ def upload_captures(captures_dir: list):
             '--exclude', '"*Backups*"',
             '--exclude', '"*WindowsImageBackup*"',
             '--exclude', '"*Boot*"'
+            '--exclude', '"*System*"'
         ]
 
-        subprocess.Popen(sync_command, shell=True, stdout=subprocess.PIPE)
-
-    os.chdir(PATH)
+        subprocess.Popen(params)
 
 
 def load_config():
@@ -433,6 +432,11 @@ def git_push():
         today = datetime.date.today()
         repo = Repo(PATH_OF_GIT_REPO)
         repo.git.add(update=True)
+        repo.git.add(PATH_OF_SITE_CAPTURES)
+        repo.git.add(PATH_OF_SITE_POSTS)
+        repo.git.add(PATH_OF_WATCH_CAPTURES)
+        repo.git.add(PATH_OF_ANALYZERS)
+        repo.git.add(PATH_OF_STATIONS)
         repo.index.commit("Captures of {}".format(today))
 
         origin = repo.remote(name='origin')
@@ -484,8 +488,8 @@ if __name__ == '__main__':
     print("- Creating analyzers")
     generate_analyzers()
 
-    print("- Upload captures")
-    upload_captures(captures_dir)
+    # print("- Upload captures")
+    # upload_captures(captures_dir)
 
     print("- Push to git")
     git_push()

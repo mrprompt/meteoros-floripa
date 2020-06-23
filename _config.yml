@@ -16,7 +16,7 @@ simple_form_token: 5da33a3875b2782c0143c966613ebc60
 
 build:
   prefix: TLP
-  days: 2
+  days: 3
   captures:
     - "D:"
     - "E:"
