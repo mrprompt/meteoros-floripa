@@ -7,9 +7,12 @@ import re
 import sqlite3
 import subprocess
 import yaml
+import boto3
+from concurrent import futures
 from xml.dom import minidom
 from typing import List
 from git import Repo
+from awscli.clidriver import create_clidriver
 
 
 PATH = os.path.dirname(__file__)
@@ -206,7 +209,7 @@ def generate_videos():
             file_input = capture[4].replace('P.jpg', '.avi')
             file_output = capture[4].replace('P.jpg', '.mp4')
 
-            if not os.path.exists(file_input) or os.path.exists(file_output):
+            if not os.path.exists(file_input):
                 continue
 
             try:
@@ -372,7 +375,7 @@ def cleanup_watches(days: int, station_prefix: str = 'TLP'):
 def convert_video(video_input: str, video_output: str):
     convert_command = [
         'ffmpeg',
-        '-n',
+        '-y',
         '-i',
         video_input,
         '-c:v',
@@ -389,24 +392,36 @@ def convert_video(video_input: str, video_output: str):
     subprocess.Popen(convert_command)
 
 
-def upload_captures(captures_dir: list):
-    for directory in captures_dir:
+def upload_captures(base_captures_dir: list):
+    def upload_directory(directory, bucket):
+        s3 = boto3.client("s3")
+
+        def error(e):
+            raise e
+
+        def walk_directory(directory):
+            for root, _, files in os.walk(directory, onerror=error):
+                for f in files:
+                    yield os.path.join(root, f)
+
+        def upload_file(filename):
+            s3.upload_file(Filename=filename, Bucket=bucket)
+
+        with futures.ThreadPoolExecutor() as executor:
+            futures.wait(
+                [executor.submit(upload_file, filename) for filename in walk_directory(directory)],
+                return_when=futures.FIRST_EXCEPTION,
+            )
+
+    for directory in base_captures_dir:
         os.chdir(directory)
 
-        params = [
-            'aws'
-            's3',
-            'sync',
-            '.',
-            's3://' + config['s3_bucket'] + '/',
-            '--exclude', '"*$RECYCLE.BIN*"',
-            '--exclude', '"*Backups*"',
-            '--exclude', '"*WindowsImageBackup*"',
-            '--exclude', '"*Boot*"'
-            '--exclude', '"*System*"'
-        ]
+        try:
+            print("  - uploading {}".format(directory))
 
-        subprocess.Popen(params)
+            upload_directory('.', config['s3_bucket'])
+        except:
+            pass
 
 
 def load_config():
@@ -491,8 +506,8 @@ if __name__ == '__main__':
     # print("- Upload captures")
     # upload_captures(captures_dir)
 
-    print("- Push to git")
-    git_push()
+    # print("- Push to git")
+    # git_push()
 
     print("- Closing database connection")
     connection.close()
