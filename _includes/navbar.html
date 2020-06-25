@@ -15,31 +15,25 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li><a href="{{ site.baseurl | prepend: site.url }}">Início</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Estações <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         {% assign stations = site.stations | sort: 'navigation_weight' %}
+
                         {% for station in stations %}
-                        <li>
-                            <a href="{{ '/stations/' | prepend: site.url | append: station.station }}">{{ station.station | upcase }}</a>
-                        </li>
+                        <li><a href="{{ '/stations/' | prepend: site.url | append: station.station }}">{{ station.station | upcase }}</a></li>
                         {% endfor %}
+
                         <li role="separator" class="divider"></li>
+
+                        <li><a href="http://istrastream.com/rms-gmn/br0004/" target="_blank">BR0004</a></li>
+                        <li><a href="http://istrastream.com/rms-gmn/br0005/" target="_blank">BR0005</a></li>
+                        <li><a href="http://istrastream.com/rms-gmn/br0007/" target="_blank">BR0007</a></li>
+                        <li><a href="http://istrastream.com/rms-gmn/br0008/" target="_blank">BR0008</a></li>
+
+                        <li role="separator" class="divider"></li>
+
                         <li><a href="http://www.bramonmeteor.org/bramon/sobre-a-bramon/como-montar-uma-estacao-bramon/" target="_blank">Como montar</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">RMS <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a href="http://istrastream.com/rms-gmn/br0004/" target="_blank">BR0004</a>
-                            <a href="http://istrastream.com/rms-gmn/br0005/" target="_blank">BR0005</a>
-                            <a href="http://istrastream.com/rms-gmn/br0007/" target="_blank">BR0007</a>
-                            <a href="http://istrastream.com/rms-gmn/br0008/" target="_blank">BR0008</a>
-                        </li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="https://globalmeteornetwork.org/" target="_blank">Sobre a GMN</a></li>
                     </ul>
                 </li>
                 <li><a href="{{ '/estatisticas' | prepend: site.url }}">Estatísticas</a></li>

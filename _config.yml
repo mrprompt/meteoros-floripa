@@ -11,12 +11,12 @@ paginate: 15
 pagination_path: "/:num"
 google_analytics: "UA-148905542-1"
 s3_bucket: "meteoros"
-s3_bucket_url: "https://meteoros.s3.amazonaws.com/"
+storage_url: "https://meteoros.s3.amazonaws.com/"
 simple_form_token: 5da33a3875b2782c0143c966613ebc60
 
 build:
   prefix: TLP
-  days: 5
+  days: 2
   captures:
     - "D:"
     - "E:"

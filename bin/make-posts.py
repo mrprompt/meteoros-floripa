@@ -7,12 +7,9 @@ import re
 import sqlite3
 import subprocess
 import yaml
-import boto3
-from concurrent import futures
 from xml.dom import minidom
 from typing import List
 from git import Repo
-from awscli.clidriver import create_clidriver
 
 
 PATH = os.path.dirname(__file__)
@@ -59,6 +56,19 @@ def organize_captures(stations_captures):
         captures_organized.append(post)
 
     populate_tables(captures_organized)
+
+
+def generate_stations():
+    stations = config['stations']
+
+    for index, station in enumerate(stations, start=1):
+        station_filename = PATH_OF_STATIONS + "{}.md".format(station)
+        filehandle = open(station_filename, "w")
+        filehandle.write("---\n")
+        filehandle.write("layout: station\n")
+        filehandle.write("station: {}\n".format(station))
+        filehandle.write("navigation_weight: {}\n".format(index))
+        filehandle.write("---\n")
 
 
 def generate_captures():
@@ -185,6 +195,25 @@ def generate_watches():
 
 
 def generate_videos():
+    def convert_video(video_input: str, video_output: str):
+        convert_command = [
+            'ffmpeg',
+            '-n',
+            '-i',
+            video_input,
+            '-c:v',
+            'libx264',
+            '-profile:v',
+            'baseline',
+            '-level',
+            '3.0',
+            '-pix_fmt',
+            'yuv420p',
+            video_output
+        ]
+
+        subprocess.Popen(convert_command)
+
     connection_cursor = connection.cursor()
 
     connection_cursor.execute("""
@@ -329,97 +358,57 @@ def fix_path_delimiter(captures_list: list):
     return result
 
 
-def delete_files(files_to_delete):
-    fix_paths = fix_path_delimiter(files_to_delete)
+def cleanup():
+    def delete_files(files_to_delete):
+        fix_paths = fix_path_delimiter(files_to_delete)
 
-    for file_to_delete in fix_paths:
-        os.remove(file_to_delete)
+        for file_to_delete in fix_paths:
+            os.remove(file_to_delete)
 
+    def cleanup_posts(days: int):
+        result = []
+        date_list = get_date_list(days, '%Y-%m-%d')
 
-def cleanup_posts(days: int):
-    result = []
-    date_list = get_date_list(days, '%Y-%m-%d')
+        for date in date_list:
+            files = glob.glob("{}/{}-captures.md".format(PATH_OF_SITE_POSTS, date))
 
-    for date in date_list:
-        files = glob.glob("{}/{}-captures.md".format(PATH_OF_SITE_POSTS, date))
+            result.extend(files)
 
-        result.extend(files)
+        delete_files(result)
 
-    delete_files(result)
+    def cleanup_captures(days: int, station_prefix: str = 'TLP'):
+        result = []
+        date_list = get_date_list(days, '%Y%m%d')
 
+        for date in date_list:
+            files = glob.glob("{}/{}*_{}.md".format(PATH_OF_SITE_CAPTURES, station_prefix, date))
 
-def cleanup_captures(days: int, station_prefix: str = 'TLP'):
-    result = []
-    date_list = get_date_list(days, '%Y%m%d')
+            result.extend(files)
 
-    for date in date_list:
-        files = glob.glob("{}/{}*_{}.md".format(PATH_OF_SITE_CAPTURES, station_prefix, date))
+        delete_files(result)
 
-        result.extend(files)
+    def cleanup_watches(days: int, station_prefix: str = 'TLP'):
+        result = []
+        date_list = get_date_list(days, '%Y%m%d')
 
-    delete_files(result)
+        for date in date_list:
+            files = glob.glob("{}/M{}_*_{}_*.md".format(PATH_OF_WATCH_CAPTURES, date, station_prefix))
 
+            result.extend(files)
 
-def cleanup_watches(days: int, station_prefix: str = 'TLP'):
-    result = []
-    date_list = get_date_list(days, '%Y%m%d')
+        delete_files(result)
 
-    for date in date_list:
-        files = glob.glob("{}/M{}_*_{}_*.md".format(PATH_OF_WATCH_CAPTURES, date, station_prefix))
-
-        result.extend(files)
-
-    delete_files(result)
-
-
-def convert_video(video_input: str, video_output: str):
-    convert_command = [
-        'ffmpeg',
-        '-y',
-        '-i',
-        video_input,
-        '-c:v',
-        'libx264',
-        '-profile:v',
-        'baseline',
-        '-level',
-        '3.0',
-        '-pix_fmt',
-        'yuv420p',
-        video_output
-    ]
-
-    subprocess.Popen(convert_command)
+    cleanup_posts(days_back)
+    cleanup_captures(days_back, station_prefix)
+    cleanup_watches(days_back, station_prefix)
 
 
 def upload_captures(base_captures_dir: list):
-    def upload_directory(directory, bucket):
-        s3 = boto3.client("s3")
-
-        def error(e):
-            raise e
-
-        def walk_directory(directory):
-            for root, _, files in os.walk(directory, onerror=error):
-                for f in files:
-                    yield os.path.join(root, f)
-
-        def upload_file(filename):
-            s3.upload_file(Filename=filename, Bucket=bucket)
-
-        with futures.ThreadPoolExecutor() as executor:
-            futures.wait(
-                [executor.submit(upload_file, filename) for filename in walk_directory(directory)],
-                return_when=futures.FIRST_EXCEPTION,
-            )
-
     for directory in base_captures_dir:
         os.chdir(directory)
 
         try:
             print("  - uploading {}".format(directory))
-
-            upload_directory('.', config['s3_bucket'])
         except:
             pass
 
@@ -427,19 +416,6 @@ def upload_captures(base_captures_dir: list):
 def load_config():
     with open(CONFIG_FILE, "r") as f:
         return yaml.load(f)
-
-
-def generate_stations():
-    stations = config['stations']
-
-    for index, station in enumerate(stations, start=1):
-        station_filename = PATH_OF_STATIONS + "{}.md".format(station)
-        filehandle = open(station_filename, "w")
-        filehandle.write("---\n")
-        filehandle.write("layout: station\n")
-        filehandle.write("station: {}\n".format(station))
-        filehandle.write("navigation_weight: {}\n".format(index))
-        filehandle.write("---\n")
 
 
 def git_push():
@@ -478,9 +454,7 @@ if __name__ == '__main__':
         exit(0)
 
     print("- Cleaning files")
-    cleanup_posts(days_back)
-    cleanup_captures(days_back, station_prefix)
-    cleanup_watches(days_back, station_prefix)
+    cleanup()
 
     print("- Organizing captures")
     organize_captures(captures)
@@ -503,11 +477,11 @@ if __name__ == '__main__':
     print("- Creating analyzers")
     generate_analyzers()
 
+    print("- Push to git")
+    git_push()
+
     # print("- Upload captures")
     # upload_captures(captures_dir)
-
-    # print("- Push to git")
-    # git_push()
 
     print("- Closing database connection")
     connection.close()

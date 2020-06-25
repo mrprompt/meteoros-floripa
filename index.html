@@ -9,19 +9,10 @@ layout: default
             {% assign filter = post.date | date: '%Y%m%d' %}
             {% assign capture_collections = site.captures | where: "label", filter | sort: "date" %}
             {% assign counter = 0 %}
-            {% assign cover = false %}
 
             {% for collection in capture_collections %}
                 {% assign counter = counter | plus: collection.capturas.size %}
-
-                {% if cover == false %}
-                    {% assign cover = collection.capturas %}
-                {% else %}
-                    {% assign cover = cover | concat: collection.capturas %}
-                {% endif %}
             {% endfor %}
-
-            {% assign capture = cover | sample %}
 
             <!-- start: Post -->
             <article class="col-md-4 mb-1">
@@ -31,7 +22,7 @@ layout: default
                     </div>
                     <div class="post-description">
                         <a href="{{ post.url }}">
-                            <img src="{{ capture.imagem | prepend: site.s3_bucket_url }}"
+                            <img src="{{ post.preview | prepend: site.storage_url }}"
                                  class="img img-thumbnail img-responsive"
                                  alt="capture shot">
                         </a>
@@ -44,7 +35,6 @@ layout: default
             </article>
             <!-- end: Post -->
 
-            {% assign cover = false %}
             {% assign counter = 0 %}
         {% endfor %}
 	</div>
