@@ -7,9 +7,15 @@ import re
 import sqlite3
 import subprocess
 import yaml
+import time
+import sys
 from xml.dom import minidom
 from typing import List
 from git import Repo
+from b2sdk.v1 import *
+from b2sdk.v1 import ScanPoliciesManager
+from b2sdk.v1 import parse_sync_folder
+from b2sdk.v1 import Synchronizer
 
 
 PATH = os.path.dirname(__file__)
@@ -404,13 +410,37 @@ def cleanup():
 
 
 def upload_captures(base_captures_dir: list):
+    info = InMemoryAccountInfo()
+    b2_api = B2Api(info)
+    application_key_id = os.environ.get('B2_APPLICATION_KEY_ID')
+    application_key = os.environ.get('B2_APPLICATION_KEY')
+    b2_api.authorize_account("production", application_key_id, application_key)
+    policies_manager = ScanPoliciesManager(exclude_all_symlinks=True)
+    synchronizer = Synchronizer(
+        max_workers=10,
+        policies_manager=policies_manager,
+        allow_empty_source=True,
+    )
+
     for directory in base_captures_dir:
+        if not os.path.isdir(directory):
+            continue
+
         os.chdir(directory)
 
-        try:
-            print("  - uploading {}".format(directory))
-        except:
-            pass
+        print("  - uploading {}".format(directory))
+
+        source = parse_sync_folder('.', b2_api)
+        destination = parse_sync_folder('b2://' + config['s3_bucket'] + '/', b2_api)
+        no_progress = False
+
+        with SyncReport(sys.stdout, no_progress) as reporter:
+            synchronizer.sync_folders(
+                source_folder=source,
+                dest_folder=destination,
+                now_millis=int(round(time.time() * 1000)),
+                reporter=reporter,
+            )
 
 
 def load_config():
@@ -477,11 +507,11 @@ if __name__ == '__main__':
     print("- Creating analyzers")
     generate_analyzers()
 
+    print("- Upload captures")
+    upload_captures(captures_dir)
+
     print("- Push to git")
     git_push()
-
-    # print("- Upload captures")
-    # upload_captures(captures_dir)
 
     print("- Closing database connection")
     connection.close()
