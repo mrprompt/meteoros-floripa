@@ -404,9 +404,9 @@ def cleanup():
 
         delete_files(result)
 
-    cleanup_posts(days_back)
+    # cleanup_posts(days_back)
     cleanup_captures(days_back, station_prefix)
-    cleanup_watches(days_back, station_prefix)
+    # cleanup_watches(days_back, station_prefix)
 
 
 def upload_captures(base_captures_dir: list):
@@ -456,6 +456,7 @@ def load_config():
 def git_push():
     try:
         today = datetime.date.today()
+
         repo = Repo(PATH_OF_GIT_REPO)
         repo.git.add(update=True)
         repo.git.add(PATH_OF_SITE_CAPTURES)
