@@ -423,7 +423,7 @@ def upload_captures(base_captures_dir: list):
         newer_file_mode=NewerFileSyncMode.SKIP,
     )
 
-    orig_dir = os.path.realpath(__file__)
+    orig_dir = os.getcwd()
 
     for directory in base_captures_dir:
         if not os.path.isdir(directory):
