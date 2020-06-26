@@ -244,7 +244,7 @@ def generate_videos():
             file_input = capture[4].replace('P.jpg', '.avi')
             file_output = capture[4].replace('P.jpg', '.mp4')
 
-            if not os.path.exists(file_input):
+            if not os.path.exists(file_input) or os.path.exists(file_output):
                 continue
 
             try:
