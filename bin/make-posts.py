@@ -371,17 +371,6 @@ def cleanup():
         for file_to_delete in fix_paths:
             os.remove(file_to_delete)
 
-    def cleanup_posts(days: int):
-        result = []
-        date_list = get_date_list(days, '%Y-%m-%d')
-
-        for date in date_list:
-            files = glob.glob("{}/{}-captures.md".format(PATH_OF_SITE_POSTS, date))
-
-            result.extend(files)
-
-        delete_files(result)
-
     def cleanup_captures(days: int, station_prefix: str = 'TLP'):
         result = []
         date_list = get_date_list(days, '%Y%m%d')
@@ -393,20 +382,7 @@ def cleanup():
 
         delete_files(result)
 
-    def cleanup_watches(days: int, station_prefix: str = 'TLP'):
-        result = []
-        date_list = get_date_list(days, '%Y%m%d')
-
-        for date in date_list:
-            files = glob.glob("{}/M{}_*_{}_*.md".format(PATH_OF_WATCH_CAPTURES, date, station_prefix))
-
-            result.extend(files)
-
-        delete_files(result)
-
-    # cleanup_posts(days_back)
     cleanup_captures(days_back, station_prefix)
-    # cleanup_watches(days_back, station_prefix)
 
 
 def upload_captures(base_captures_dir: list):
@@ -431,7 +407,7 @@ def upload_captures(base_captures_dir: list):
 
         os.chdir(directory)
 
-        print("  - uploading {}".format(directory))
+        print("  - synchronizing {}".format(directory))
 
         source = parse_sync_folder('.', b2_api)
         destination = parse_sync_folder('b2://' + config['s3_bucket'] + '/', b2_api)
