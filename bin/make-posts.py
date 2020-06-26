@@ -420,7 +420,10 @@ def upload_captures(base_captures_dir: list):
         max_workers=10,
         policies_manager=policies_manager,
         allow_empty_source=True,
+        newer_file_mode=NewerFileSyncMode.SKIP,
     )
+
+    orig_dir = os.path.realpath(__file__)
 
     for directory in base_captures_dir:
         if not os.path.isdir(directory):
@@ -441,6 +444,8 @@ def upload_captures(base_captures_dir: list):
                 now_millis=int(round(time.time() * 1000)),
                 reporter=reporter,
             )
+
+    os.chdir(orig_dir)
 
 
 def load_config():
@@ -476,42 +481,42 @@ if __name__ == '__main__':
     station_prefix = config['build']['prefix']
     captures_dir = config['build']['captures']
 
-    print('- Reading captures')
-    captures = get_matching_captures(captures_dir, station_prefix, days_back)
-
-    if len(captures) == 0:
-        print("- Nothing to do")
-        exit(0)
-
-    print("- Cleaning files")
-    cleanup()
-
-    print("- Organizing captures")
-    organize_captures(captures)
-
-    print("- Converting videos")
-    generate_videos()
-
-    print("- Creating stations files")
-    generate_stations()
-
-    print("- Creating captures")
-    generate_captures()
-
-    print("- Creating pages")
-    generate_posts()
-
-    print("- Creating watches")
-    generate_watches()
-
-    print("- Creating analyzers")
-    generate_analyzers()
+    # print('- Reading captures')
+    # captures = get_matching_captures(captures_dir, station_prefix, days_back)
+    #
+    # if len(captures) == 0:
+    #     print("- Nothing to do")
+    #     exit(0)
+    #
+    # print("- Cleaning files")
+    # cleanup()
+    #
+    # print("- Organizing captures")
+    # organize_captures(captures)
+    #
+    # print("- Converting videos")
+    # generate_videos()
+    #
+    # print("- Creating stations files")
+    # generate_stations()
+    #
+    # print("- Creating captures")
+    # generate_captures()
+    #
+    # print("- Creating pages")
+    # generate_posts()
+    #
+    # print("- Creating watches")
+    # generate_watches()
+    #
+    # print("- Creating analyzers")
+    # generate_analyzers()
 
     print("- Upload captures")
     upload_captures(captures_dir)
 
-    print("- Push to git")
-    git_push()
+    # print("- Push to git")
+    # git_push()
 
     print("- Closing database connection")
     connection.close()
