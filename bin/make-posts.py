@@ -49,10 +49,9 @@ def organize_captures(stations_captures):
         connection.commit()
 
     captures_organized = []
-    er_filter = "\w{3,5}\d{1,2}.+P\.jpg$"
 
     for capture in stations_captures:
-        base = re.findall(er_filter, capture)
+        base = re.findall("\w{3,5}\d{1,2}.+P\.jpg$", capture)
         capture_spliced = base[0].split('/')
         station = capture_spliced[0]
         capture_date = capture_spliced[3]
@@ -63,9 +62,7 @@ def organize_captures(stations_captures):
     populate_tables(captures_organized)
 
 
-def generate_stations():
-    stations = config['stations']
-
+def generate_stations(stations: list):
     for index, station in enumerate(stations, start=1):
         station_filename = PATH_OF_STATIONS + "{}.md".format(station)
 
@@ -421,6 +418,7 @@ if __name__ == '__main__':
     config = load_config()
     days_back = config['build']['days']
     captures_dir = config['build']['captures']
+    stations = config['stations']
 
     print('- Reading captures')
     captures = get_matching_captures(captures_dir, days_back)
@@ -436,7 +434,7 @@ if __name__ == '__main__':
     organize_captures(captures)
 
     print("- Creating stations files")
-    generate_stations()
+    generate_stations(stations)
 
     print("- Creating captures")
     generate_captures()
