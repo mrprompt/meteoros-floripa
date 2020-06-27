@@ -31,7 +31,6 @@ PATH_OF_STATIONS = "{}/../_stations/".format(PATH)
 def organize_captures(stations_captures):
     def populate_tables(captures_list: List):
         connection_cursor = connection.cursor()
-
         connection_cursor.execute("""
         CREATE TABLE IF NOT EXISTS captures (
             id INTEGER  NOT NULL PRIMARY KEY AUTOINCREMENT,
@@ -50,7 +49,7 @@ def organize_captures(stations_captures):
         connection.commit()
 
     captures_organized = []
-    er_filter = "\w{3}\d{1,2}.+P.jpg$"
+    er_filter = "\w{3,5}\d{1,2}.+P\.jpg$"
 
     for capture in stations_captures:
         base = re.findall(er_filter, capture)
@@ -69,6 +68,7 @@ def generate_stations():
 
     for index, station in enumerate(stations, start=1):
         station_filename = PATH_OF_STATIONS + "{}.md".format(station)
+
         filehandle = open(station_filename, "w")
         filehandle.write("---\n")
         filehandle.write("layout: station\n")
@@ -79,7 +79,6 @@ def generate_stations():
 
 def generate_captures():
     connection_cursor = connection.cursor()
-
     connection_cursor.execute("""
     SELECT night_start, station
     FROM captures
@@ -138,7 +137,6 @@ def generate_captures():
 
 def generate_posts():
     connection_cursor = connection.cursor()
-
     connection_cursor.execute("""
     SELECT night_start, files
     FROM captures
@@ -164,43 +162,6 @@ def generate_posts():
 
 
 def generate_watches():
-    connection_cursor = connection.cursor()
-
-    connection_cursor.execute("""
-    SELECT night_start, station, files
-    FROM captures
-    """)
-
-    for data in connection_cursor.fetchall():
-        night_start = str(data[0])
-        station = str(data[1])
-        file = str(data[2])
-
-        capture_spliced = file.split('/')
-        capture_base_filename = capture_spliced[-1]
-        capture_base_filename_spliced = capture_base_filename.split('_')
-
-        day = capture_base_filename_spliced[0][7:9]
-        month = capture_base_filename_spliced[0][5:7]
-        year = capture_base_filename_spliced[0][1:5]
-        hour = capture_base_filename_spliced[1][0:2]
-        minute = capture_base_filename_spliced[1][2:4]
-        second = capture_base_filename_spliced[1][4:6]
-
-        post_filename = PATH_OF_WATCH_CAPTURES + "{}.md".format(capture_base_filename.replace('P.jpg', ''))
-
-        filehandle = open(post_filename, "w+")
-        filehandle.write("---\n")
-        filehandle.write("layout: watch\n")
-        filehandle.write("title: {} - {}/{}/{} - {}\n".format(station, day, month, year, capture_base_filename.replace('P.jpg', 'T.jpg')))
-        filehandle.write("date: {}-{}-{} {}:{}:{}\n".format(year, month, day, hour, minute, second))
-        filehandle.write("permalink: /{}/{}/{}/watch/{}\n".format(year, month, day, capture_base_filename.replace('P.jpg', '')))
-        filehandle.write("capture: {}\n".format(file.replace('P.jpg', 'T.jpg')))
-        filehandle.write("---\n")
-        filehandle.close()
-
-
-def generate_videos():
     def convert_video(video_input: str, video_output: str):
         convert_command = [
             'ffmpeg',
@@ -221,41 +182,45 @@ def generate_videos():
         subprocess.Popen(convert_command)
 
     connection_cursor = connection.cursor()
-
     connection_cursor.execute("""
-    SELECT night_start, station
+    SELECT night_start, station, files, files_full_path
     FROM captures
-    GROUP BY night_start, station
     """)
 
     for data in connection_cursor.fetchall():
         night_start = str(data[0])
         station = str(data[1])
+        file = str(data[2])
+        file_input = data[3].replace('P.jpg', '.avi')
+        file_output = data[3].replace('P.jpg', '.mp4')
+        capture_spliced = file.split('/')
+        capture_base_filename = capture_spliced[-1]
+        capture_base_filename_spliced = capture_base_filename.split('_')
+        day = capture_base_filename_spliced[0][7:9]
+        month = capture_base_filename_spliced[0][5:7]
+        year = capture_base_filename_spliced[0][1:5]
+        hour = capture_base_filename_spliced[1][0:2]
+        minute = capture_base_filename_spliced[1][2:4]
+        second = capture_base_filename_spliced[1][4:6]
 
-        connection_cursor.execute("""
-            SELECT id, night_start, station, files, files_full_path
-            FROM captures
-            WHERE night_start = ?
-            AND station = ?
-            ORDER BY station
-            """, (night_start, station))
+        if os.path.exists(file_input) and not os.path.exists(file_output):
+            convert_video(file_input, file_output)
 
-        for capture in connection_cursor.fetchall():
-            file_input = capture[4].replace('P.jpg', '.avi')
-            file_output = capture[4].replace('P.jpg', '.mp4')
+        post_filename = PATH_OF_WATCH_CAPTURES + "{}.md".format(capture_base_filename.replace('P.jpg', ''))
 
-            if not os.path.exists(file_input) or os.path.exists(file_output):
-                continue
-
-            try:
-                convert_video(file_input, file_output)
-            except Exception:
-                pass
+        filehandle = open(post_filename, "w+")
+        filehandle.write("---\n")
+        filehandle.write("layout: watch\n")
+        filehandle.write("title: {} - {}/{}/{} - {}\n".format(station, day, month, year, capture_base_filename.replace('P.jpg', 'T.jpg')))
+        filehandle.write("date: {}-{}-{} {}:{}:{}\n".format(year, month, day, hour, minute, second))
+        filehandle.write("permalink: /{}/{}/{}/watch/{}\n".format(year, month, day, capture_base_filename.replace('P.jpg', '')))
+        filehandle.write("capture: {}\n".format(file.replace('P.jpg', 'T.jpg')))
+        filehandle.write("---\n")
+        filehandle.close()
 
 
 def generate_analyzers():
     connection_cursor = connection.cursor()
-
     connection_cursor.execute("""
     SELECT night_start, station
     FROM captures
@@ -340,13 +305,13 @@ def get_date_list(days: int, date_format: str = '%Y%m%d'):
     return [(datetime.date.today() - datetime.timedelta(days=x)).strftime(date_format) for x in range(0, days)]
 
 
-def get_matching_captures(captures_dir: list, prefix: str, days: int):
+def get_matching_captures(captures_dir: list, days: int):
     result = []
     date_list = get_date_list(days)
 
     for directory in captures_dir:
         for date in date_list:
-            files = glob.glob("{}/**/{}/*{}*P.jpg".format(directory, date, prefix), recursive=True)
+            files = glob.glob("{}/**/{}/*P.jpg".format(directory, date), recursive=True)
 
             result.extend(files)
 
@@ -371,18 +336,18 @@ def cleanup():
         for file_to_delete in fix_paths:
             os.remove(file_to_delete)
 
-    def cleanup_captures(days: int, station_prefix: str = 'TLP'):
+    def cleanup_captures(days: int):
         result = []
         date_list = get_date_list(days, '%Y%m%d')
 
         for date in date_list:
-            files = glob.glob("{}/{}*_{}.md".format(PATH_OF_SITE_CAPTURES, station_prefix, date))
+            files = glob.glob("{}/*_{}.md".format(PATH_OF_SITE_CAPTURES, date))
 
             result.extend(files)
 
         delete_files(result)
 
-    cleanup_captures(days_back, station_prefix)
+    cleanup_captures(days_back)
 
 
 def upload_captures(base_captures_dir: list):
@@ -445,7 +410,7 @@ def git_push():
         origin = repo.remote(name='origin')
         origin.push()
     except:
-        print('Some error occured while pushing the code')
+        print('Some error occurred while pushing the code')
 
 
 if __name__ == '__main__':
@@ -455,11 +420,10 @@ if __name__ == '__main__':
     print("- Loading site configuration")
     config = load_config()
     days_back = config['build']['days']
-    station_prefix = config['build']['prefix']
     captures_dir = config['build']['captures']
 
     print('- Reading captures')
-    captures = get_matching_captures(captures_dir, station_prefix, days_back)
+    captures = get_matching_captures(captures_dir, days_back)
 
     if len(captures) == 0:
         print("- Nothing to do")
@@ -470,9 +434,6 @@ if __name__ == '__main__':
 
     print("- Organizing captures")
     organize_captures(captures)
-
-    print("- Converting videos")
-    generate_videos()
 
     print("- Creating stations files")
     generate_stations()

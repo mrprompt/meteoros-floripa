@@ -15,13 +15,13 @@ storage_url: "https://meteoros.s3.us-west-000.backblazeb2.com/"
 simple_form_token: 5da33a3875b2782c0143c966613ebc60
 
 build:
-  prefix: TLP
-  days: 30
+  days: 2
   captures:
-#    - "/Volumes/external/BRAMON/estacoes/!data"
+    - "/Volumes/external/BRAMON/estacoes/!data"
     - "D:/bramon/!data"
     - "E:/bramon/!data"
     - "F:/bramon/!data"
+    - "C:/meteoros/!data"
 
 stations:
   - TLP1
