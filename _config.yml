@@ -17,11 +17,11 @@ simple_form_token: 5da33a3875b2782c0143c966613ebc60
 build:
   days: 2
   captures:
-    - "/Volumes/external/BRAMON/estacoes/!data"
+#    - "/Volumes/external/BRAMON/estacoes/!data"
     - "D:/bramon/!data"
     - "E:/bramon/!data"
     - "F:/bramon/!data"
-    - "C:/meteoros/!data"
+#    - "C:/meteoros/!data"
 
 stations:
   - TLP1
