@@ -422,31 +422,31 @@ if __name__ == '__main__':
 
     print('- Reading captures')
     captures = get_matching_captures(captures_dir, days_back)
-    #
-    # if len(captures) == 0:
-    #     print("- Nothing to do")
-    #     exit(0)
-    #
-    # print("- Cleaning files")
-    # cleanup()
-    #
-    # print("- Organizing captures")
-    # organize_captures(captures)
-    #
-    # print("- Creating stations files")
-    # generate_stations(stations)
-    #
-    # print("- Creating captures")
-    # generate_captures()
-    #
-    # print("- Creating pages")
-    # generate_posts()
-    #
-    # print("- Creating watches")
-    # generate_watches()
-    #
-    # print("- Creating analyzers")
-    # generate_analyzers()
+
+    if len(captures) == 0:
+        print("- Nothing to do")
+        exit(0)
+
+    print("- Cleaning files")
+    cleanup()
+
+    print("- Organizing captures")
+    organize_captures(captures)
+
+    print("- Creating stations files")
+    generate_stations(stations)
+
+    print("- Creating captures")
+    generate_captures()
+
+    print("- Creating pages")
+    generate_posts()
+
+    print("- Creating watches")
+    generate_watches()
+
+    print("- Creating analyzers")
+    generate_analyzers()
 
     print("- Upload captures")
     upload_captures(captures_dir)
