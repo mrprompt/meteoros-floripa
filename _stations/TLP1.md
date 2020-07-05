@@ -1,6 +1,6 @@
 ---
 layout: station
-title: Capturas da estação TLP1
+title: Capturas da esta&ccedil;&atilde;o TLP1
 station: TLP1
 navigation_weight: 1
 ---

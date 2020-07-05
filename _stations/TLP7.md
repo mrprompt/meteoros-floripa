@@ -1,6 +1,6 @@
 ---
 layout: station
-title: Capturas da estação TLP7
+title: Capturas da esta&ccedil;&atilde;o TLP7
 station: TLP7
 navigation_weight: 7
 ---
