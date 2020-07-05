@@ -69,6 +69,7 @@ def generate_stations(stations: list):
         filehandle = open(station_filename, "w")
         filehandle.write("---\n")
         filehandle.write("layout: station\n")
+        filehandle.write("title: Capturas da estação {}\n".format(station))
         filehandle.write("station: {}\n".format(station))
         filehandle.write("navigation_weight: {}\n".format(index))
         filehandle.write("---\n")
@@ -117,6 +118,7 @@ def generate_captures():
                 filehandle.write("---\n")
                 filehandle.write("layout: capture\n")
                 filehandle.write("label: {}\n".format(night_start))
+                filehandle.write("title: Capturas da estação {}\n".format(station))
                 filehandle.write("station: {}\n".format(station))
                 filehandle.write("date: {}-{}-{} {}:{}:{}\n".format(capture_year, capture_month, capture_day, capture_hour, capture_minute, capture_second))
                 filehandle.write("preview: {}\n".format(file))
@@ -373,7 +375,7 @@ def upload_captures(base_captures_dir: list):
 
         source = parse_sync_folder('.', b2_api)
         destination = parse_sync_folder('b2://' + config['s3_bucket'] + '/', b2_api)
-        no_progress = False
+        no_progress = True
 
         with SyncReport(sys.stdout, no_progress) as reporter:
             synchronizer.sync_folders(
