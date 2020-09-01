@@ -205,8 +205,8 @@ def generate_watches():
         minute = capture_base_filename_spliced[1][2:4]
         second = capture_base_filename_spliced[1][4:6]
 
-        # if os.path.exists(file_input) and not os.path.exists(file_output):
-        #     convert_video(file_input, file_output)
+        if os.path.exists(file_input) and not os.path.exists(file_output):
+            convert_video(file_input, file_output)
 
         post_filename = PATH_OF_WATCH_CAPTURES + "{}.md".format(capture_base_filename.replace('P.jpg', ''))
 
@@ -453,11 +453,11 @@ if __name__ == '__main__':
     print("- Creating analyzers")
     generate_analyzers()
 
-    # print("- Upload captures")
-    # upload_captures(captures_dir)
+    print("- Upload captures")
+    upload_captures(captures_dir)
 
-    # print("- Push to git")
-    # git_push()
+    print("- Push to git")
+    git_push()
 
     print("- Closing database connection")
     connection.close()
