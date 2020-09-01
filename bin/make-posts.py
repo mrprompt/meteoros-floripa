@@ -393,7 +393,7 @@ def upload_captures(base_captures_dir: list):
 
 def load_config():
     with open(CONFIG_FILE, "r") as f:
-        return yaml.load(f)
+        return yaml.load(f, Loader=yaml.FullLoader)
 
 
 def git_push():
