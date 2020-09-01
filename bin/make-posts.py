@@ -16,7 +16,10 @@ from b2sdk.v1 import *
 from b2sdk.v1 import ScanPoliciesManager
 from b2sdk.v1 import parse_sync_folder
 from b2sdk.v1 import Synchronizer
+from dotenv import load_dotenv
 
+
+load_dotenv()
 
 PATH = os.path.dirname(__file__)
 PATH_OF_GIT_REPO = "{}/../".format(PATH)
@@ -163,7 +166,7 @@ def generate_posts():
 def generate_watches():
     def convert_video(video_input: str, video_output: str):
         convert_command = [
-            'ffmpeg',
+            'c:/bramon/tools/ffmpeg',
             '-n',
             '-i',
             video_input,
@@ -202,8 +205,8 @@ def generate_watches():
         minute = capture_base_filename_spliced[1][2:4]
         second = capture_base_filename_spliced[1][4:6]
 
-        if os.path.exists(file_input) and not os.path.exists(file_output):
-            convert_video(file_input, file_output)
+        # if os.path.exists(file_input) and not os.path.exists(file_output):
+        #     convert_video(file_input, file_output)
 
         post_filename = PATH_OF_WATCH_CAPTURES + "{}.md".format(capture_base_filename.replace('P.jpg', ''))
 
@@ -450,11 +453,11 @@ if __name__ == '__main__':
     print("- Creating analyzers")
     generate_analyzers()
 
-    print("- Upload captures")
-    upload_captures(captures_dir)
+    # print("- Upload captures")
+    # upload_captures(captures_dir)
 
-    print("- Push to git")
-    git_push()
+    # print("- Push to git")
+    # git_push()
 
     print("- Closing database connection")
     connection.close()
