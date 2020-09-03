@@ -11,9 +11,14 @@
             format: "yyyy/mm/dd",
             language: "pt-BR",
             autoclose: true,
-            endDate: '0d'
+            endDate: '0d',
+            startDate: '28-08-2018'
         })
         .on('hide', function(e) {
+            if (!e.date) {
+                return;
+            }
+
             window.location.href = '/' + e.format('yyyy/mm/dd') + '/captures/';
         });
 
