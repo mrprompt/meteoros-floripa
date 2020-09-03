@@ -10,7 +10,8 @@
             .datepicker({
             format: "yyyy/mm/dd",
             language: "pt-BR",
-            autoclose: true
+            autoclose: true,
+            endDate: '0d'
         })
         .on('hide', function(e) {
             window.location.href = '/' + e.format('yyyy/mm/dd') + '/captures/';
