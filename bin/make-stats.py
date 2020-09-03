@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf8 -*-
+import glob
 import os
 import sqlite3
-import boto3
 import yaml
 from typing import List
 
@@ -14,60 +14,28 @@ CONFIG_FILE = "{}/../_config.yml".format(PATH)
 
 def load_config():
     with open(CONFIG_FILE, "r") as f:
-        return yaml.load(f)
+        return yaml.load(f, Loader=yaml.FullLoader)
 
 
-def get_matching_s3_objects(bucket, prefix="", suffix=""):
-    """
-    Generate objects in an S3 bucket.
+def get_matching_captures(captures_dir: list):
+    def fix_path_delimiter(captures_list: list):
+        result = []
 
-    From: https://alexwlchan.net/2019/07/listing-s3-keys/
+        for path in captures_list:
+            path_fixed = path.replace("\\", "/")
 
-    :param bucket: Name of the S3 bucket.
-    :param prefix: Only fetch objects whose key starts with
-        this prefix (optional).
-    :param suffix: Only fetch objects whose keys end with
-        this suffix (optional).
-    """
-    s3 = boto3.client("s3")
-    paginator = s3.get_paginator("list_objects_v2")
+            result.append(path_fixed)
 
-    kwargs = {'Bucket': bucket}
+        return result
 
-    # We can pass the prefix directly to the S3 API.  If the user has passed
-    # a tuple or list of prefixes, we go through them one by one.
-    if isinstance(prefix, str):
-        prefixes = (prefix,)
-    else:
-        prefixes = prefix
+    result = []
 
-    for key_prefix in prefixes:
-        kwargs["Prefix"] = key_prefix
+    for directory in captures_dir:
+        files = glob.glob("{}/**/*P.jpg".format(directory), recursive=True)
 
-        for page in paginator.paginate(**kwargs):
-            try:
-                contents = page["Contents"]
-            except KeyError:
-                return
+        result.extend(files)
 
-            for obj in contents:
-                key = obj["Key"]
-                if key.endswith(suffix):
-                    yield obj
-
-
-def get_matching_s3_keys(bucket, prefix="", suffix=""):
-    """
-    Generate the keys in an S3 bucket.
-
-    From: https://alexwlchan.net/2019/07/listing-s3-keys/
-
-    :param bucket: Name of the S3 bucket.
-    :param prefix: Only fetch keys that start with this prefix (optional).
-    :param suffix: Only fetch keys that end with this suffix (optional).
-    """
-    for obj in get_matching_s3_objects(bucket, prefix, suffix):
-        yield obj["Key"]
+    return fix_path_delimiter(result)
 
 
 def organize_captures(stations_captures: List) -> List:
@@ -159,25 +127,30 @@ def generate_stats(connection: object) -> bool:
 
 
 if __name__ == '__main__':
+    print("- Connecting to database")
+    connection = sqlite3.connect(':memory:')
+
     print("- Loading site configuration")
     config = load_config()
+    captures_dir = config['build']['captures']
 
-    print('- Reading captures from S3 bucket')
-    captures = get_matching_s3_keys(config['s3_bucket'], suffix='.mp4', prefix=config['build']['prefix'])
+    print('- Reading captures')
+    captures = get_matching_captures(captures_dir)
+
+    if len(captures) == 0:
+        print("- Nothing to do")
+        exit(0)
 
     print("- Organizing captures")
     posts = organize_captures(captures)
 
-    print("- Connecting to database")
-    conn = sqlite3.connect(':memory:')
-
     print("- Creating temporary table and populating...")
-    populate_tables(conn, posts)
+    populate_tables(connection, posts)
 
     print("- Creating stats")
-    generate_stats(conn)
+    generate_stats(connection)
 
     print("- Closing database connection")
-    conn.close()
+    connection.close()
 
     print("- Done :)")

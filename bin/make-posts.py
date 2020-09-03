@@ -166,7 +166,8 @@ def generate_posts():
 def generate_watches():
     def convert_video(video_input: str, video_output: str):
         convert_command = [
-            'c:/bramon/tools/ffmpeg',
+            config['build']['ffmpeg_path'],
+            'ffmpeg',
             '-n',
             '-i',
             video_input,
