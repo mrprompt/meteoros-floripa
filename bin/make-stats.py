@@ -18,24 +18,18 @@ def load_config():
 
 
 def get_matching_captures(captures_dir: list):
-    def fix_path_delimiter(captures_list: list):
-        result = []
-
-        for path in captures_list:
-            path_fixed = path.replace("\\", "/")
-
-            result.append(path_fixed)
-
-        return result
-
     result = []
 
     for directory in captures_dir:
-        files = glob.glob("{}/**/*P.jpg".format(directory), recursive=True)
+        os.chdir(directory)
+
+        files = glob.glob("**/*P.jpg", recursive=True)
 
         result.extend(files)
 
-    return fix_path_delimiter(result)
+    os.chdir(PATH)
+
+    return result
 
 
 def organize_captures(stations_captures: List) -> List:
