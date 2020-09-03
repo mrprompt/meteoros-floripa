@@ -13,7 +13,7 @@
             autoclose: true
         })
         .on('hide', function(e) {
-            window.location.href = '/' + e.date.format('yyyy/mm/dd') + '/captures/';
+            window.location.href = '/' + e.format('yyyy/mm/dd') + '/captures/';
         });
 
         window.dataLayer = window.dataLayer || [];
