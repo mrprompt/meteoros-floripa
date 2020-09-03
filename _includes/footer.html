@@ -6,10 +6,15 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.pt-BR.min.js" integrity="sha512-mVkLPLQVfOWLRlC2ZJuyX5+0XrTlbW2cyAwyqgPkLGxhoaHNSWesYMlcUjX8X+k45YB8q90s88O7sos86636NQ==" crossorigin="anonymous"></script>
     <script async src="//www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}"></script>
     <script>
-        $('.form-group.date').datepicker({
+        $('.link.date')
+            .datepicker({
             format: "yyyy/mm/dd",
             language: "pt-BR",
             autoclose: true
+        })
+        .on('hide', function(e) {
+            // `e` here contains the extra attributes
+            window.location.href = '/' + e.value + '/captures/';
         });
 
         window.dataLayer = window.dataLayer || [];
