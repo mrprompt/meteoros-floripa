@@ -43,7 +43,7 @@ def organize_captures(stations_captures: List) -> List:
     captures_organized = []
 
     for capture in stations_captures:
-        capture_spliced = capture.split('/')
+        capture_spliced = capture.split('\\')
         station = capture_spliced[0]
         capture_date = capture_spliced[2]
         post = (capture_date, station, capture)

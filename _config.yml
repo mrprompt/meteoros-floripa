@@ -18,12 +18,12 @@ build:
   days: 2
   ffmpeg_path: "C:/bramon/tools/"
   captures:
-    - "/Volumes/external/BRAMON/estacoes/!data/"
-#    - "D:/bramon/!data"
-#    - "E:/bramon/!data"
-#    - "F:/bramon/!data"
-#    - "G:/bramon/!data"
-#    - "H:/bramon/!data"
+#    - "/Volumes/external/BRAMON/estacoes/!data/"
+    - "D:/bramon/!data"
+    - "E:/bramon/!data"
+    - "F:/bramon/!data"
+    - "G:/bramon/!data"
+    - "H:/bramon/!data"
 
 stations:
   - TLP1
