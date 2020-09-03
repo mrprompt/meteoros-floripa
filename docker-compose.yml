@@ -2,6 +2,7 @@ version: '3.4'
 services:
   jekyll:
     image: starefossen/github-pages
+#    container_name: meteoros-floripa
     ports:
       - "4000:4000"
     volumes:
