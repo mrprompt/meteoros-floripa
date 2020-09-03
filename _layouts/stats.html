@@ -34,7 +34,7 @@
                             <tr>
                                 <td>{{ post.year }}</td>
                                 <td>{{ post.month | prepend: '00' | slice: -2, 2 }}</td>
-                                <td>{{ post.captures | prepend: '0000' | slice: -4, 4 }}</td>
+                                <td>{{ post.captures | prepend: '000' | slice: -3, 3 }}</td>
                             </tr>
                             {% endfor %}
                         </tbody>
