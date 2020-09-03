@@ -13,8 +13,7 @@
             autoclose: true
         })
         .on('hide', function(e) {
-            // `e` here contains the extra attributes
-            window.location.href = '/' + e.value + '/captures/';
+            window.location.href = '/' + e.date.format('yyyy/mm/dd') + '/captures/';
         });
 
         window.dataLayer = window.dataLayer || [];
