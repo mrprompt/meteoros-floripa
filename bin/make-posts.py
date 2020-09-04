@@ -416,6 +416,18 @@ def git_push():
         print('Some error occurred while pushing the code')
 
 
+def stack_captures():
+    from PIL import ImageChops
+    import os, Image
+
+    data = num.genfromtxt('list.txt', dtype='str')
+    finalimage = Image.open(data[0])
+    for i in range(1, len(data)):
+        currentimage = Image.open(data[i])
+        finalimage = ImageChops.lighter(finalimage, currentimage)
+    finalimage.save("allblended.jpg", "JPEG")
+
+
 if __name__ == '__main__':
     print("- Connecting to database")
     connection = sqlite3.connect(':memory:')
