@@ -141,7 +141,7 @@ def generate_captures():
         filehandle.write("---\n")
         filehandle.close()
 
-        stack_captures(stack, "{}/stack.jpg".format(stack_output_dir))
+        # stack_captures(stack, "{}/stack.jpg".format(stack_output_dir))
 
 
 def generate_posts():
@@ -467,17 +467,17 @@ if __name__ == '__main__':
     print("- Creating pages")
     generate_posts()
 
-    # print("- Creating watches")
-    # generate_watches()
-    #
-    # print("- Creating analyzers")
-    # generate_analyzers()
-    #
-    # print("- Upload captures")
-    # upload_captures(captures_dir)
-    #
-    # print("- Push to git")
-    # git_push()
+    print("- Creating watches")
+    generate_watches()
+
+    print("- Creating analyzers")
+    generate_analyzers()
+
+    print("- Upload captures")
+    upload_captures(captures_dir)
+
+    print("- Push to git")
+    git_push()
 
     print("- Closing database connection")
     connection.close()
