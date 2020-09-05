@@ -87,12 +87,14 @@ def generate_captures():
     """)
 
     for data in connection_cursor.fetchall():
+        stack = []
+        stack_output_dir = "./"
         night_start = str(data[0])
         station = str(data[1])
         capture_filename = PATH_OF_SITE_CAPTURES + "{}_{}.md".format(station, night_start)
 
         connection_cursor.execute("""
-            SELECT id, night_start, station, files
+            SELECT id, night_start, station, files, files_full_path
             FROM captures
             WHERE night_start = ?
             AND station = ?
@@ -100,6 +102,9 @@ def generate_captures():
             """, (night_start, station))
 
         for capture in connection_cursor.fetchall():
+            stack.append(capture[4])
+            stack_output_dir = os.path.dirname(capture[4])
+
             file = capture[3]
 
             capture_spliced = file.split('/')
@@ -124,7 +129,7 @@ def generate_captures():
                 filehandle.write("title: Capturas da esta&ccedil;&atilde;o {}\n".format(station))
                 filehandle.write("station: {}\n".format(station))
                 filehandle.write("date: {}-{}-{} {}:{}:{}\n".format(capture_year, capture_month, capture_day, capture_hour, capture_minute, capture_second))
-                filehandle.write("preview: {}\n".format(file))
+                filehandle.write("preview: {}/stack.jpg\n".format(os.path.dirname(file)))
                 filehandle.write("capturas:\n")
             else:
                 filehandle = open(capture_filename, "a")
@@ -135,6 +140,8 @@ def generate_captures():
         filehandle = open(capture_filename, "a")
         filehandle.write("---\n")
         filehandle.close()
+
+        stack_captures(stack, "{}/stack.jpg".format(stack_output_dir))
 
 
 def generate_posts():
@@ -416,16 +423,16 @@ def git_push():
         print('Some error occurred while pushing the code')
 
 
-def stack_captures():
-    from PIL import ImageChops
-    import os, Image
+def stack_captures(data, output_file):
+    from PIL import ImageChops, Image
 
-    data = num.genfromtxt('list.txt', dtype='str')
-    finalimage = Image.open(data[0])
+    stack = Image.open(data[0])
+
     for i in range(1, len(data)):
-        currentimage = Image.open(data[i])
-        finalimage = ImageChops.lighter(finalimage, currentimage)
-    finalimage.save("allblended.jpg", "JPEG")
+        current_image = Image.open(data[i])
+        stack = ImageChops.lighter(stack, current_image)
+
+    stack.save(output_file, "JPEG")
 
 
 if __name__ == '__main__':

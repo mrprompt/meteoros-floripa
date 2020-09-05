@@ -2,3 +2,4 @@ GitPython
 b2sdk
 PyYAML
 python-dotenv
+Pillow
