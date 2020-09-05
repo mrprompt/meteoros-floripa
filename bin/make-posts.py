@@ -165,7 +165,7 @@ def generate_posts():
         filehandle.write("layout: post\n")
         filehandle.write("title: {}/{}/{}\n".format(day, month, year))
         filehandle.write("date: {}-{}-{} 10:00:00\n".format(year, month, day))
-        filehandle.write("preview: {}\n".format(file_preview))
+        filehandle.write("preview: {}/stack.jpg\n".format(os.path.dirname(file_preview)))
         filehandle.write("---\n")
         filehandle.close()
 
@@ -467,17 +467,17 @@ if __name__ == '__main__':
     print("- Creating pages")
     generate_posts()
 
-    print("- Creating watches")
-    generate_watches()
-
-    print("- Creating analyzers")
-    generate_analyzers()
-
-    print("- Upload captures")
-    upload_captures(captures_dir)
-
-    print("- Push to git")
-    git_push()
+    # print("- Creating watches")
+    # generate_watches()
+    #
+    # print("- Creating analyzers")
+    # generate_analyzers()
+    #
+    # print("- Upload captures")
+    # upload_captures(captures_dir)
+    #
+    # print("- Push to git")
+    # git_push()
 
     print("- Closing database connection")
     connection.close()
