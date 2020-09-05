@@ -141,7 +141,7 @@ def generate_captures():
         filehandle.write("---\n")
         filehandle.close()
 
-        # stack_captures(stack, "{}/stack.jpg".format(stack_output_dir))
+        stack_captures(stack, "{}/stack.jpg".format(stack_output_dir))
 
 
 def generate_posts():
@@ -426,13 +426,16 @@ def git_push():
 def stack_captures(data, output_file):
     from PIL import ImageChops, Image
 
-    stack = Image.open(data[0])
+    try:
+        stack = Image.open(data[0])
 
-    for i in range(1, len(data)):
-        current_image = Image.open(data[i])
-        stack = ImageChops.lighter(stack, current_image)
+        for i in range(1, len(data)):
+            current_image = Image.open(data[i])
+            stack = ImageChops.lighter(stack, current_image)
 
-    stack.save(output_file, "JPEG")
+        stack.save(output_file, "JPEG")
+    except:
+        pass
 
 
 if __name__ == '__main__':
