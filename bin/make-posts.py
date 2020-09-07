@@ -17,6 +17,7 @@ from b2sdk.v1 import ScanPoliciesManager
 from b2sdk.v1 import parse_sync_folder
 from b2sdk.v1 import Synchronizer
 from dotenv import load_dotenv
+from PIL import ImageChops, Image
 
 
 load_dotenv()
@@ -29,6 +30,11 @@ PATH_OF_SITE_CAPTURES = "{}/../_captures/".format(PATH)
 PATH_OF_WATCH_CAPTURES = "{}/../_watches/".format(PATH)
 PATH_OF_ANALYZERS = "{}/../_data/".format(PATH)
 PATH_OF_STATIONS = "{}/../_stations/".format(PATH)
+
+
+def load_config():
+    with open(CONFIG_FILE, "r") as f:
+        return yaml.load(f, Loader=yaml.FullLoader)
 
 
 def organize_captures(stations_captures):
@@ -79,6 +85,18 @@ def generate_stations(stations: list):
 
 
 def generate_captures():
+    def stack_captures(data, output_file):
+        try:
+            stack = Image.open(data[0])
+
+            for i in range(1, len(data)):
+                current_image = Image.open(data[i])
+                stack = ImageChops.lighter(stack, current_image)
+
+            stack.save(output_file, "JPEG")
+        except:
+            pass
+
     connection_cursor = connection.cursor()
     connection_cursor.execute("""
     SELECT night_start, station
@@ -399,11 +417,6 @@ def upload_captures(base_captures_dir: list):
     os.chdir(orig_dir)
 
 
-def load_config():
-    with open(CONFIG_FILE, "r") as f:
-        return yaml.load(f, Loader=yaml.FullLoader)
-
-
 def git_push():
     try:
         today = datetime.date.today()
@@ -421,21 +434,6 @@ def git_push():
         origin.push()
     except:
         print('Some error occurred while pushing the code')
-
-
-def stack_captures(data, output_file):
-    from PIL import ImageChops, Image
-
-    try:
-        stack = Image.open(data[0])
-
-        for i in range(1, len(data)):
-            current_image = Image.open(data[i])
-            stack = ImageChops.lighter(stack, current_image)
-
-        stack.save(output_file, "JPEG")
-    except:
-        pass
 
 
 if __name__ == '__main__':
