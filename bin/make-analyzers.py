@@ -7,10 +7,7 @@ import sqlite3
 import yaml
 from xml.dom import minidom
 from typing import List
-from dotenv import load_dotenv
 
-
-load_dotenv()
 
 PATH = os.path.dirname(__file__)
 PATH_OF_GIT_REPO = "{}/../".format(PATH)

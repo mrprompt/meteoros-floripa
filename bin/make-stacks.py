@@ -1,16 +1,13 @@
 #!/usr/bin/env python3
 # -*- coding: utf8 -*-
-import datetime
 import glob
 import os
 import re
 import sqlite3
 import yaml
 from typing import List
-from dotenv import load_dotenv
+from PIL import ImageChops, Image
 
-
-load_dotenv()
 
 PATH = os.path.dirname(__file__)
 PATH_OF_GIT_REPO = "{}/../".format(PATH)
@@ -57,6 +54,18 @@ def organize_captures(stations_captures):
 
 
 def generate_stacks():
+    def stack_captures(data, output_file):
+        try:
+            stack = Image.open(data[0])
+
+            for i in range(1, len(data)):
+                current_image = Image.open(data[i])
+                stack = ImageChops.lighter(stack, current_image)
+
+            stack.save(output_file, "JPEG")
+        except:
+            pass
+
     connection_cursor = connection.cursor()
     connection_cursor.execute("""
     SELECT night_start, station
@@ -110,21 +119,6 @@ def fix_path_delimiter(captures_list: list):
 def load_config():
     with open(CONFIG_FILE, "r") as f:
         return yaml.load(f, Loader=yaml.FullLoader)
-
-
-def stack_captures(data, output_file):
-    from PIL import ImageChops, Image
-
-    try:
-        stack = Image.open(data[0])
-
-        for i in range(1, len(data)):
-            current_image = Image.open(data[i])
-            stack = ImageChops.lighter(stack, current_image)
-
-        stack.save(output_file, "JPEG")
-    except:
-        pass
 
 
 if __name__ == '__main__':
