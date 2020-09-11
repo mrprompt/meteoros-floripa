@@ -16,7 +16,6 @@ simple_form_token: 5da33a3875b2782c0143c966613ebc60
 
 build:
   days: 2
-  ffmpeg_path: "C:/bramon/tools/"
   captures:
 #    - "/Volumes/external/BRAMON/estacoes/!data/TLP1/"
     - "D:/bramon/!data"

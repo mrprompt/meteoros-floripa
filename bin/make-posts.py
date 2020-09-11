@@ -191,7 +191,6 @@ def generate_posts():
 def generate_watches():
     def convert_video(video_input: str, video_output: str):
         convert_command = [
-            config['build']['ffmpeg_path'],
             'ffmpeg',
             '-n',
             '-i',
