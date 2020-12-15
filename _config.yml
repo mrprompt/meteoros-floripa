@@ -7,7 +7,7 @@ encoding: UTF-8
 highlighter: rouge
 timezone: UTC
 permalink: pretty
-paginate: 6
+paginate: 3
 pagination_path: "/:num"
 google_analytics: "UA-148905542-1"
 s3_bucket: "meteoros"
