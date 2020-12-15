@@ -4,13 +4,12 @@
 <div class="container">
 	<!--start: Row -->
 	<div class="row">
-		{% include social.html %}
-
-		{% assign image = page.capture | replace: 'T.jpg', 'P.jpg' %}
-		{% assign station = image | split: "/" | first %}
-		{% assign analyze = site.data.analyzers[ image ] %}
-
 		<div class="post-content col-lg-8 col-lg-offset-2 col-xs-12 mb-1">
+			{% include social.html %}
+
+			{% assign image = page.capture | replace: 'T.jpg', 'P.jpg' %}
+			{% assign station = image | split: "/" | first %}
+			{% assign analyze = site.data.analyzers[ image ] %}
 			<div class="post-description embed-responsive embed-responsive-16by9">
 				<video width="100%" controls autoplay loop id="videoPlayer" class="embed-responsive-item">
 					<source src="{{ page.capture | replace: 'T.jpg', '.mp4' | prepend: site.storage_url }}" type="video/mp4" id="videoSource">
@@ -60,9 +59,10 @@
 				{% endif %}
 			</div>
 			{% endif %}
+			<hr>
+			<div id="disqus_thread"></div>
 		</div>
 
-		<div id="disqus_thread"></div>
 		<script>
 			var disqus_config = function () {
 				this.page.url = '{{ page.url | prepend: site.url }}';
