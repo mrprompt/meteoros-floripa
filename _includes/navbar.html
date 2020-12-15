@@ -10,7 +10,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand logo" href="{{ site.baseurl | prepend: site.url }}">
-                <img alt="{{ site.title }}" src="/assets/logo.png">
+                <img alt="{{ site.title }}" src="{{ '/assets/logo.png' | prepend: site.url }}">
             </a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
@@ -18,46 +18,28 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Estações <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li class="dropdown-header">BRAMON</li>
-
                         {% assign stations = site.stations | sort: 'navigation_weight' %}
 
                         {% for station in stations %}
                         <li><a href="{{ '/stations/' | prepend: site.url | append: station.station }}">{{ station.station | upcase }}</a></li>
                         {% endfor %}
-
-                        <li role="separator" class="divider"></li>
-                        <li class="dropdown-header">GMN</li>
-
-                        <li><a href="http://istrastream.com/rms-gmn/br0004/" target="_blank">BR0004 <i class="fas fa-external-link-alt"></i></a></li>
-                        <li><a href="http://istrastream.com/rms-gmn/br0005/" target="_blank">BR0005 <i class="fas fa-external-link-alt"></i></a></li>
-                        <li><a href="http://istrastream.com/rms-gmn/br0007/" target="_blank">BR0007 <i class="fas fa-external-link-alt"></i></a></li>
-                        <li><a href="http://istrastream.com/rms-gmn/br0008/" target="_blank">BR0008 <i class="fas fa-external-link-alt"></i></a></li>
                     </ul>
                 </li>
+                <li><a href="{{ '/videos' | prepend: site.url }}">Tutorias em vídeo</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Saiba mais <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="{{ '/videos' | prepend: site.url }}">Tutorias em vídeo</a></li>
+                        <li><a href="http://www.bramonmeteor.org/bramon/" target="_blank">Conheça a BRAMON <i class="fas fa-external-link-alt"></i></a></li>
                         <li><a href="http://www.bramonmeteor.org/bramon/sobre-a-bramon/como-montar-uma-estacao-bramon/" target="_blank">Como montar <i class="fas fa-external-link-alt"></i></a></li>
                         <li><a href="https://bramon.imo.net/members/imo/report_intro" target="_blank">Reporte um Bólido <i class="fas fa-external-link-alt"></i></a></li>
-
-                        <li role="separator" class="divider"></li>
-                        <li class="dropdown-header">Redes</li>
-
-                        <li><a href="http://www.bramonmeteor.org/bramon/" target="_blank">Conheça a BRAMON <i class="fas fa-external-link-alt"></i></a></li>
-                        <li><a href="http://globalmeteornetwork.org/" target="_blank">Conheça a GMN <i class="fas fa-external-link-alt"></i></a></li>
                     </ul>
                 </li>
-                {% comment %}
-                <li><a href="{{ '/estatisticas' | prepend: site.url }}">Estatísticas</a></li>
-                {% endcomment %}
                 <li><a href="{{ '/o-projeto' | prepend: site.url }}">Sobre o Projeto</a></li>
+                <li><a href="{{ '/contato' | prepend: site.url }}">Contato</a></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right list-inline visible-lg">
                 <li><a href="javascript:;" title="Buscar por data" class="link date"><i class="fas fa-calendar-alt"></i></a></li>
-                <li><a href="{{ '/contato' | prepend: site.url }}" title="Contato"><i class="fas fa-envelope"></i><span class="hidden">Contato</span></a></li>
                 <li><a href="https://facebook.com/MeteorosFloripa" title="Facebook"><i class="fab fa-facebook"></i><span class="hidden">Facebook</span></a></li>
                 <li><a href="https://twitter.com/MeteorosFloripa" title="Twitter"><i class="fab fa-twitter"></i><span class="hidden">Twitter</span></a></li>
             </ul>

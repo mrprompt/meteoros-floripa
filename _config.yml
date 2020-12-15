@@ -17,12 +17,7 @@ simple_form_token: 5da33a3875b2782c0143c966613ebc60
 build:
   days: 2
   captures:
-#    - "/Volumes/external/BRAMON/estacoes/!data/TLP1/"
     - "D:/bramon/!data"
-    - "E:/bramon/!data"
-    - "F:/bramon/!data"
-    - "G:/bramon/!data"
-    - "H:/bramon/!data"
 
 stations:
   - TLP1
