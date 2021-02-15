@@ -17,7 +17,7 @@ simple_form_token: 5da33a3875b2782c0143c966613ebc60
 build:
   days: 2
   captures:
-    - "D:/bramon/!data"
+    - "D:/BRAMON_data"
 
 stations:
   - TLP1
