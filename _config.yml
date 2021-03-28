@@ -15,7 +15,7 @@ storage_url: "https://meteoros.s3.us-west-000.backblazeb2.com/"
 simple_form_token: 5da33a3875b2782c0143c966613ebc60
 
 build:
-  days: 2
+  days: 3
   captures:
     - "D:/BRAMON_data"
 
