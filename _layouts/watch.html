@@ -41,8 +41,10 @@
 					de {{ analyze.altitude_start | round: 2 }} km sobre as coordenadas {{ analyze.latitude_start | round: 2 }}, {{ analyze.longitude_start | round: 2 }}.
 				</p>
 				<p>
-					{% if analyze.velocity > 0 %}
-						O meteoro entrou na atmosfera com uma velocidade inicial estimada de {{ analyze.velocity | round: 2 }} km/s.<br>
+					{% assign velocity = analyze.velocity | plus: 0 %}
+					
+					{% if velocity > 0 %}
+						O meteoro entrou na atmosfera com uma velocidade inicial estimada de {{ velocity | round: 2 }} km/s.<br>
 					{% endif %}
 					
 					O trajeto visível desapareceu no azimute {{ analyze.azimute_final | round: 2 }} com {{ analyze.elevation_final | round: 2 }}° de elevação e
