@@ -46,9 +46,6 @@
 					{% if velocity > 0 %}
 						O meteoro entrou na atmosfera com uma velocidade inicial estimada de {{ velocity | round: 2 }} km/s.<br>
 					{% endif %}
-					
-					O trajeto visível desapareceu no azimute {{ analyze.azimute_final | round: 2 }} com {{ analyze.elevation_final | round: 2 }}° de elevação e
-					altitude provável de {{ analyze.altitude_final | round: 2 }} km sobre as coordenadas {{ analyze.latitude_final | round: 2 }}, {{ analyze.longitude_final | round: 2 }}.
 				</p>
 				{% if analyze.class != "spo" %}
 				<p>
