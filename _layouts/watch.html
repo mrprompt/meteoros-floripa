@@ -21,8 +21,8 @@
 				<span><i class="fa fa-clock"></i> Hora: {{ page.date | date: '%H:%M:%S' }} UTC</span><br>
 				{% if analyze %}
 				<span><i class="fa fa-meteor"></i> Classe: {{ analyze.class }}</span><br>
-				<span><i class="fa fa-sun"></i> Magnitude: {{ analyze.magnitude }}</span><br>
-				<span><i class="fa fa-stopwatch-20"></i> Duração: {{ analyze.duration }}</span><br>
+				<span><i class="fa fa-sun"></i> Magnitude: {{ analyze.magnitude | round: 2 }}</span><br>
+				<span><i class="fa fa-stopwatch-20"></i> Duração: {{ analyze.duration | round: 2 }}s</span><br>
 				{% else %}
 				<span><i class="fa fa-meteor"></i> Classe: não analisado</span><br>
 				<span><i class="fa fa-sun"></i> Magnitude: não analisado</span><br>
@@ -36,14 +36,17 @@
 				<p>
 					Fenômeno registrado em {{ page.date | date: '%d/%m/%Y' }} por volta das {{ page.date | date: '%H:%M:%S' }} (UTC)
 					pela câmera {{ station }} da estação de monitoramento de {{ site.city }}. <br>
-					A fase luminosa, que durou {{ analyze.duration }} segundos, teve um pico de magnitude de {{ analyze.magnitude }},
-					iniciou-se no azimute {{ analyze.azimute_start }} com uma elevação de {{ analyze.elevation_start }}° e altitude estimada
-					de {{ analyze.altitude_start }} km sobre as coordenadas {{ analyze.latitude_start }}, {{ analyze.longitude_start }}.
+					A fase luminosa, que durou {{ analyze.duration }} segundos, teve um pico de magnitude de {{ analyze.magnitude | round: 2 }},
+					iniciou-se no azimute {{ analyze.azimute_start | round: 2 }} com uma elevação de {{ analyze.elevation_start | round: 2 }}° e altitude estimada
+					de {{ analyze.altitude_start | round: 2 }} km sobre as coordenadas {{ analyze.latitude_start | round: 2 }}, {{ analyze.longitude_start | round: 2 }}.
 				</p>
 				<p>
-					O meteoro entrou na atmosfera com uma velocidade inicial estimada de {{ analyze.velocity }} km/s.<br>
-					O trajeto visível desapareceu no azimute {{ analyze.azimute_final }} com {{ analyze.elevation_final }}° de elevação e
-					altitude provável de {{ analyze.altitude_final }} km sobre as coordenadas {{ analyze.latitude_final }}, {{ analyze.longitude_final }}.
+					{% if analyze.velocity > 0 %}
+						O meteoro entrou na atmosfera com uma velocidade inicial estimada de {{ analyze.velocity | round: 2 }} km/s.<br>
+					{% endif %}
+					
+					O trajeto visível desapareceu no azimute {{ analyze.azimute_final | round: 2 }} com {{ analyze.elevation_final | round: 2 }}° de elevação e
+					altitude provável de {{ analyze.altitude_final | round: 2 }} km sobre as coordenadas {{ analyze.latitude_final | round: 2 }}, {{ analyze.longitude_final | round: 2 }}.
 				</p>
 				{% if analyze.class != "spo" %}
 				<p>
@@ -51,7 +54,7 @@
 					identificada pelo código {{ shower.IAUNo }} {{ shower.Code }} da IAU.<br>
 
 					{% if shower.Parent != "" and shower.Parent != " " %}
-					Esta chuva está relacionada ao corpo parental: {{ shower.Parent }}.
+						Esta chuva está relacionada ao corpo parental: {{ shower.Parent }}.
 					{% endif %}
 				</p>
 				<br>
