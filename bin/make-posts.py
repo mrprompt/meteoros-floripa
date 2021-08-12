@@ -16,11 +16,8 @@ from b2sdk.v1 import *
 from b2sdk.v1 import ScanPoliciesManager
 from b2sdk.v1 import parse_sync_folder
 from b2sdk.v1 import Synchronizer
-from dotenv import load_dotenv
 from PIL import ImageChops, Image
 
-
-load_dotenv()
 
 PATH = os.path.dirname(__file__)
 PATH_OF_GIT_REPO = "{}/../".format(PATH)
