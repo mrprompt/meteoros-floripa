@@ -449,8 +449,8 @@ if __name__ == '__main__':
         print("- Nothing to do")
         exit(0)
 
-    print("- Cleaning files")
-    cleanup()
+    # print("- Cleaning files")
+    # cleanup()
 
     print("- Organizing captures")
     organize_captures(captures)
