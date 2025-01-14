@@ -9,10 +9,11 @@
 
 			{% assign image = page.capture | replace: 'T.jpg', 'P.jpg' %}
 			{% assign station = image | split: "/" | first %}
+			{% assign arquivo = image | split: "/" | last %}
 			{% assign analyze = site.data.analyzers[ image ] %}
 			<div class="post-description embed-responsive embed-responsive-16by9">
 				<video width="100%" controls autoplay loop id="videoPlayer" class="embed-responsive-item">
-					<source src="{{ page.capture | replace: 'T.jpg', '.mp4' | prepend: site.storage_url }}" type="video/mp4" id="videoSource">
+					<source src="/videos/{{ arquivo | replace: 'P.jpg', '.mp4' }}" type="video/mp4" id="videoSource">
 					Seu navegador não suporta a tag de vídeo.
 				</video>
 			</div>

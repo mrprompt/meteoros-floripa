@@ -8,9 +8,11 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.pt-BR.min.js" integrity="sha512-mVkLPLQVfOWLRlC2ZJuyX5+0XrTlbW2cyAwyqgPkLGxhoaHNSWesYMlcUjX8X+k45YB8q90s88O7sos86636NQ==" crossorigin="anonymous"></script>
     <script async src="//www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}"></script>
     <script>
+	let datalimit = $('.post-content .post-title h2 a').first().text();
+
         $('.link.date')
             .datepicker({
-            format: "yyyy/mm/dd",
+            format: '2023/05/28',
             language: "pt-BR",
             autoclose: true,
             endDate: '0d',
@@ -44,15 +46,6 @@
 
             $('#back-to-top').tooltip('show');
         });
-
-        window.dataLayer = window.dataLayer || [];
-
-        function gtag(){
-            dataLayer.push(arguments);
-        }
-
-        gtag('js', new Date());
-        gtag('config', '{{ site.google_analytics }}');
     </script>
 </body>
 </html>
