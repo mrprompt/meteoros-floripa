@@ -188,7 +188,7 @@ def generate_posts():
 def generate_watches():
     def convert_video(video_input: str, video_output: str):
         convert_command = [
-            'ffmpeg',
+            'c:/bramon/tools/ffmpeg',
             '-n',
             '-i',
             video_input,
@@ -471,7 +471,7 @@ if __name__ == '__main__':
     generate_analyzers()
 
     print("- Upload captures")
-    upload_captures(captures_dir)
+    # upload_captures(captures_dir)
 
     print("- Push to git")
     git_push()
