@@ -15,7 +15,7 @@ storage_url: "/storage/"
 simple_form_token: 5da33a3875b2782c0143c966613ebc60
 ffmpeg_path: "C:/bramon/tools"
 build:
-  days: 15
+  days: 30
   captures:
     - "C:/bramon/!data"
 
