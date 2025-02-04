@@ -10,8 +10,7 @@ permalink: pretty
 paginate: 24
 pagination_path: "/:num"
 google_analytics: "UA-148905542-1"
-s3_bucket: "meteoros"
-storage_url: "/storage/"
+storage_url: "https://storage.meteoros.floripa.br/"
 simple_form_token: 5da33a3875b2782c0143c966613ebc60
 ffmpeg_path: "C:/bramon/tools"
 build:
