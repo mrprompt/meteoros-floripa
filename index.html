@@ -3,14 +3,17 @@ layout: default
 ---
 <!--start: Container-->
 <div class="container">
+	{% if config.manutencao == true %}
 	<div class="row">
-		<h1>Site em atualização</h1>
-
-		<p>O servidor está sendo migrado para uma nova estrutura, tenha paciência que logo as capturas retornam.</p>
+		<div class="alert alert-info">
+			<h1>Site em atualização</h1>
+			<p>O servidor está sendo migrado para uma nova estrutura, tenha paciência que logo as capturas retornam.</p>
+		</div>
 	</div>
+	{% endif %}
 	
     <!-- start: Post -->
-	<div class="row">
+    <div class="row">
     {% for post in paginator.posts %}
         {% assign filter = post.date | date: '%Y%m%d' %}
         {% assign capture_collections = site.captures | where: "label", filter | sort: "date" %}
@@ -40,12 +43,12 @@ layout: default
             </div>
         </div>
     {% endfor %}
-	</div>
+    </div>
     <!-- end: Post -->
 
-	<!--start: Row -->
+    <!--start: Row -->
 	<div class="row">
-        {% include pagination.html %}
+		{% include pagination.html %}
 	</div>
 	<!--end: Row -->
 </div>
