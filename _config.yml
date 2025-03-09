@@ -1,3 +1,4 @@
+# Base config
 title: Meteoros Floripa
 description: Estações de capturas de meteoros em Florianópolis/SC
 url: "https://meteoros.floripa.br"
@@ -9,6 +10,8 @@ timezone: UTC
 permalink: pretty
 paginate: 24
 pagination_path: "/:num"
+
+# Tools config
 google_analytics: "UA-148905542-1"
 storage_url: "https://storage.meteoros.floripa.br/"
 simple_form_token: 5da33a3875b2782c0143c966613ebc60
@@ -21,18 +24,9 @@ build:
 stations:
   - TLP1
   - TLP2
-  - TLP3
-  - TLP4
-  - TLP5
-  - TLP6
-  - TLP7
-  - TLP8
-  - TLP9
-  - TLP10
 
 exclude:
   - bin
-  - docker-compose.yml
 
 plugins:
   - jekyll-sitemap
