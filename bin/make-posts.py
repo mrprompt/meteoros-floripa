@@ -7,13 +7,11 @@ import re
 import sqlite3
 import subprocess
 import yaml
-import time
-import sys
 from xml.dom import minidom
 from typing import List
 from git import Repo
 from PIL import ImageChops, Image
-
+from robocopy import robocopy
 
 PATH = os.path.dirname(__file__)
 PATH_OF_GIT_REPO = "{}/../".format(PATH)
@@ -389,6 +387,17 @@ def git_push():
         print('Some error occurred while pushing the code')
 
 
+def upload_captures(source: str, captures_dest: str, videos_dest: str):
+    try:
+        print("  - uploading captures")
+        robocopy.copy(captures_dest, captures_dest, "/xf *.mp4 /xo")
+
+        print("  - uploading videos")
+        robocopy.copy(captures_dest + '/*.mp4', videos_dest, "/xo")
+    except Exception as e:
+        print('Some error occurred while pushing the code: ' + str(e))
+
+
 if __name__ == '__main__':
     print("- Connecting to database")
     connection = sqlite3.connect(':memory:')
@@ -423,6 +432,9 @@ if __name__ == '__main__':
 
     print("- Creating analyzers")
     generate_analyzers()
+
+    print("- Uploading captures")
+    upload_captures(PATH_OF_SITE_CAPTURES, config['storage']['captures'], config['storage']['videos'])
 
     print("- Push to git")
     git_push()

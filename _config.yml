@@ -13,18 +13,27 @@ pagination_path: "/:num"
 
 # Tools config
 google_analytics: "UA-148905542-1"
-storage_url: "https://storage.meteoros.floripa.br/"
 simple_form_token: 5da33a3875b2782c0143c966613ebc60
 ffmpeg_path: "C:/bramon/tools"
+
+# Storage config
+storage:
+  url: "https://storage.meteoros.floripa.br/"
+  captures: "D:/BRAMON"
+  videos: "D:/Meteoros"
+
+# Build config
 build:
-  days: 7
+  days: 2
   captures:
     - "C:/bramon/!data"
 
+# Stations enabled
 stations:
   - TLP1
   - TLP2
 
+# Jekyll config
 exclude:
   - bin
 
