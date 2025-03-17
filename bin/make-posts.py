@@ -389,11 +389,11 @@ def git_push():
 def upload_captures(sources: list, captures_dest: str, videos_dest: str):
     for source in sources:
         try:
-            print("  - uploading captures")
-            robocopy.copy(source, captures_dest, "/xf *.mp4 /xo")
+            # print("  - uploading captures")
+            # robocopy.copy(source, captures_dest, "/xf *.mp4 /xo")
 
             print("  - uploading videos")
-            robocopy.copy(source + '/*.mp4', videos_dest, "/xo")
+            robocopy.copy(source, videos_dest, "*.mp4 /xo")
         except Exception as e:
             print('Some error occurred while pushing the code: ' + str(e))
 
