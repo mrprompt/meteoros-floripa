@@ -2,3 +2,4 @@ GitPython
 PyYAML
 Pillow
 py-robocopy
+scp

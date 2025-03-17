@@ -393,7 +393,7 @@ def upload_captures(sources: list, captures_dest: str, videos_dest: str):
             robocopy.copy(source, captures_dest, "/xf *.mp4 /xo")
 
             print("  - uploading videos")
-            robocopy.copy(source, videos_dest, "*.mp4 /xo")
+            robocopy.copy(source, videos_dest, "*.mp4 /xo /xjd")
         except Exception as e:
             print('Some error occurred while pushing the code: ' + str(e))
 
@@ -404,12 +404,9 @@ if __name__ == '__main__':
 
     print("- Loading site configuration")
     config = load_config()
-    days_back = config['build']['days']
-    captures_dir = config['build']['captures']
-    stations = config['build']['stations']
 
     print('- Reading captures')
-    captures = get_matching_captures(captures_dir, days_back)
+    captures = get_matching_captures(config['build']['captures'], config['build']['days'])
 
     if len(captures) == 0:
         print("- Nothing to do")
@@ -418,8 +415,8 @@ if __name__ == '__main__':
     print("- Organizing captures")
     organize_captures(captures)
 
-    print("- Creating stations files")
-    generate_stations(stations)
+    # print("- Creating stations files")
+    # generate_stations(config['build']['stations'])
 
     print("- Creating captures")
     generate_captures()
