@@ -21,7 +21,7 @@
                         {% assign stations = site.stations | sort: 'navigation_weight' %}
 
                         {% for station in stations %}
-                        <li><a href="{{ '/stations/' | prepend: site.url | append: station.station }}">{{ station.station | upcase }}</a></li>
+                        <li><a href="{{ '/stations/' | prepend: site.url | append: station.station }}">{% if station.status == 'ativa' %}{{ station.station | upcase }}{% else %}<s>{{ station.station | upcase }}</s>{% endif %}</span></a></li>
                         {% endfor %}
                     </ul>
                 </li>
