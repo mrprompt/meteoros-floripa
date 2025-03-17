@@ -387,15 +387,16 @@ def git_push():
         print('Some error occurred while pushing the code')
 
 
-def upload_captures(source: str, captures_dest: str, videos_dest: str):
-    try:
-        print("  - uploading captures")
-        robocopy.copy(captures_dest, captures_dest, "/xf *.mp4 /xo")
+def upload_captures(sources: list, captures_dest: str, videos_dest: str):
+    for source in sources:
+        try:
+            print("  - uploading captures")
+            robocopy.copy(source, captures_dest, "/xf *.mp4 /xo")
 
-        print("  - uploading videos")
-        robocopy.copy(captures_dest + '/*.mp4', videos_dest, "/xo")
-    except Exception as e:
-        print('Some error occurred while pushing the code: ' + str(e))
+            print("  - uploading videos")
+            robocopy.copy(source + '/*.mp4', videos_dest, "/xo")
+        except Exception as e:
+            print('Some error occurred while pushing the code: ' + str(e))
 
 
 if __name__ == '__main__':
@@ -406,7 +407,7 @@ if __name__ == '__main__':
     config = load_config()
     days_back = config['build']['days']
     captures_dir = config['build']['captures']
-    stations = config['stations']
+    stations = config['build']['stations']
 
     print('- Reading captures')
     captures = get_matching_captures(captures_dir, days_back)
@@ -434,7 +435,7 @@ if __name__ == '__main__':
     generate_analyzers()
 
     print("- Uploading captures")
-    upload_captures(PATH_OF_SITE_CAPTURES, config['storage']['captures'], config['storage']['videos'])
+    upload_captures(config['build']['captures'], config['storage']['captures'], config['storage']['videos'])
 
     print("- Push to git")
     git_push()

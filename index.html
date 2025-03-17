@@ -5,7 +5,7 @@ layout: default
 <div class="container">
     <!-- start: Post -->
     <div class="row">
-    {% for post in paginator.posts %}
+    {% for post in site.posts %}
         {% assign filter = post.date | date: '%Y%m%d' %}
         {% assign capture_collections = site.captures | where: "label", filter | sort: "date" %}
         {% assign counter = 0 %}
@@ -36,13 +36,5 @@ layout: default
     {% endfor %}
     </div>
     <!-- end: Post -->
-
-    {% comment %}
-    <!--start: Row -->
-	<div class="row">
-		{% include pagination.html %}
-	</div>
-	<!--end: Row -->
-    {% endcomment %}
 </div>
 <!--end: Container-->
