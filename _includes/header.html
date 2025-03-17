@@ -80,12 +80,12 @@
                             {% assign stations = site.stations | sort: 'navigation_weight' %}
 
                             {% for station in stations %}
-                            <li><a href="{{ '/stations/' | prepend: site.url | append: station.station }}">{% if station.status == 'ativa' %}{{ station.station | upcase }}{% else %}<s>{{ station.station | upcase }}</s>{% endif %}</span></a></li>
+                            <li><i class="fa fa-broadcast-tower"></i> <a href="{{ '/stations/' | prepend: site.url | append: station.station }}">{% if station.status == 'ativa' %}{{ station.station | upcase }}{% else %}<s>{{ station.station | upcase }}</s>{% endif %}</span></a></li>
                             {% endfor %}
                         </ul>
                     </li>
                     <li>
-                        <a href="https://bramon.imo.net/members/imo/report_intro" target="_blank">Reporte um Bólido <i class="fas fa-external-link-alt"></i></a>
+                        <a href="https://bramon.imo.net/members/imo/report_intro" target="_blank"><i class="fa fa-meteor"></i> Reporte um Bólido <i class="fas fa-external-link-alt"></i></a>
                     </li>
                 </ul>
                 <!-- /site pages -->
