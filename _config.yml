@@ -18,7 +18,6 @@ maintenance: false
 
 # Tools config
 simple_form_token: 5da33a3875b2782c0143c966613ebc60
-ffmpeg_path: "C:/bramon/tools"
 
 # Storage config
 storage:
@@ -34,6 +33,9 @@ build:
   stations:
     - TLP1
     - TLP2
+  converter:
+    path: "C:/bramon/tools/ffmpeg.exe"
+    options: "xx"
 
 # Jekyll exclude from build
 exclude:

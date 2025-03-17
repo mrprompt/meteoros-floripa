@@ -179,10 +179,10 @@ def generate_posts():
         filehandle.close()
 
 
-def generate_watches():
-    def convert_video(video_input: str, video_output: str):
+def generate_watches(converter_path: str, converter_options: str):
+    def convert_video(video_input: str, video_output: str, converter_path: str, converter_options: str):
         convert_command = [
-            'c:/bramon/tools/ffmpeg',
+            converter_path,
             '-n',
             '-i',
             video_input,
@@ -206,7 +206,6 @@ def generate_watches():
     """)
 
     for data in connection_cursor.fetchall():
-        night_start = str(data[0])
         station = str(data[1])
         file = str(data[2])
         file_input = data[3].replace('P.jpg', '.avi')
@@ -222,7 +221,7 @@ def generate_watches():
         second = capture_base_filename_spliced[1][4:6]
 
         if os.path.exists(file_input) and not os.path.exists(file_output):
-            convert_video(file_input, file_output)
+            convert_video(file_input, file_output, converter_path, converter_options)
 
         post_filename = PATH_OF_WATCH_CAPTURES + "{}.md".format(capture_base_filename.replace('P.jpg', ''))
 
@@ -429,7 +428,7 @@ if __name__ == '__main__':
     generate_posts()
 
     print("- Creating watches")
-    generate_watches()
+    generate_watches(config['build']['converter']['path'], config['build']['converter']['options'])
 
     print("- Creating analyzers")
     generate_analyzers()
