@@ -3,15 +3,6 @@ layout: default
 ---
 <!--start: Container-->
 <div class="container">
-	{% if config.manutencao == true %}
-	<div class="row">
-		<div class="alert alert-info">
-			<h1>Site em atualização</h1>
-			<p>O servidor está sendo migrado para uma nova estrutura, tenha paciência que logo as capturas retornam.</p>
-		</div>
-	</div>
-	{% endif %}
-	
     <!-- start: Post -->
     <div class="row">
     {% for post in paginator.posts %}

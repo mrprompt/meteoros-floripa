@@ -4,6 +4,8 @@ description: Estações de capturas de meteoros em Florianópolis/SC
 url: "https://meteoros.floripa.br"
 baseurl: "/"
 city: "Florianópolis-SC"
+
+# Jekyll configurations
 encoding: UTF-8
 highlighter: rouge
 timezone: UTC
@@ -13,8 +15,11 @@ pagination_path: "/:num"
 limit_posts: 24
 incremental: true
 
+# Maintenance mode
+maintenance: false
+
 # Tools config
-google_analytics: "UA-148905542-1"
+google_analytics: "G-RBCV8VMKNS"
 simple_form_token: 5da33a3875b2782c0143c966613ebc60
 ffmpeg_path: "C:/bramon/tools"
 
@@ -29,16 +34,15 @@ build:
   days: 2
   captures:
     - "C:/bramon/!data"
+  stations:
+    - TLP1
+    - TLP2
 
-# Stations enabled
-stations:
-  - TLP1
-  - TLP2
-
-# Jekyll config
+# Jekyll exclude from build
 exclude:
   - bin
 
+# Jekyll plugins enabled
 plugins:
   - jekyll-github-metadata
   - jekyll-sitemap
@@ -46,9 +50,7 @@ plugins:
   - jekyll-feed
   - jemoji
 
-sass:
-  style: compressed
-
+# Collections to build
 collections:
   captures:
     output: true
