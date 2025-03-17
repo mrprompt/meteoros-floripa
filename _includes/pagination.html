@@ -9,19 +9,15 @@
             {% endif %}
         </li>
 
-        {% comment %}
-            {% for page in (1..paginator.total_pages) %}
-            <li>
-                {% if page == paginator.page %}
-                <a href="#" class="btn btn-md">{{ page }}</a>
-                {% elsif page == 1 %}
-                <a href="{{ '/' | prepend: site.baseurl | replace: '//', '/' }}" class="btn btn-md">{{ page }}</a>
-                {% else %}
-                <a href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}" class="btn btn-md">{{ page }}</a>
-                {% endif %}
-            </li>
-            {% endfor %}
-        {% endcomment %}
+        <li>
+            <form method="get">
+                <select name="pagina" id="paginacao">
+                {% for page in (1..paginator.total_pages) %}
+                    <option value="{{ page }}">{{page}}</option>
+                {% endfor %}
+                </select>
+            </form>
+        </li>
 
         <li>
             {% if paginator.next_page %}

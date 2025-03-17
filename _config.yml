@@ -10,6 +10,8 @@ timezone: UTC
 permalink: pretty
 paginate: 24
 pagination_path: "/:num"
+limit_posts: 24
+incremental: true
 
 # Tools config
 google_analytics: "UA-148905542-1"
@@ -17,7 +19,7 @@ storage_url: "https://storage.meteoros.floripa.br/"
 simple_form_token: 5da33a3875b2782c0143c966613ebc60
 ffmpeg_path: "C:/bramon/tools"
 build:
-  days: 7
+  days: 2
   captures:
     - "C:/bramon/!data"
 
@@ -29,9 +31,11 @@ exclude:
   - bin
 
 plugins:
+  - jekyll-github-metadata
   - jekyll-sitemap
   - jekyll-paginate
   - jekyll-feed
+  - jemoji
 
 sass:
   style: compressed
