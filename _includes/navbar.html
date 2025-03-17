@@ -21,7 +21,7 @@
                         {% assign stations = site.stations | sort: 'navigation_weight' %}
 
                         {% for station in stations %}
-                        <li><a href="{{ '/stations/' | prepend: site.url | append: station.station }}">{{ station.station | upcase }} - <span class="badge badge-pill badge-{% if station.status == 'ativa' %}primary{% else %}secondary{% endif %}">{{ station.status }}</span></a></li>
+                        <li><a href="{{ '/stations/' | prepend: site.url | append: station.station }}">{{ station.station | upcase }} - <span class="bg-{% if station.status == 'ativa' %}primary{% else %}danger{% endif %}">{{ station.status }}</span></a></li>
                         {% endfor %}
                     </ul>
                 </li>
