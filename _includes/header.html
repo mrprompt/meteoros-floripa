@@ -74,8 +74,11 @@
             <div id="navbar" class="navbar-collapse collapse">
                 <!-- site pages -->
                 <ul class="nav navbar-nav">
+                    <li>
+                        <a href="{{ '/' | prepend: site.url }}"><i class="fa fa-home"></i> Início</a>
+                    </li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Estações <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-broadcast-tower"></i> Estações <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             {% assign stations = site.stations | sort: 'navigation_weight' %}
 
@@ -83,6 +86,9 @@
                             <li><a href="{{ '/stations/' | prepend: site.url | append: station.station }}"><i class="fa fa-broadcast-tower"></i> {% if station.status == 'ativa' %}{{ station.station | upcase }}{% else %}<s>{{ station.station | upcase }}</s>{% endif %}</span></a></li>
                             {% endfor %}
                         </ul>
+                    </li>
+                    <li>
+                        <a href="https://www.bramonmeteor.org/bramon/a-bramon/como-montar-uma-estacao-bramon/" target="_blank"><i class="fas fa-desktop"></i> Monte sua estação <i class="fas fa-external-link-alt"></i></a>
                     </li>
                     <li>
                         <a href="https://bramon.imo.net/members/imo/report_intro" target="_blank"><i class="fa fa-meteor"></i> Reporte um Bólido <i class="fas fa-external-link-alt"></i></a>

@@ -18,6 +18,9 @@ incremental: true
 # Maintenance mode
 maintenance: false
 
+# Development mode
+environment: "development"
+
 # Tools config
 google_analytics: "G-RBCV8VMKNS"
 simple_form_token: 5da33a3875b2782c0143c966613ebc60
@@ -44,11 +47,11 @@ exclude:
 
 # Jekyll plugins enabled
 plugins:
-  - jekyll-github-metadata
+  # - jekyll-github-metadata
   - jekyll-sitemap
-  - jekyll-paginate
-  - jekyll-feed
-  - jemoji
+  # - jekyll-paginate
+  # - jekyll-feed
+  # - jemoji
 
 # Collections to build
 collections:
@@ -60,3 +63,9 @@ collections:
 
   watches:
     output: true
+
+# Feed config
+feed:
+  icon: /assets/favicon.png
+  logo: /assets/logo.png
+  disable_in_development: true
