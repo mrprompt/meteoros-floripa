@@ -56,6 +56,14 @@
         <link rel="icon" type="image/x-icon" href="{{ '/assets/favicon.ico' | prepend: site.url }}">
     </head>
 <body>
+    {% if jekyll.environment == "development" %}
+	<div class="row">
+		<div class="alert alert-info">
+			<p>development mode</p>
+		</div>
+	</div>
+    {% endif %}
+    
     <!-- Static navbar -->
     <nav class="navbar navbar-default">
         <div class="container">

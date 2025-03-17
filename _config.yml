@@ -16,11 +16,7 @@ incremental: true
 # Maintenance mode
 maintenance: false
 
-# Development mode
-# environment: "development"
-
 # Tools config
-google_analytics: "G-RBCV8VMKNS"
 simple_form_token: 5da33a3875b2782c0143c966613ebc60
 ffmpeg_path: "C:/bramon/tools"
 

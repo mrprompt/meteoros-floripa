@@ -17,6 +17,7 @@ ifeq ($(shell docker ps -f name=meteoros-floripa-http | wc -l | tr -d '[:space:]
 		--rm \
 		--name meteoros-floripa-http \
 		-v $(PWD):/usr/src/app \
+		-e JEKYLL_ENV="development" \
 		-p 4000:4000 \
 		-d starefossen/github-pages
 else
