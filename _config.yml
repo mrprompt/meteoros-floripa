@@ -17,7 +17,7 @@ incremental: true
 maintenance: false
 
 # Development mode
-environment: "development"
+# environment: "development"
 
 # Tools config
 google_analytics: "G-RBCV8VMKNS"
