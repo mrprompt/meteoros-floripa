@@ -243,11 +243,12 @@ def generate_analyzers():
     FROM captures
     GROUP BY night_start, station
     """)
+    
+    analyzers_file = PATH_OF_ANALYZERS + "analyzers.yaml"
 
     for data in connection_cursor.fetchall():
         night_start = str(data[0])
         station = str(data[1])
-        capture_filename = PATH_OF_ANALYZERS + "analyzers.yaml"
 
         connection_cursor.execute("""
             SELECT id, night_start, station, files, files_full_path
@@ -298,7 +299,7 @@ def generate_analyzers():
 
             base = re.findall("\w{3}\d{1,2}.+", capture[3])
 
-            filehandle = open(capture_filename, "a")
+            filehandle = open(analyzers_file, "a")
             filehandle.write("{}:\n".format(base[0]))
             filehandle.write("  station: {}\n".format(station))
             filehandle.write("  class: {}\n".format(classe))
@@ -346,7 +347,7 @@ def fix_path_delimiter(captures_list: list):
     return result
 
 
-def cleanup():
+def cleanup(days: int):
     def delete_files(files_to_delete):
         fix_paths = fix_path_delimiter(files_to_delete)
 
@@ -364,7 +365,7 @@ def cleanup():
 
         delete_files(result)
 
-    cleanup_captures(days_back)
+    cleanup_captures(days)
 
 
 def git_push():
@@ -392,8 +393,8 @@ def upload_captures(sources: list, captures_dest: str, videos_dest: str):
             print("  - uploading captures")
             robocopy.copy(source, captures_dest, "/xf *.mp4 /xo")
 
-            # print("  - uploading videos")
-            # robocopy.copy(source, videos_dest, "*.mp4 /xo /xjd")
+            print("  - uploading videos")
+            robocopy.copy(source, videos_dest, "*.mp4 /xo /xjd")
         except Exception as e:
             print('Some error occurred while pushing the code: ' + str(e))
 
@@ -405,6 +406,12 @@ if __name__ == '__main__':
     print("- Loading site configuration")
     config = load_config()
 
+    # print("- Creating stations files")
+    # generate_stations(config['build']['stations'])
+
+    # print('- Cleanup unprocessed captures')
+    # cleanup(config['build']['days'])
+
     print('- Reading captures')
     captures = get_matching_captures(config['build']['captures'], config['build']['days'])
 
@@ -414,9 +421,6 @@ if __name__ == '__main__':
 
     print("- Organizing captures")
     organize_captures(captures)
-
-    # print("- Creating stations files")
-    # generate_stations(config['build']['stations'])
 
     print("- Creating captures")
     generate_captures()
