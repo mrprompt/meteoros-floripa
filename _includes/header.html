@@ -95,11 +95,22 @@
                             {% endfor %}
                         </ul>
                     </li>
-                    <li>
-                        <a href="https://www.bramonmeteor.org/bramon/a-bramon/como-montar-uma-estacao-bramon/" target="_blank"><i class="fas fa-desktop"></i> Monte sua estação <i class="fas fa-external-link-alt"></i></a>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-broadcast-tower"></i> Saiba mais <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="https://www.bramonmeteor.org/bramon/" target="_blank"><i class="fas fa-desktop"></i> Sobre a BRAMON <i class="fas fa-external-link-alt"></i></a>
+                            </li>
+                            <li>
+                                <a href="https://www.bramonmeteor.org/bramon/a-bramon/como-montar-uma-estacao-bramon/" target="_blank"><i class="fas fa-desktop"></i> Monte sua estação <i class="fas fa-external-link-alt"></i></a>
+                            </li>
+                            <li>
+                                <a href="https://bramon.imo.net/members/imo/report_intro" target="_blank"><i class="fa fa-meteor"></i> Reporte um Bólido <i class="fas fa-external-link-alt"></i></a>
+                            </li>
+                        </ul>
                     </li>
                     <li>
-                        <a href="https://bramon.imo.net/members/imo/report_intro" target="_blank"><i class="fa fa-meteor"></i> Reporte um Bólido <i class="fas fa-external-link-alt"></i></a>
+                        <a href="{{ '/perguntas-e-respostas' | prepend: site.baseurl }}"><i class="fas fa-sticky-note"></i> FAQ</a>
                     </li>
                     <li>
                         <a href="{{ '/o-projeto' | prepend: site.baseurl }}"><i class="fas fa-sticky-note"></i> Sobre</a>
