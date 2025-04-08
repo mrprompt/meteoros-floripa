@@ -27,7 +27,7 @@ storage:
 
 # Build config
 build:
-  days: 7
+  days: 2
   captures:
     - "C:/bramon/!data"
   stations:
