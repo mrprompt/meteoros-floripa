@@ -41,6 +41,7 @@ build:
 exclude:
   - bin
   - venv
+  - Makefile
 
 # Jekyll plugins enabled
 plugins:
