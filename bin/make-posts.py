@@ -406,12 +406,6 @@ if __name__ == '__main__':
     print("- Loading site configuration")
     config = load_config()
 
-    # print("- Creating stations files")
-    # generate_stations(config['build']['stations'])
-
-    # print('- Cleanup unprocessed captures')
-    # cleanup(config['build']['days'])
-
     print('- Reading captures')
     captures = get_matching_captures(config['build']['captures'], config['build']['days'])
 
