@@ -393,8 +393,10 @@ def upload_captures(sources: list, captures_dest: str, videos_dest: str):
             print("  - uploading captures")
             robocopy.copy(source, captures_dest, "/xf *.mp4 /xo")
 
+            """
             print("  - uploading videos")
             robocopy.copy(source, videos_dest, "*.mp4 /xo /xjd")
+            """
         except Exception as e:
             print('Some error occurred while pushing the code: ' + str(e))
 
