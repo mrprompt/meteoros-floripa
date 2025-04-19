@@ -133,13 +133,17 @@
     </nav>
 
 	{% if site.maintenance == true %}
-	<div class="jumbotron">
-		<h1>Em manutenção</h1>
-		<p>
-			O site está passando por um período de manutenção e logo retornará a normalidade. <br> 
-			Por favor, desconsidere qualquer problema.
-		</p>
+	<!-- Maintenance Container -->
+	<div class="container">
+		<div class="jumbotron">
+			<h1>Em manutenção</h1>
+			<p>
+				O site está passando por um período de manutenção e logo retornará a normalidade. <br> 
+				Por favor, desconsidere qualquer problema.
+			</p>
+		</div>
 	</div>
+	<!-- /Maintenance Container -->
 	{% endif %}
 
 
