@@ -17,7 +17,7 @@ layout: default
         {% assign preview_rand = capture_collections | sample: 3 %}
         {% assign preview = preview_rand[0] %}
 
-        <div class="post-content col-lg-3 col-xs-12">
+        <div class="post-content col-lg-3 col-md-6 col-xs-12">
             <div class="post-title">
                 <h2 class="nobreak"><a href="{{ post.url | prepend: site.url }}">{{ post.title }}</a></h2>
             </div>
