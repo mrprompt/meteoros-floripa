@@ -398,7 +398,7 @@ def upload_captures(sources: list, captures_dest: str):
             print("  - uploading captures")
             robocopy.copy(source, captures_dest, "/xf *.mp4 /xf *.avi /xo")
         except Exception as e:
-            print('Some error occurred while pushing the code: ' + str(e))
+            print('Some error occurred uploading capture: ' + str(e))
 
 
 if __name__ == '__main__':
