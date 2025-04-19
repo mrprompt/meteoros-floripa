@@ -13,7 +13,7 @@
 			{% assign analyze = site.data.analyzers[ image ] %}
 			<div class="post-description embed-responsive embed-responsive-16by9">
 				<video width="100%" controls autoplay loop id="videoPlayer" class="embed-responsive-item">
-					<source src="{{ arquivo | replace: 'P.jpg', '.mp4' | prepend: "videos/" | prepend: site.storage.url }}" type="video/mp4" id="videoSource">
+					<source src="{{ arquivo | replace: 'P.jpg', '.mp4' | prepend: "videos/" | prepend: site.build.storage.url }}" type="video/mp4" id="videoSource">
 					Seu navegador não suporta a tag de vídeo.
 				</video>
 			</div>
