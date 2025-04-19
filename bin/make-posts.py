@@ -179,26 +179,7 @@ def generate_posts():
         filehandle.close()
 
 
-def generate_watches(converter_path: str, converter_options: str):
-    def convert_video(video_input: str, video_output: str, converter_path: str, converter_options: str):
-        convert_command = [
-            converter_path,
-            '-n',
-            '-i',
-            video_input,
-            '-c:v',
-            'libx264',
-            '-profile:v',
-            'baseline',
-            '-level',
-            '3.0',
-            '-pix_fmt',
-            'yuv420p',
-            video_output
-        ]
-
-        subprocess.Popen(convert_command)
-
+def generate_watches():
     connection_cursor = connection.cursor()
     connection_cursor.execute("""
     SELECT night_start, station, files, files_full_path
@@ -208,8 +189,6 @@ def generate_watches(converter_path: str, converter_options: str):
     for data in connection_cursor.fetchall():
         station = str(data[1])
         file = str(data[2])
-        file_input = data[3].replace('P.jpg', '.avi')
-        file_output = data[3].replace('P.jpg', '.mp4')
         capture_spliced = file.split('/')
         capture_base_filename = capture_spliced[-1]
         capture_base_filename_spliced = capture_base_filename.split('_')
@@ -220,12 +199,7 @@ def generate_watches(converter_path: str, converter_options: str):
         minute = capture_base_filename_spliced[1][2:4]
         second = capture_base_filename_spliced[1][4:6]
 
-        if os.path.exists(file_input) and not os.path.exists(file_output):
-            convert_video(file_input, file_output, converter_path, converter_options)
-
-        post_filename = PATH_OF_WATCH_CAPTURES + "{}.md".format(capture_base_filename.replace('P.jpg', ''))
-
-        filehandle = open(post_filename, "w+")
+        filehandle = open(PATH_OF_WATCH_CAPTURES + "{}.md".format(capture_base_filename.replace('P.jpg', '')), "w+")
         filehandle.write("---\n")
         filehandle.write("layout: watch\n")
         filehandle.write("title: {} - {}/{}/{} - {}\n".format(station, day, month, year, capture_base_filename.replace('P.jpg', 'T.jpg')))
@@ -319,6 +293,37 @@ def generate_analyzers():
             filehandle.close()
 
 
+def generate_videos(converter_path: str, converter_options: str):
+    connection_cursor = connection.cursor()
+    connection_cursor.execute("""
+    SELECT files_full_path
+    FROM captures
+    """)
+
+    for data in connection_cursor.fetchall():
+        video_input = (data[0].replace('P.jpg', '.avi'))
+        video_output = (data[0].replace('P.jpg', '.mp4'))
+
+        convert_command = [
+            converter_path,
+            '-n',
+            '-i',
+            video_input,
+            '-c:v',
+            'libx264',
+            '-profile:v',
+            'baseline',
+            '-level',
+            '3.0',
+            '-pix_fmt',
+            'yuv420p',
+            video_output
+        ]
+
+        if os.path.exists(video_input) and not os.path.exists(video_output):
+            subprocess.Popen(convert_command)
+
+
 def get_date_list(days: int, date_format: str = '%Y%m%d'):
     return [(datetime.date.today() - datetime.timedelta(days=x)).strftime(date_format) for x in range(0, days)]
 
@@ -387,16 +392,11 @@ def git_push():
         print('Some error occurred while pushing the code')
 
 
-def upload_captures(sources: list, captures_dest: str, videos_dest: str):
+def upload_captures(sources: list, captures_dest: str):
     for source in sources:
         try:
             print("  - uploading captures")
-            robocopy.copy(source, captures_dest, "/xf *.mp4 /xo")
-
-            """
-            print("  - uploading videos")
-            robocopy.copy(source, videos_dest, "*.mp4 /xo /xjd")
-            """
+            robocopy.copy(source, captures_dest, "/xf *.mp4 /xf *.avi /xo")
         except Exception as e:
             print('Some error occurred while pushing the code: ' + str(e))
 
@@ -425,13 +425,16 @@ if __name__ == '__main__':
     generate_posts()
 
     print("- Creating watches")
-    generate_watches(config['build']['converter']['path'], config['build']['converter']['options'])
+    generate_watches()
+
+    print("- Creating video")
+    generate_videos(config['build']['converter']['path'], config['build']['converter']['options'])
 
     print("- Creating analyzers")
     generate_analyzers()
 
     print("- Uploading captures")
-    upload_captures(config['build']['captures'], config['storage']['captures'], config['storage']['videos'])
+    upload_captures(config['build']['captures'], config['build']['storage']['captures'])
 
     print("- Push to git")
     git_push()

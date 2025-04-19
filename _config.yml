@@ -19,12 +19,6 @@ maintenance: false
 # Tools config
 simple_form_token: 5da33a3875b2782c0143c966613ebc60
 
-# Storage config
-storage:
-  url: "https://storage.meteoros.floripa.br/"
-  captures: "D:/BRAMON"
-  videos: "D:/Meteoros"
-
 # Build config
 build:
   days: 2
@@ -35,7 +29,19 @@ build:
     - TLP2
   converter:
     path: "C:/bramon/tools/ffmpeg.exe"
-    options: "xx"
+    options:
+      - "-hide_banner"
+      - "-loglevel panic"
+      - "-i"
+      - "%input%"
+      - "-c:v copy"
+      - "-c:a copy"
+      - "-map 0"
+      - "-f mp4"
+      - "%output%"
+  storage:
+    url: "https://storage.meteoros.floripa.br/"
+    captures: "E:/capturas"
 
 # Jekyll exclude from build
 exclude:
