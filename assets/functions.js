@@ -1,20 +1,4 @@
 $(document).ready(function() {
-    $('.link.date')
-        .datepicker({
-        format: 'yyyy/mm/dd',
-        language: "pt-BR",
-        autoclose: true,
-        endDate: '0d',
-        startDate: '2018/08/28'
-    })
-    .on('hide', function(e) {
-        if (!e.date) {
-            return;
-        }
-
-        window.location.href = '/' + e.format('yyyy/mm/dd') + '/captures/';
-    });
-
     $(window).scroll(function () {
         if ($(this).scrollTop() > 50) {
             $('#back-to-top').fadeIn();
