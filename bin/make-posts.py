@@ -306,6 +306,9 @@ def generate_videos(converter_path: str, converter_options: str):
 
         convert_command = [
             converter_path,
+            '-loglevel',
+            'error',
+            '-hide_banner',
             '-nostats',
             '-n',
             '-i',
