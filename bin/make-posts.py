@@ -306,6 +306,7 @@ def generate_videos(converter_path: str, converter_options: str):
 
         convert_command = [
             converter_path,
+            '-nostats',
             '-n',
             '-i',
             video_input,
