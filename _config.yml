@@ -29,19 +29,10 @@ build:
     - TLP2
   converter:
     path: "C:/bramon/tools/ffmpeg.exe"
-    options:
-      - "-hide_banner"
-      - "-loglevel panic"
-      - "-i"
-      - "%input%"
-      - "-c:v copy"
-      - "-c:a copy"
-      - "-map 0"
-      - "-f mp4"
-      - "%output%"
   storage:
     url: "https://storage.meteoros.floripa.br/"
     captures: "E:/capturas"
+    videos: "E:/capturas/videos"
 
 # Jekyll exclude from build
 exclude:

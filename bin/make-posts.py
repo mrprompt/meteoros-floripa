@@ -7,6 +7,7 @@ import re
 import sqlite3
 import subprocess
 import yaml
+import shutil
 from xml.dom import minidom
 from typing import List
 from git import Repo
@@ -293,7 +294,7 @@ def generate_analyzers():
             filehandle.close()
 
 
-def generate_videos(converter_path: str, converter_options: str):
+def generate_videos(converter_path: str):
     connection_cursor = connection.cursor()
     connection_cursor.execute("""
     SELECT files_full_path
@@ -405,6 +406,20 @@ def upload_captures(sources: list, captures_dest: str):
             print('Some error occurred uploading capture: ' + str(e))
 
 
+def upload_videos(sources: list, videos_dest: str):
+    connection_cursor = connection.cursor()
+    connection_cursor.execute("""
+    SELECT files_full_path
+    FROM captures
+    """)
+
+    for data in connection_cursor.fetchall():
+        video_input = (data[0].replace('P.jpg', '.mp4'))
+        
+        shutil.copy(video_input, videos_dest)
+
+
+
 if __name__ == '__main__':
     print("- Connecting to database")
     connection = sqlite3.connect(':memory:')
@@ -432,13 +447,16 @@ if __name__ == '__main__':
     generate_watches()
 
     print("- Creating video")
-    generate_videos(config['build']['converter']['path'], config['build']['converter']['options'])
+    generate_videos(config['build']['converter']['path'])
 
     print("- Creating analyzers")
     generate_analyzers()
 
     print("- Uploading captures")
     upload_captures(config['build']['captures'], config['build']['storage']['captures'])
+
+    print("- Uploading videos")
+    upload_videos(config['build']['captures'], config['build']['storage']['videos'])
 
     print("- Push to git")
     git_push()
