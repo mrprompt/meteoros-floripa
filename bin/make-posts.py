@@ -400,7 +400,6 @@ def git_push():
 def upload_captures(sources: list, captures_dest: str):
     for source in sources:
         try:
-            print("  - uploading captures")
             robocopy.copy(source, captures_dest, "/xf *.mp4 /xf *.avi /xo")
         except Exception as e:
             print('Some error occurred uploading capture: ' + str(e))
@@ -416,7 +415,7 @@ def upload_videos(sources: list, videos_dest: str):
     for data in connection_cursor.fetchall():
         video_input = (data[0].replace('P.jpg', '.mp4'))
         
-        shutil.copy(video_input, videos_dest)
+        shutil.move(video_input, videos_dest)
 
 
 
