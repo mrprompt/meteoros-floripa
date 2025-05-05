@@ -415,7 +415,7 @@ def upload_videos(sources: list, videos_dest: str):
     for data in connection_cursor.fetchall():
         video_input = (data[0].replace('P.jpg', '.mp4'))
         
-        shutil.move(video_input, videos_dest)
+        shutil.copy(video_input, videos_dest)
 
 
 
