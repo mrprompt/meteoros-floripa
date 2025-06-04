@@ -31,8 +31,8 @@ build:
     path: "C:/bramon/tools/ffmpeg.exe"
   storage:
     url: "https://storage.meteoros.floripa.br/"
-    captures: "E:/capturas"
-    videos: "E:/capturas/videos"
+    captures: "D:/capturas"
+    videos: "D:/capturas/videos"
 
 # Jekyll exclude from build
 exclude:
