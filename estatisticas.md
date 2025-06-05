@@ -1,0 +1,1314 @@
+---
+layout: stats
+title: Estat&iacute;sticas de Capturas
+permalink: estatisticas
+capturas: 
+  - station: TLP1
+    month: 08
+    year: 2018
+    captures: 39
+  - station: TLP1
+    month: 09
+    year: 2018
+    captures: 83
+  - station: TLP1
+    month: 10
+    year: 2018
+    captures: 1
+  - station: TLP1
+    month: 11
+    year: 2018
+    captures: 14
+  - station: TLP1
+    month: 12
+    year: 2018
+    captures: 46
+  - station: TLP1
+    month: 01
+    year: 2019
+    captures: 57
+  - station: TLP1
+    month: 02
+    year: 2019
+    captures: 130
+  - station: TLP1
+    month: 03
+    year: 2019
+    captures: 39
+  - station: TLP1
+    month: 04
+    year: 2019
+    captures: 88
+  - station: TLP1
+    month: 05
+    year: 2019
+    captures: 49
+  - station: TLP1
+    month: 06
+    year: 2019
+    captures: 107
+  - station: TLP1
+    month: 07
+    year: 2019
+    captures: 88
+  - station: TLP1
+    month: 08
+    year: 2019
+    captures: 57
+  - station: TLP1
+    month: 09
+    year: 2019
+    captures: 17
+  - station: TLP1
+    month: 10
+    year: 2019
+    captures: 22
+  - station: TLP1
+    month: 11
+    year: 2019
+    captures: 26
+  - station: TLP1
+    month: 12
+    year: 2019
+    captures: 43
+  - station: TLP1
+    month: 01
+    year: 2020
+    captures: 29
+  - station: TLP1
+    month: 02
+    year: 2020
+    captures: 82
+  - station: TLP1
+    month: 03
+    year: 2020
+    captures: 125
+  - station: TLP1
+    month: 04
+    year: 2020
+    captures: 325
+  - station: TLP1
+    month: 05
+    year: 2020
+    captures: 307
+  - station: TLP1
+    month: 06
+    year: 2020
+    captures: 105
+  - station: TLP1
+    month: 07
+    year: 2020
+    captures: 181
+  - station: TLP1
+    month: 08
+    year: 2020
+    captures: 169
+  - station: TLP1
+    month: 09
+    year: 2020
+    captures: 36
+  - station: TLP1
+    month: 10
+    year: 2020
+    captures: 62
+  - station: TLP1
+    month: 11
+    year: 2020
+    captures: 49
+  - station: TLP1
+    month: 12
+    year: 2020
+    captures: 86
+  - station: TLP1
+    month: 01
+    year: 2021
+    captures: 62
+  - station: TLP1
+    month: 02
+    year: 2021
+    captures: 196
+  - station: TLP1
+    month: 03
+    year: 2021
+    captures: 155
+  - station: TLP1
+    month: 04
+    year: 2021
+    captures: 151
+  - station: TLP1
+    month: 05
+    year: 2021
+    captures: 796
+  - station: TLP1
+    month: 06
+    year: 2021
+    captures: 707
+  - station: TLP1
+    month: 07
+    year: 2021
+    captures: 1188
+  - station: TLP1
+    month: 08
+    year: 2021
+    captures: 235
+  - station: TLP1
+    month: 09
+    year: 2021
+    captures: 311
+  - station: TLP1
+    month: 04
+    year: 2022
+    captures: 5
+  - station: TLP1
+    month: 06
+    year: 2022
+    captures: 174
+  - station: TLP1
+    month: 07
+    year: 2022
+    captures: 50
+  - station: TLP1
+    month: 08
+    year: 2022
+    captures: 381
+  - station: TLP1
+    month: 09
+    year: 2022
+    captures: 323
+  - station: TLP1
+    month: 10
+    year: 2022
+    captures: 128
+  - station: TLP1
+    month: 12
+    year: 2022
+    captures: 2
+  - station: TLP1
+    month: 02
+    year: 2023
+    captures: 96
+  - station: TLP1
+    month: 03
+    year: 2023
+    captures: 316
+  - station: TLP1
+    month: 04
+    year: 2023
+    captures: 124
+  - station: TLP1
+    month: 05
+    year: 2023
+    captures: 151
+  - station: TLP1
+    month: 01
+    year: 2024
+    captures: 5
+  - station: TLP1
+    month: 02
+    year: 2024
+    captures: 48
+  - station: TLP1
+    month: 03
+    year: 2024
+    captures: 17
+  - station: TLP1
+    month: 04
+    year: 2024
+    captures: 29
+  - station: TLP1
+    month: 05
+    year: 2024
+    captures: 49
+  - station: TLP1
+    month: 06
+    year: 2024
+    captures: 41
+  - station: TLP1
+    month: 07
+    year: 2024
+    captures: 1
+  - station: TLP1
+    month: 08
+    year: 2024
+    captures: 81
+  - station: TLP1
+    month: 09
+    year: 2024
+    captures: 16
+  - station: TLP1
+    month: 10
+    year: 2024
+    captures: 98
+  - station: TLP1
+    month: 01
+    year: 2025
+    captures: 82
+  - station: TLP1
+    month: 02
+    year: 2025
+    captures: 161
+  - station: TLP1
+    month: 03
+    year: 2025
+    captures: 190
+  - station: TLP1
+    month: 04
+    year: 2025
+    captures: 345
+  - station: TLP1
+    month: 05
+    year: 2025
+    captures: 143
+  - station: TLP1
+    month: 06
+    year: 2025
+    captures: 17
+  - station: TLP10
+    month: 07
+    year: 2019
+    captures: 46
+  - station: TLP10
+    month: 08
+    year: 2019
+    captures: 35
+  - station: TLP10
+    month: 09
+    year: 2019
+    captures: 12
+  - station: TLP10
+    month: 10
+    year: 2019
+    captures: 3
+  - station: TLP10
+    month: 11
+    year: 2019
+    captures: 92
+  - station: TLP10
+    month: 12
+    year: 2019
+    captures: 20
+  - station: TLP10
+    month: 01
+    year: 2020
+    captures: 12
+  - station: TLP10
+    month: 02
+    year: 2020
+    captures: 1
+  - station: TLP10
+    month: 03
+    year: 2020
+    captures: 43
+  - station: TLP10
+    month: 04
+    year: 2020
+    captures: 151
+  - station: TLP10
+    month: 05
+    year: 2020
+    captures: 77
+  - station: TLP10
+    month: 06
+    year: 2020
+    captures: 98
+  - station: TLP10
+    month: 07
+    year: 2020
+    captures: 328
+  - station: TLP10
+    month: 08
+    year: 2020
+    captures: 101
+  - station: TLP10
+    month: 09
+    year: 2020
+    captures: 22
+  - station: TLP10
+    month: 10
+    year: 2020
+    captures: 65
+  - station: TLP2
+    month: 12
+    year: 2018
+    captures: 2
+  - station: TLP2
+    month: 01
+    year: 2019
+    captures: 10
+  - station: TLP2
+    month: 02
+    year: 2019
+    captures: 27
+  - station: TLP2
+    month: 03
+    year: 2019
+    captures: 6
+  - station: TLP2
+    month: 04
+    year: 2019
+    captures: 78
+  - station: TLP2
+    month: 05
+    year: 2019
+    captures: 31
+  - station: TLP2
+    month: 06
+    year: 2019
+    captures: 184
+  - station: TLP2
+    month: 07
+    year: 2019
+    captures: 60
+  - station: TLP2
+    month: 08
+    year: 2019
+    captures: 27
+  - station: TLP2
+    month: 09
+    year: 2019
+    captures: 23
+  - station: TLP2
+    month: 10
+    year: 2019
+    captures: 39
+  - station: TLP2
+    month: 11
+    year: 2019
+    captures: 6
+  - station: TLP2
+    month: 12
+    year: 2019
+    captures: 28
+  - station: TLP2
+    month: 01
+    year: 2020
+    captures: 20
+  - station: TLP2
+    month: 02
+    year: 2020
+    captures: 106
+  - station: TLP2
+    month: 03
+    year: 2020
+    captures: 191
+  - station: TLP2
+    month: 04
+    year: 2020
+    captures: 330
+  - station: TLP2
+    month: 05
+    year: 2020
+    captures: 433
+  - station: TLP2
+    month: 06
+    year: 2020
+    captures: 168
+  - station: TLP2
+    month: 07
+    year: 2020
+    captures: 239
+  - station: TLP2
+    month: 08
+    year: 2020
+    captures: 252
+  - station: TLP2
+    month: 09
+    year: 2020
+    captures: 15
+  - station: TLP2
+    month: 10
+    year: 2020
+    captures: 46
+  - station: TLP2
+    month: 11
+    year: 2020
+    captures: 60
+  - station: TLP2
+    month: 12
+    year: 2020
+    captures: 72
+  - station: TLP2
+    month: 01
+    year: 2021
+    captures: 44
+  - station: TLP2
+    month: 02
+    year: 2021
+    captures: 152
+  - station: TLP2
+    month: 03
+    year: 2021
+    captures: 133
+  - station: TLP2
+    month: 04
+    year: 2021
+    captures: 130
+  - station: TLP2
+    month: 05
+    year: 2021
+    captures: 630
+  - station: TLP2
+    month: 06
+    year: 2021
+    captures: 76
+  - station: TLP2
+    month: 07
+    year: 2021
+    captures: 243
+  - station: TLP2
+    month: 08
+    year: 2021
+    captures: 238
+  - station: TLP2
+    month: 09
+    year: 2021
+    captures: 221
+  - station: TLP2
+    month: 10
+    year: 2021
+    captures: 86
+  - station: TLP2
+    month: 11
+    year: 2021
+    captures: 21
+  - station: TLP2
+    month: 12
+    year: 2021
+    captures: 84
+  - station: TLP2
+    month: 01
+    year: 2022
+    captures: 16
+  - station: TLP2
+    month: 08
+    year: 2022
+    captures: 259
+  - station: TLP2
+    month: 09
+    year: 2022
+    captures: 165
+  - station: TLP2
+    month: 10
+    year: 2022
+    captures: 80
+  - station: TLP2
+    month: 02
+    year: 2023
+    captures: 96
+  - station: TLP2
+    month: 03
+    year: 2023
+    captures: 198
+  - station: TLP2
+    month: 04
+    year: 2023
+    captures: 73
+  - station: TLP2
+    month: 05
+    year: 2023
+    captures: 136
+  - station: TLP2
+    month: 02
+    year: 2024
+    captures: 37
+  - station: TLP2
+    month: 03
+    year: 2024
+    captures: 22
+  - station: TLP2
+    month: 04
+    year: 2024
+    captures: 47
+  - station: TLP2
+    month: 05
+    year: 2024
+    captures: 60
+  - station: TLP2
+    month: 06
+    year: 2024
+    captures: 81
+  - station: TLP2
+    month: 07
+    year: 2024
+    captures: 1
+  - station: TLP2
+    month: 08
+    year: 2024
+    captures: 61
+  - station: TLP2
+    month: 09
+    year: 2024
+    captures: 9
+  - station: TLP2
+    month: 10
+    year: 2024
+    captures: 2
+  - station: TLP2
+    month: 01
+    year: 2025
+    captures: 59
+  - station: TLP2
+    month: 02
+    year: 2025
+    captures: 94
+  - station: TLP2
+    month: 03
+    year: 2025
+    captures: 149
+  - station: TLP2
+    month: 04
+    year: 2025
+    captures: 247
+  - station: TLP2
+    month: 05
+    year: 2025
+    captures: 135
+  - station: TLP2
+    month: 06
+    year: 2025
+    captures: 6
+  - station: TLP3
+    month: 01
+    year: 2019
+    captures: 50
+  - station: TLP3
+    month: 02
+    year: 2019
+    captures: 23
+  - station: TLP3
+    month: 03
+    year: 2019
+    captures: 2
+  - station: TLP3
+    month: 04
+    year: 2019
+    captures: 106
+  - station: TLP3
+    month: 05
+    year: 2019
+    captures: 107
+  - station: TLP3
+    month: 06
+    year: 2019
+    captures: 76
+  - station: TLP3
+    month: 07
+    year: 2019
+    captures: 73
+  - station: TLP3
+    month: 08
+    year: 2019
+    captures: 69
+  - station: TLP3
+    month: 09
+    year: 2019
+    captures: 23
+  - station: TLP3
+    month: 10
+    year: 2019
+    captures: 39
+  - station: TLP3
+    month: 11
+    year: 2019
+    captures: 26
+  - station: TLP3
+    month: 12
+    year: 2019
+    captures: 22
+  - station: TLP3
+    month: 01
+    year: 2020
+    captures: 19
+  - station: TLP3
+    month: 02
+    year: 2020
+    captures: 103
+  - station: TLP3
+    month: 03
+    year: 2020
+    captures: 193
+  - station: TLP3
+    month: 04
+    year: 2020
+    captures: 354
+  - station: TLP3
+    month: 05
+    year: 2020
+    captures: 450
+  - station: TLP3
+    month: 06
+    year: 2020
+    captures: 166
+  - station: TLP3
+    month: 07
+    year: 2020
+    captures: 250
+  - station: TLP3
+    month: 08
+    year: 2020
+    captures: 170
+  - station: TLP3
+    month: 09
+    year: 2020
+    captures: 17
+  - station: TLP3
+    month: 10
+    year: 2020
+    captures: 56
+  - station: TLP3
+    month: 11
+    year: 2020
+    captures: 51
+  - station: TLP3
+    month: 12
+    year: 2020
+    captures: 100
+  - station: TLP3
+    month: 01
+    year: 2021
+    captures: 34
+  - station: TLP3
+    month: 02
+    year: 2021
+    captures: 106
+  - station: TLP3
+    month: 03
+    year: 2021
+    captures: 52
+  - station: TLP3
+    month: 04
+    year: 2021
+    captures: 77
+  - station: TLP3
+    month: 05
+    year: 2021
+    captures: 9
+  - station: TLP3
+    month: 08
+    year: 2021
+    captures: 63
+  - station: TLP3
+    month: 09
+    year: 2021
+    captures: 247
+  - station: TLP3
+    month: 10
+    year: 2021
+    captures: 108
+  - station: TLP3
+    month: 11
+    year: 2021
+    captures: 44
+  - station: TLP3
+    month: 12
+    year: 2021
+    captures: 96
+  - station: TLP3
+    month: 01
+    year: 2022
+    captures: 19
+  - station: TLP3
+    month: 03
+    year: 2025
+    captures: 10
+  - station: TLP3
+    month: 04
+    year: 2025
+    captures: 59
+  - station: TLP4
+    month: 04
+    year: 2019
+    captures: 71
+  - station: TLP4
+    month: 05
+    year: 2019
+    captures: 131
+  - station: TLP4
+    month: 06
+    year: 2019
+    captures: 59
+  - station: TLP4
+    month: 07
+    year: 2019
+    captures: 119
+  - station: TLP4
+    month: 08
+    year: 2019
+    captures: 46
+  - station: TLP4
+    month: 09
+    year: 2019
+    captures: 58
+  - station: TLP4
+    month: 10
+    year: 2019
+    captures: 38
+  - station: TLP4
+    month: 11
+    year: 2019
+    captures: 34
+  - station: TLP4
+    month: 12
+    year: 2019
+    captures: 43
+  - station: TLP4
+    month: 01
+    year: 2020
+    captures: 28
+  - station: TLP4
+    month: 02
+    year: 2020
+    captures: 114
+  - station: TLP4
+    month: 03
+    year: 2020
+    captures: 196
+  - station: TLP4
+    month: 04
+    year: 2020
+    captures: 392
+  - station: TLP4
+    month: 05
+    year: 2020
+    captures: 463
+  - station: TLP4
+    month: 06
+    year: 2020
+    captures: 171
+  - station: TLP4
+    month: 07
+    year: 2020
+    captures: 266
+  - station: TLP4
+    month: 08
+    year: 2020
+    captures: 121
+  - station: TLP4
+    month: 09
+    year: 2020
+    captures: 23
+  - station: TLP4
+    month: 10
+    year: 2020
+    captures: 38
+  - station: TLP4
+    month: 11
+    year: 2020
+    captures: 71
+  - station: TLP4
+    month: 12
+    year: 2020
+    captures: 139
+  - station: TLP4
+    month: 01
+    year: 2021
+    captures: 60
+  - station: TLP4
+    month: 02
+    year: 2021
+    captures: 273
+  - station: TLP4
+    month: 03
+    year: 2021
+    captures: 196
+  - station: TLP4
+    month: 04
+    year: 2021
+    captures: 142
+  - station: TLP4
+    month: 05
+    year: 2021
+    captures: 24
+  - station: TLP4
+    month: 08
+    year: 2021
+    captures: 35
+  - station: TLP4
+    month: 09
+    year: 2021
+    captures: 162
+  - station: TLP4
+    month: 10
+    year: 2021
+    captures: 71
+  - station: TLP4
+    month: 11
+    year: 2021
+    captures: 44
+  - station: TLP4
+    month: 12
+    year: 2021
+    captures: 80
+  - station: TLP4
+    month: 01
+    year: 2022
+    captures: 9
+  - station: TLP4
+    month: 03
+    year: 2025
+    captures: 13
+  - station: TLP4
+    month: 04
+    year: 2025
+    captures: 43
+  - station: TLP5
+    month: 04
+    year: 2019
+    captures: 33
+  - station: TLP5
+    month: 05
+    year: 2019
+    captures: 77
+  - station: TLP5
+    month: 06
+    year: 2019
+    captures: 150
+  - station: TLP5
+    month: 07
+    year: 2019
+    captures: 40
+  - station: TLP5
+    month: 08
+    year: 2019
+    captures: 6
+  - station: TLP5
+    month: 09
+    year: 2019
+    captures: 7
+  - station: TLP5
+    month: 10
+    year: 2019
+    captures: 26
+  - station: TLP5
+    month: 11
+    year: 2019
+    captures: 8
+  - station: TLP5
+    month: 12
+    year: 2019
+    captures: 8
+  - station: TLP5
+    month: 01
+    year: 2020
+    captures: 32
+  - station: TLP5
+    month: 02
+    year: 2020
+    captures: 71
+  - station: TLP5
+    month: 03
+    year: 2020
+    captures: 156
+  - station: TLP5
+    month: 04
+    year: 2020
+    captures: 322
+  - station: TLP5
+    month: 05
+    year: 2020
+    captures: 370
+  - station: TLP5
+    month: 06
+    year: 2020
+    captures: 103
+  - station: TLP5
+    month: 07
+    year: 2020
+    captures: 172
+  - station: TLP5
+    month: 08
+    year: 2020
+    captures: 112
+  - station: TLP5
+    month: 09
+    year: 2020
+    captures: 18
+  - station: TLP5
+    month: 10
+    year: 2020
+    captures: 40
+  - station: TLP5
+    month: 11
+    year: 2020
+    captures: 70
+  - station: TLP5
+    month: 12
+    year: 2020
+    captures: 132
+  - station: TLP5
+    month: 01
+    year: 2021
+    captures: 60
+  - station: TLP5
+    month: 02
+    year: 2021
+    captures: 233
+  - station: TLP5
+    month: 03
+    year: 2021
+    captures: 194
+  - station: TLP5
+    month: 04
+    year: 2021
+    captures: 197
+  - station: TLP5
+    month: 05
+    year: 2021
+    captures: 43
+  - station: TLP6
+    month: 04
+    year: 2019
+    captures: 18
+  - station: TLP6
+    month: 05
+    year: 2019
+    captures: 47
+  - station: TLP6
+    month: 06
+    year: 2019
+    captures: 64
+  - station: TLP6
+    month: 07
+    year: 2019
+    captures: 52
+  - station: TLP6
+    month: 08
+    year: 2019
+    captures: 47
+  - station: TLP6
+    month: 09
+    year: 2019
+    captures: 6
+  - station: TLP6
+    month: 10
+    year: 2019
+    captures: 33
+  - station: TLP6
+    month: 11
+    year: 2019
+    captures: 26
+  - station: TLP6
+    month: 12
+    year: 2019
+    captures: 30
+  - station: TLP6
+    month: 01
+    year: 2020
+    captures: 29
+  - station: TLP6
+    month: 02
+    year: 2020
+    captures: 24
+  - station: TLP6
+    month: 03
+    year: 2020
+    captures: 31
+  - station: TLP6
+    month: 04
+    year: 2020
+    captures: 50
+  - station: TLP6
+    month: 05
+    year: 2020
+    captures: 63
+  - station: TLP6
+    month: 06
+    year: 2020
+    captures: 25
+  - station: TLP6
+    month: 07
+    year: 2020
+    captures: 91
+  - station: TLP6
+    month: 08
+    year: 2020
+    captures: 138
+  - station: TLP6
+    month: 09
+    year: 2020
+    captures: 7
+  - station: TLP6
+    month: 10
+    year: 2020
+    captures: 15
+  - station: TLP6
+    month: 11
+    year: 2020
+    captures: 21
+  - station: TLP6
+    month: 12
+    year: 2020
+    captures: 33
+  - station: TLP6
+    month: 01
+    year: 2021
+    captures: 10
+  - station: TLP6
+    month: 02
+    year: 2021
+    captures: 111
+  - station: TLP6
+    month: 03
+    year: 2021
+    captures: 45
+  - station: TLP6
+    month: 04
+    year: 2021
+    captures: 37
+  - station: TLP6
+    month: 05
+    year: 2021
+    captures: 7
+  - station: TLP7
+    month: 04
+    year: 2019
+    captures: 5
+  - station: TLP7
+    month: 05
+    year: 2019
+    captures: 47
+  - station: TLP7
+    month: 06
+    year: 2019
+    captures: 49
+  - station: TLP7
+    month: 07
+    year: 2019
+    captures: 78
+  - station: TLP7
+    month: 08
+    year: 2019
+    captures: 162
+  - station: TLP7
+    month: 09
+    year: 2019
+    captures: 104
+  - station: TLP7
+    month: 10
+    year: 2019
+    captures: 26
+  - station: TLP7
+    month: 11
+    year: 2019
+    captures: 14
+  - station: TLP7
+    month: 12
+    year: 2019
+    captures: 24
+  - station: TLP7
+    month: 01
+    year: 2020
+    captures: 19
+  - station: TLP7
+    month: 02
+    year: 2020
+    captures: 29
+  - station: TLP7
+    month: 03
+    year: 2020
+    captures: 56
+  - station: TLP7
+    month: 04
+    year: 2020
+    captures: 76
+  - station: TLP7
+    month: 05
+    year: 2020
+    captures: 79
+  - station: TLP7
+    month: 06
+    year: 2020
+    captures: 52
+  - station: TLP7
+    month: 07
+    year: 2020
+    captures: 112
+  - station: TLP7
+    month: 08
+    year: 2020
+    captures: 119
+  - station: TLP7
+    month: 09
+    year: 2020
+    captures: 23
+  - station: TLP7
+    month: 10
+    year: 2020
+    captures: 21
+  - station: TLP7
+    month: 11
+    year: 2020
+    captures: 17
+  - station: TLP7
+    month: 12
+    year: 2020
+    captures: 36
+  - station: TLP7
+    month: 01
+    year: 2021
+    captures: 6
+  - station: TLP7
+    month: 02
+    year: 2021
+    captures: 94
+  - station: TLP7
+    month: 03
+    year: 2021
+    captures: 99
+  - station: TLP7
+    month: 04
+    year: 2021
+    captures: 73
+  - station: TLP7
+    month: 05
+    year: 2021
+    captures: 51
+  - station: TLP8
+    month: 06
+    year: 2019
+    captures: 1
+  - station: TLP8
+    month: 07
+    year: 2019
+    captures: 41
+  - station: TLP8
+    month: 08
+    year: 2019
+    captures: 49
+  - station: TLP8
+    month: 09
+    year: 2019
+    captures: 137
+  - station: TLP8
+    month: 10
+    year: 2019
+    captures: 32
+  - station: TLP8
+    month: 11
+    year: 2019
+    captures: 41
+  - station: TLP8
+    month: 12
+    year: 2019
+    captures: 34
+  - station: TLP8
+    month: 01
+    year: 2020
+    captures: 38
+  - station: TLP8
+    month: 02
+    year: 2020
+    captures: 3
+  - station: TLP8
+    month: 03
+    year: 2020
+    captures: 58
+  - station: TLP8
+    month: 04
+    year: 2020
+    captures: 205
+  - station: TLP8
+    month: 05
+    year: 2020
+    captures: 216
+  - station: TLP8
+    month: 06
+    year: 2020
+    captures: 73
+  - station: TLP8
+    month: 07
+    year: 2020
+    captures: 43
+  - station: TLP8
+    month: 08
+    year: 2020
+    captures: 65
+  - station: TLP8
+    month: 09
+    year: 2020
+    captures: 14
+  - station: TLP8
+    month: 10
+    year: 2020
+    captures: 28
+  - station: TLP8
+    month: 02
+    year: 2021
+    captures: 39
+  - station: TLP8
+    month: 03
+    year: 2021
+    captures: 119
+  - station: TLP8
+    month: 04
+    year: 2021
+    captures: 44
+  - station: TLP9
+    month: 06
+    year: 2019
+    captures: 5
+  - station: TLP9
+    month: 07
+    year: 2019
+    captures: 10
+  - station: TLP9
+    month: 08
+    year: 2019
+    captures: 31
+  - station: TLP9
+    month: 09
+    year: 2019
+    captures: 101
+  - station: TLP9
+    month: 10
+    year: 2019
+    captures: 18
+  - station: TLP9
+    month: 11
+    year: 2019
+    captures: 50
+  - station: TLP9
+    month: 12
+    year: 2019
+    captures: 59
+  - station: TLP9
+    month: 01
+    year: 2020
+    captures: 64
+  - station: TLP9
+    month: 02
+    year: 2020
+    captures: 6
+  - station: TLP9
+    month: 03
+    year: 2020
+    captures: 46
+  - station: TLP9
+    month: 04
+    year: 2020
+    captures: 135
+  - station: TLP9
+    month: 05
+    year: 2020
+    captures: 132
+  - station: TLP9
+    month: 06
+    year: 2020
+    captures: 34
+  - station: TLP9
+    month: 07
+    year: 2020
+    captures: 48
+  - station: TLP9
+    month: 08
+    year: 2020
+    captures: 71
+  - station: TLP9
+    month: 09
+    year: 2020
+    captures: 10
+  - station: TLP9
+    month: 10
+    year: 2020
+    captures: 28
+---
