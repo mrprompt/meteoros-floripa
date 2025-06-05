@@ -1,5 +1,5 @@
 ---
-layout: stats
+layout: default
 title: Estat&iacute;sticas de Capturas
 permalink: estatisticas
 capturas: 

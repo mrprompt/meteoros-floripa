@@ -97,7 +97,7 @@ def generate_stats(connection: object) -> bool:
     captures_stats_filename = "{}/estatisticas.md".format(PATH_OF_STATS)
     filehandle = open(captures_stats_filename, "w+")
     filehandle.write("---\n")
-    filehandle.write("layout: stats\n")
+    filehandle.write("layout: default\n")
     filehandle.write("title: Estat&iacute;sticas de Capturas\n")
     filehandle.write("permalink: estatisticas\n")
     filehandle.write("capturas: \n")
