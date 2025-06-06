@@ -4,7 +4,7 @@ import glob
 import os
 import sqlite3
 import yaml
-from typing import List
+from typing import List, Any, LiteralString
 
 
 PATH = os.path.dirname(__file__)
@@ -17,7 +17,7 @@ def load_config():
         return yaml.load(f, Loader=yaml.FullLoader)
 
 
-def get_matching_captures(captures_dir: list):
+def get_matching_captures(captures_dir: List[LiteralString]) -> List[Any]:
     result = []
 
     for directory in captures_dir:
@@ -43,7 +43,7 @@ def organize_captures(stations_captures: List) -> List:
     captures_organized = []
 
     for capture in stations_captures:
-        capture_spliced = capture.split('\\')
+        capture_spliced = capture.split('/')
         station = capture_spliced[0]
         capture_date = capture_spliced[2]
         post = (capture_date, station, capture)
@@ -97,7 +97,7 @@ def generate_stats(connection: object) -> bool:
     captures_stats_filename = "{}/estatisticas.md".format(PATH_OF_STATS)
     filehandle = open(captures_stats_filename, "w+")
     filehandle.write("---\n")
-    filehandle.write("layout: stats\n")
+    filehandle.write("layout: default\n")
     filehandle.write("title: Estat&iacute;sticas de Capturas\n")
     filehandle.write("permalink: estatisticas\n")
     filehandle.write("capturas: \n")
