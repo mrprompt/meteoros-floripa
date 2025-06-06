@@ -262,7 +262,7 @@ capturas:
   - station: TLP1
     month: 06
     year: 2025
-    captures: 17
+    captures: 30
   - station: TLP10
     month: 07
     year: 2019
@@ -566,7 +566,7 @@ capturas:
   - station: TLP2
     month: 06
     year: 2025
-    captures: 6
+    captures: 18
   - station: TLP3
     month: 01
     year: 2019
@@ -1312,38 +1312,3 @@ capturas:
     year: 2020
     captures: 28
 ---
-
-<!--start: Container-->
-<div class="container">
-  <!-- Main component for a primary marketing message or call to action -->
-  <div class="jumbotron">
-      <h1>{{ page.title }}</h1>
-      <p>Estatísticas de Capturas</p>
-  </div>
-
-	<!--start: Row -->
-	<div class="row">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Estação</th>
-          <th>Mês</th>
-          <th>Ano</th>
-          <th>Capturas</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for stats in page.capturas %}
-            <tr>
-                <th scrope="row">{{ stats.station }}</th>
-                <td>{{ stats.month }}</td>
-                <td>{{ stats.year }}</td>
-                <td>{{ stats.captures }}</td>
-            </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-	</div>
-	<!--end: Row -->
-</div>
-<!--end: Container-->
