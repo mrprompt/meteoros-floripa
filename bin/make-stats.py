@@ -94,7 +94,7 @@ def generate_stats(connection: object) -> bool:
     ORDER BY station, capture_month
     """)
 
-    captures_stats_filename = "{}/estatisticas.md".format(PATH_OF_STATS)
+    captures_stats_filename = "{}/estatisticas.html".format(PATH_OF_STATS)
     filehandle = open(captures_stats_filename, "w+")
     filehandle.write("---\n")
     filehandle.write("layout: default\n")
