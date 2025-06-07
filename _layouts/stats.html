@@ -2,36 +2,36 @@
 
 <!--start: Container-->
 <div class="container">
-  <!-- Main component for a primary marketing message or call to action -->
-  <div class="jumbotron">
-      <h1>{{ page.title }}</h1>
-      <p>Estatísticas de Capturas</p>
-  </div>
+    <!-- Main component for a primary marketing message or call to action -->
+    <div class="jumbotron">
+        <h1>{{ page.title }}</h1>
+        <p>Estatísticas de Capturas</p>
+    </div>
 
-	<!--start: Row -->
-	<div class="row">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Estação</th>
-          <th>Mês</th>
-          <th>Ano</th>
-          <th>Capturas</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for stats in page.capturas %}
-            <tr>
-                <th scrope="row">{{ stats.station }}</th>
-                <td>{{ stats.month }}</td>
-                <td>{{ stats.year }}</td>
-                <td>{{ stats.captures }}</td>
-            </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-	</div>
-	<!--end: Row -->
+    <!--start: Row -->
+    <div class="row">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Estação</th>
+                    <th>Mês</th>
+                    <th>Ano</th>
+                    <th>Capturas</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for stats in page.capturas %}
+                <tr>
+                    <th scrope="row">{{ stats.station }}</th>
+                    <td>{{ stats.month }}</td>
+                    <td>{{ stats.year }}</td>
+                    <td>{{ stats.captures }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <!--end: Row -->
 </div>
 <!--end: Container-->
 
