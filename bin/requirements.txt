@@ -1,4 +1,0 @@
-GitPython
-PyYAML
-Pillow
-py-robocopy
