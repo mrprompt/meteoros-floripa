@@ -3,6 +3,7 @@ title: Meteoros Floripa
 description: Estações de capturas de meteoros em Florianópolis/SC
 url: "https://meteoros.floripa.br"
 baseurl: "/"
+storageurl: "https://storage.meteoros.floripa.br/"
 city: "Florianópolis-SC"
 
 # Jekyll configurations
