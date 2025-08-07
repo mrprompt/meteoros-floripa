@@ -15,7 +15,7 @@ limit_posts: 24
 incremental: true
 
 # Maintenance mode
-maintenance: true
+maintenance: false
 
 # Tools config
 simple_form_token: 5da33a3875b2782c0143c966613ebc60
