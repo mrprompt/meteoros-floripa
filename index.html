@@ -3,38 +3,17 @@ layout: default
 ---
 <!--start: Container-->
 <div class="container">
-    <!-- start: Post -->
-    <div class="row">
-    {% for post in site.posts %}
-        {% assign filter = post.date | date: '%Y%m%d' %}
-        {% assign capture_collections = site.captures | where: "label", filter | sort: "date" %}
-        {% assign counter = 0 %}
-
-        {% for collection in capture_collections %}
-            {% assign counter = counter | plus: collection.capturas.size %}
-        {% endfor %}
-
-        {% assign preview_rand = capture_collections | sample: 3 %}
-        {% assign preview = preview_rand[0] %}
-
-        <div class="post-content col-lg-3 col-md-6 col-xs-12">
-            <div class="post-title">
-                <h2 class="nobreak"><a href="{{ post.url | prepend: site.url }}">{{ post.title }}</a></h2>
-            </div>
-            <div class="post-description">
-                <a href="{{ post.url }}">
-                    <img src="{{ preview.preview | prepend: site.storageurl }}"
-                         class="img img-thumbnail img-responsive"
-                         alt="capture shot">
-                </a>
-            </div>
-            <div class="post-meta">
-                <span><i class="fa fa-calendar"></i> Data: {{ post.date | date: '%d/%m/%Y' }}</span><br>
-                <span><i class="fa fa-meteor"></i> Capturas: {{ counter }}</span>
-            </div>
-        </div>
-    {% endfor %}
+    <div class="jumbotron">
+        <h1>Desligado</h1>
+        <p>
+            Foi bom enquanto durou :(
+        </p>
     </div>
-    <!-- end: Post -->
+
+    <div class="row">
+        <p>
+            O site está desativado por tempo indeterminado devido a mudança de endereço da estação base, onde não é possível instalar novamente as câmeras.
+        </p>
+    </div>
 </div>
 <!--end: Container-->
