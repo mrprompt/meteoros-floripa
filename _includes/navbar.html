@@ -30,7 +30,7 @@
                         <li>
                             <a href="{{ '/stations/' | prepend: site.url | append: station.station }}">
                                 <i class="fa fa-broadcast-tower"></i> 
-                                {% if station.status == 'ativa' %}{{ station.station | upcase }}{% else %}<s>{{ station.station | upcase }}</s>{% endif%}
+                                {% if station.status == 'ativada' %}{{ station.station | upcase }}{% else %}<s>{{ station.station | upcase }}</s>{% endif%}
                             </a>
                         </li>
                         {% endfor %}
