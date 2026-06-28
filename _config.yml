@@ -1,9 +1,9 @@
 # Base config
 title: Meteoros Floripa
 description: Estações de capturas de meteoros em Florianópolis/SC
-url: "https://meteoros.floripa.br"
+url: "https://meteoros.mrprompt.com.br"
 baseurl: "/"
-storageurl: "https://storage.meteoros.floripa.br/"
+storageurl: "https://cdn-meteoros.mrprompt.com.br/"
 city: "Florianópolis-SC"
 
 # Jekyll configurations
